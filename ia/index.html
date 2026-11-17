@@ -11,9 +11,11 @@
   <link rel="stylesheet" href="/assets/css/abertura.css">
   <link rel="stylesheet" href="/assets/css/viagem.css">
   <link rel="stylesheet" href="/assets/css/vitrine.css">
+  <link rel="stylesheet" href="/assets/css/final.css">
   <script defer src="/assets/vendor/gsap.min.js"></script>
   <script defer src="/assets/vendor/ScrollTrigger.min.js"></script>
   <script defer src="/assets/vendor/lenis.min.js"></script>
+  <script defer src="/assets/vendor/matter.min.js"></script>
   <script type="module" src="/assets/js/main.js"></script>
 </head>
 <body>
@@ -354,10 +356,54 @@
 
   </div>
 </section>
-    <section id="caixa" aria-label="Caixa de ferramentas"></section>
-    <section id="infra" aria-label="Como fica no ar"></section>
-    <section id="contato" aria-label="Contato"></section>
+<section class="ia-uso g" id="servicos" aria-labelledby="h-uso"><div class="w">
+  <div class="lbl" style="color:var(--yellow)">IA no dia a dia</div>
+  <h2 id="h-uso">Como eu uso IA</h2>
+  <ol class="uso">
+    <li><b>Claude Code como equipe</b><span>Especificação e plano primeiro, tarefas divididas entre subagentes e revisão a cada entrega.</span></li>
+    <li><b>Vários agentes, um projeto</b><span>No estágio, o desenvolvimento é dividido entre 3 frentes do Claude (sistema, WhatsApp e coleta de dados), que conversam por contratos de API.</span></li>
+    <li><b>Testes com agentes</b><span>O bot do laboratório é testado por agentes que simulam funcionários com perfis diferentes.</span></li>
+    <li><b>IA fora do chat</b><span>Integrações via MCP, como a do Fusion 360, em que o Claude modelou uma peça aprovada na primeira impressão.</span></li>
+  </ol>
+</div></section>
+
+<section class="box g" id="caixa" aria-labelledby="h-box">
+  <div class="head"><div class="w">
+    <div class="lbl" style="color:var(--yellow)">Caixa de ferramentas</div>
+    <h2 id="h-box">O que eu uso para construir. Pode bagunçar.</h2>
+    <p>Arraste e jogue as peças.</p>
+    <div class="tools"><button type="button" id="shake" data-hover>Chacoalhar</button></div>
+  </div></div>
+  <div class="pile" id="pile">
+    <span class="chip y">n8n</span><span class="chip">OpenAI</span><span class="chip y">Claude Code</span><span class="chip o">MCP</span><span class="chip">Python</span><span class="chip o">FastAPI</span><span class="chip">Postgres</span><span class="chip o">Supabase</span><span class="chip y">Docker</span><span class="chip">Dokploy</span><span class="chip o">Cloudflare</span><span class="chip">Evolution API</span><span class="chip o">Playwright</span><span class="chip y">Three.js</span><span class="chip">HTML · CSS · JS</span><span class="chip o">ESP32</span>
+  </div>
+</section>
+
+<section class="infra g" id="infra" aria-labelledby="h-inf"><div class="w">
+  <div class="lbl" style="color:var(--dim)">Infraestrutura · como fica no ar</div>
+  <h2 id="h-inf">Não paro no protótipo. Tudo isso roda no meu servidor.</h2>
+  <div class="net"><div class="ln" aria-hidden="true"></div><div class="pkt" id="pkt" aria-hidden="true"></div>
+    <div class="node"><i>01</i><b>Você</b><span>abre o endereço</span></div>
+    <div class="node"><i>02</i><b>Cloudflare</b><span>DNS, HTTPS e cache</span></div>
+    <div class="node"><i>03</i><b>VPS Hetzner</b><span>um servidor Linux</span></div>
+    <div class="node"><i>04</i><b>Dokploy</b><span>deploy a cada push</span></div>
+    <div class="node"><i>05</i><b>Containers</b><span>um por sistema</span></div>
+  </div>
+  <div class="live"><span>este site</span><span>findbus.com.br</span><span>radar de preços</span><span>demonstração do radar</span><span>painéis internos</span></div>
+</div></section>
+
+<section class="svc g" aria-labelledby="h-svc"><div class="w">
+  <div class="lbl" style="color:var(--dim)" id="h-svc">O que eu faço</div>
+  <ul><li><a href="#p1" data-hover>Agentes de IA <span>n8n · OpenAI · Claude</span></a></li><li><a href="#p3" data-hover>Automações <span>coleta · alertas · OCR</span></a></li><li><a href="#p4" data-hover>Interfaces <span>HTML · CSS · JS · 3D</span></a></li><li><a href="#infra" data-hover>Deploy e infra <span>Docker · Dokploy · Cloudflare</span></a></li></ul>
+</div></section>
+
+<section class="ct g" id="contato" aria-labelledby="h-ct"><div class="w">
+  <div class="lbl">Contato</div>
+  <h2 id="h-ct">Vamos<br>conversar?</h2>
+  <div class="row"><button class="mag" id="mag" type="button" data-hover>Copiar<br>e-mail</button><code id="mail">mmatheusbragamed@gmail.com</code></div>
+</div></section>
   </main>
+<footer class="g"><div class="w ft"><span>Matheus Braga · Goiânia, GO</span><nav><a href="https://www.linkedin.com/in/mmatheusbraga/" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://github.com/MatheusBraga1106" target="_blank" rel="noopener">GitHub ↗</a></nav></div></footer>
   <div class="sr" aria-live="polite" id="live"></div>
 </body>
 </html>

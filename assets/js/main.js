@@ -3,6 +3,8 @@ import { irPara } from './rolagem.js';
 import { iniciarAbertura, prepararTitulo } from './abertura3d.js';
 import { iniciarViagem } from './viagem.js';
 import { iniciarVitrine } from './vitrine.js';
+import { iniciarCaixa } from './caixa.js';
+import { iniciarContato } from './contato.js';
 
 const reduzido = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const toque = matchMedia('(pointer: coarse)').matches;
@@ -33,6 +35,8 @@ prepararTitulo();
 iniciarAbertura();
 const viagemSite = iniciarViagem(lenis);
 const vitrineSite = iniciarVitrine(lenis);
+iniciarCaixa();
+iniciarContato();
 
 // links internos (#secao): rolam até a seção. Links com data-go/data-win/data-inner e os #p1..#p4 têm tratamento próprio.
 document.querySelectorAll('a[href^="#"]:not([href="#"]):not([data-go]):not([data-win]):not([data-inner])').forEach((a) => {
