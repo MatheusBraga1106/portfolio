@@ -39,6 +39,17 @@ const trocas = [
   ['<em>Feito com Python e Arduino</em>', '<em>Você joga contra a rede</em>'],
   ['<em>Feito com Python, ADB e scrcpy</em>', '<em>Bateria, rede e tela remota</em>'],
   ['<em>Feito como skill do Claude</em>', '<em>Divide por pessoa, com a taxa</em>'],
+  // detalhes dos projetos (o "Ver mais" do catálogo): sem ferramentas
+  ['<p>Extrai as faturas de água de órgãos públicos, com OCR para documentos digitalizados e validação cruzada entre os campos.</p>', '<p>Extrai as faturas de água de órgãos públicos, lendo até documentos escaneados, e confere os campos entre si.</p>'],
+  ['<div><b>HC-SR04</b><span>sensores ultrassônicos</span></div>', '<div><b>Sensores</b><span>de distância, como num carro</span></div>'],
+  ['<p>Um robô que desvia de obstáculos com sensores HC-SR04. Você joga, a sua rede joga, e vocês competem.</p>', '<p>Um robô que desvia de obstáculos com sensores de distância. Você joga, a sua rede joga, e vocês competem.</p>'],
+  ['<p>Uma central no computador acompanha celulares Android que viraram servidores: bateria, temperatura, rede e tela remota, com aviso quando algo foge do normal.</p>', '<p>Uma central no computador acompanha celulares antigos que viraram servidores: bateria, temperatura, rede e tela remota, com aviso quando algo foge do normal.</p>'],
+  ['<div><b>OCR</b><span>Python e Tesseract</span></div>', '<div><b>Digitalizadas</b><span>lê até fatura escaneada</span></div>'],
+  ['<p>Câmera e sensores com ESP32-S3 registram cada retirada na geladeira do Centro Acadêmico, e um painel faz a auditoria.</p>', '<p>Câmera e sensores registram cada retirada na geladeira do Centro Acadêmico, e um painel faz a auditoria.</p>'],
+  ['<div><b>ESP32-S3</b><span>com câmera</span></div>', '<div><b>Câmera</b><span>em cada retirada</span></div>'],
+  ['<span class="win-cam"><small>Feito com</small><strong>Python e Arduino</strong></span>', '<span class="win-cam"><small>Como funciona</small><strong>A rede aprende jogando</strong></span>'],
+  ['<span class="win-cam prin"><small>Feito com</small><strong>Python, ADB e scrcpy</strong></span>', '<span class="win-cam prin"><small>Para quem</small><strong>Quem usa celular antigo como servidor</strong></span>'],
+  ['<span class="win-selo">IA · Skill do Claude</span>', '<span class="win-selo">Inteligência artificial</span>'],
   // bloco de serviços
   ['<div class="lbl" style="color:var(--yellow)">IA no dia a dia</div>\n  <h2 id="h-uso">Como eu uso IA</h2>', '<div class="lbl" style="color:var(--yellow)">Serviços</div>\n  <h2 id="h-uso">O que eu posso fazer por você</h2>'],
   ['<li><b>Claude Code como equipe</b><span>Especificação e plano primeiro, tarefas divididas entre subagentes e revisão a cada entrega.</span></li>', '<li><b>Atendimento automático no WhatsApp</b><span>Responde, entende o pedido, registra e chama uma pessoa quando precisa.</span></li>'],

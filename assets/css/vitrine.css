@@ -20,7 +20,7 @@
 .win-menu a.on{box-shadow:0 2px 0 var(--v-org)}
 .win-menu em,.win-menu a.zap{font-style:normal;background:var(--v-zap);color:#fff;border-radius:6px;padding:6px 10px;font-weight:600;text-decoration:none}
 .win-selo{display:inline-block;font-size:12.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--v-org)}
-.win h3{font-family:var(--display);font-stretch:72%;font-weight:850;font-size:clamp(36px,4.8vw,72px);line-height:.92;text-transform:uppercase;margin:0;letter-spacing:-.005em;text-wrap:balance}
+.win h3,.ct-detalhe h3{font-family:var(--display);font-stretch:72%;font-weight:850;font-size:clamp(36px,4.8vw,72px);line-height:.92;text-transform:uppercase;margin:0;letter-spacing:-.005em;text-wrap:balance}
 
 
 /* landing: só a abertura escura com os dois caminhos (catálogo e contato) */
@@ -67,19 +67,48 @@
 .ct-corpo h4{margin:0;font-weight:600;font-size:15px;line-height:1.35}
 .ct-corpo p{margin:0;font-size:13px;color:#5c5f63}
 .ct-corpo em{font-style:normal;font-size:12.5px;color:#63666a}
-.ct-corpo a{margin-top:8px;text-align:center;border:1px solid #1b1b1b;border-radius:2px;color:#1b1b1b;font-weight:600;font-size:14px;padding:8px;text-decoration:none}
-.ct-corpo a:hover{background:#1b1b1b;color:#fff}
-/* projeto sem código aberto: a mesma caixa do botão, tracejada e sem ação */
-.ct-nota{margin-top:8px;text-align:center;border:1px dashed #c4c6ca;border-radius:2px;color:#5c5f63;font-size:13px;padding:8px}
+.ct-mais{background:transparent;font-family:inherit;cursor:pointer;margin-top:8px;text-align:center;border:1px solid #1b1b1b;border-radius:2px;color:#1b1b1b;font-weight:600;font-size:14px;padding:8px;text-decoration:none}
+.ct-mais:hover{background:#1b1b1b;color:#fff}
+/* detalhes do projeto (abrem pelo "Ver mais" do catálogo): um diálogo no visual da vitrine */
+.ct-detalhe{width:min(1040px,calc(100vw - 32px));max-height:calc(100vh - 48px);max-height:calc(100dvh - 48px);padding:0;border:0;border-radius:12px;background:var(--v-bg);color:var(--v-blk);overflow:auto;overscroll-behavior:contain;box-shadow:0 30px 80px -20px rgba(0,0,0,.7);color-scheme:light}
+.ct-detalhe::backdrop{background:rgba(12,12,11,.74);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+.ct-detalhe[open]{display:flex;flex-direction:column}
+.ct-detalhe-topo{position:sticky;top:0;z-index:1;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 12px 10px clamp(16px,3vw,40px);background:#1b1b1b;color:#fff}
+.ct-detalhe-topo b{font-size:15px}
+.ct-fechar{width:36px;height:36px;border:0;border-radius:50%;background:#2c2c2c;color:#fff;font-size:22px;line-height:1;cursor:pointer}
+.ct-fechar:hover{background:#3a3a3a}
+html.modal-aberto{overflow:hidden}
+.win-heroi{flex:1;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(16px,3vw,40px);align-items:center;padding:clamp(18px,3vw,40px) clamp(16px,3vw,40px)}
+.win-txt{display:grid;gap:14px;min-width:0}
+.win-txt p{margin:0;font-size:15.5px;color:#333;max-width:48ch}
+.win-heroi .win-selo{color:#c2410c}
+.win-caminhos{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:520px;margin-top:4px}
+.win-caminhos{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:520px;margin-top:4px}
+.win-cam{display:grid;gap:2px;text-decoration:none;border:1.5px solid var(--v-line);background:#fff;border-radius:6px;padding:11px 14px;color:var(--v-blk);min-width:0}
+.win-cam small{font-size:11.5px;color:var(--v-soft)}
+.win-cam strong{font-size:14.5px}
+.win-cam.prin{background:var(--v-red);border-color:var(--v-red);color:#fff}
+.win-cam.prin small{color:#fff}
+a.win-cam{transition:transform .18s var(--ease)}
+a.win-cam:hover{transform:translateY(-2px)}
+.win-ilu{min-width:0;display:grid;place-items:center}
+.win-ilu svg{width:100%;max-width:480px;height:auto;display:block;overflow:visible}
+.win-selos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--v-line);background:#fff;flex:none}
+.win-selos div{padding:14px clamp(14px,2.4vw,28px);border-right:1px solid var(--v-line);min-width:0}
+.win-selos div:last-child{border-right:0}
+.win-selos b{display:block;font-family:var(--display);font-stretch:75%;font-weight:800;font-size:22px;text-transform:uppercase;line-height:1.05}
+.win-selos span{font-size:12.5px;color:var(--v-soft)}
 
 @media (max-width:860px){
   .win{position:relative;top:auto;height:auto;min-height:0;margin-bottom:24px}
   .win-vp{overflow:visible}
   .win-page{transform:none!important}
-  .lj-heroi-grade,.ct-shell{grid-template-columns:1fr}
+  .win-heroi,.lj-heroi-grade,.ct-shell{grid-template-columns:1fr}
   .lj-heroi{background:#151515}
-  .lj-heroi-foto svg{max-width:300px;margin-inline:auto}
-  .lj-caminhos{grid-template-columns:1fr}
+  .win-ilu svg,.lj-heroi-foto svg{max-width:300px;margin-inline:auto}
+  .win-caminhos,.lj-caminhos{grid-template-columns:1fr}
+  .win-selos b{font-size:17px}
+  .ct-detalhe{width:calc(100vw - 16px);max-height:calc(100dvh - 16px)}
   .ct-lado{border-right:0;padding-right:0}
   .win-menu a:not(.on):not(.zap),.win-menu em{display:none}
 }

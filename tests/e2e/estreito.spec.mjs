@@ -63,3 +63,15 @@ test('no celular o número do FindBus vem com a legenda', async ({ page }) => {
   await expect(page.locator('#p2 .stat small')).toBeVisible();
   await expect(page.locator('#p2 .stat small')).toHaveText('usuários por dia útil');
 });
+
+test('no celular os detalhes do "Ver mais" cabem na tela e o X fica à vista', async ({ page }) => {
+  await abrir(page, '/clientes/');
+  await page.locator('.ct-card', { hasText: 'Robô desviador' }).getByRole('button', { name: 'Ver mais' }).click();
+  const d = page.locator('dialog[open]');
+  await expect(d).toBeVisible();
+  const r = await d.evaluate((el) => { const b = el.getBoundingClientRect(); return { esq: b.left, dir: b.right, W: document.documentElement.clientWidth, larg: el.scrollWidth - el.clientWidth }; });
+  expect(r.esq).toBeGreaterThanOrEqual(0);
+  expect(r.dir).toBeLessThanOrEqual(r.W);
+  expect(r.larg).toBeLessThanOrEqual(0);
+  await expect(d.getByRole('button', { name: 'Fechar' })).toBeInViewport();
+});

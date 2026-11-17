@@ -70,5 +70,5 @@ test('depois de redimensionar, Catálogo ainda cai no lugar', async ({ page }) =
 
 test('ilustrações desenhadas', async ({ page }) => {
   await abrir(page); await pronto(page);
-  await expect(page.locator('[data-desenho] svg')).toHaveCount(6);
+  await expect(page.locator('[data-desenho] svg')).toHaveCount(11);
 });

@@ -60,7 +60,7 @@ for (const v of VERSOES) {
     so(info, 'desktop');
     await abrir(page, v.caminho);
     await page.keyboard.press('Tab');
-    for (const alvo of [page.locator('.lj-caminho.prin'), page.locator('.ct-card a').first(), page.locator('#mag')]) {
+    for (const alvo of [page.locator('.lj-caminho.prin'), page.locator('.ct-card .ct-mais').first(), page.locator('#mag')]) {
       await alvo.focus();
       const contorno = await alvo.evaluate((el) => getComputedStyle(el).outlineStyle);
       expect(contorno).not.toBe('none');
