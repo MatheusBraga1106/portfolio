@@ -4,7 +4,7 @@ import { abrir } from './ajuda.mjs';
 test('carrega sem erros', async ({ page }) => {
   const erros = await abrir(page);
   await page.waitForLoadState('networkidle');
-  await expect(page).toHaveTitle('Matheus Braga · AI Builder');
+  await expect(page).toHaveTitle('Matheus Braga · AI Engineer');
   expect(erros).toEqual([]);
 });
 

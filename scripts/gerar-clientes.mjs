@@ -6,23 +6,25 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 let p = readFileSync('ia/index.html', 'utf8');
 const trocas = [
   // cabeçalho da página
-  ['<title>Matheus Braga · AI Builder</title>', '<title>Matheus Braga · Sistemas sob medida</title>'],
-  ['content="AI Builder, Engenharia de Computação na UFG. Agentes de IA, automações e sistemas internos, do protótipo ao servidor."', 'content="Atendimento automático no WhatsApp, painéis, alertas e sistemas sob medida, feitos e mantidos no ar por Matheus Braga, de Goiânia."'],
+  ['<title>Matheus Braga · AI Engineer</title>', '<title>Matheus Braga · Sistemas sob medida</title>'],
+  ['content="AI Engineer, Engenharia de Computação na UFG. Sistemas que integram LLMs a processos reais, em produção, com testes automatizados, Docker e deploy no próprio servidor."', 'content="Atendimento automático no WhatsApp, painéis, alertas e sistemas sob medida, feitos e mantidos no ar por Matheus Braga, de Goiânia."'],
   // endereço e compartilhamento
   ['https://ia.matheusbragadev.com/', 'https://matheusbragadev.com/', 'todas'],
   ['/assets/img/og-ia.png', '/assets/img/og-clientes.png'],
-  ['<meta property="og:title" content="Matheus Braga · AI Builder">', '<meta property="og:title" content="Matheus Braga · Sistemas sob medida">'],
-  ['<meta property="og:description" content="Agentes de IA, automações e sistemas internos em uso, do protótipo ao servidor.">', '<meta property="og:description" content="Atendimento automático no WhatsApp, painéis, alertas e sistemas sob medida, no ar.">'],
+  ['<meta property="og:title" content="Matheus Braga · AI Engineer">', '<meta property="og:title" content="Matheus Braga · Sistemas sob medida">'],
+  ['<meta property="og:description" content="Sistemas que integram LLMs a processos reais, em produção, com testes automatizados e deploy no próprio servidor.">', '<meta property="og:description" content="Atendimento automático no WhatsApp, painéis, alertas e sistemas sob medida, no ar.">'],
   // abertura
   ['<h1><span class="sr">Construo com IA e coloco no ar.</span><span aria-hidden="true" class="split">Construo com IA e coloco no ar.</span>', '<h1 class="longa"><span class="sr">Do problema ao sistema funcionando.</span><span aria-hidden="true" class="split">Do problema ao sistema funcionando.</span>'],
-  ['<p>AI Builder · Engenharia de Computação na UFG. Agentes, automações e sistemas internos, do protótipo ao meu próprio servidor.</p><a class="cta" href="#viagem" data-hover>Ver os projetos ↓</a>', '<p>Atendimento automático no WhatsApp, painéis, alertas e sistemas sob medida, feitos e mantidos no ar por mim.</p><a class="cta" href="#viagem" data-hover>Ver o que eu já fiz ↓</a>'],
+  ['<p>AI Engineer · Engenharia de Computação na UFG. Engenharia de software com foco em IA: construo sistemas que integram LLMs a processos reais e coloco em produção, com testes automatizados, Docker e deploy no meu próprio servidor.</p><a class="cta" href="#viagem" data-hover>Ver os projetos ↓</a>', '<p>Atendimento automático no WhatsApp, painéis, alertas e sistemas sob medida, feitos e mantidos no ar por mim.</p><a class="cta" href="#viagem" data-hover>Ver o que eu já fiz ↓</a>'],
   // faixa abaixo da abertura: resultados no lugar das ferramentas (as duas cópias da faixa)
   ['<span>n8n</span><i>✦</i><span>OpenAI</span><i>✦</i><span>Claude Code</span><i>✦</i><span>Python</span><i>✦</i><span>FastAPI</span><i>✦</i><span>Postgres</span><i>✦</i><span>Docker</span><i>✦</i><span>Dokploy</span><i>✦</i><span>Cloudflare</span><i>✦</i>', '<span>Atendimento no WhatsApp</span><i>✦</i><span>Painéis</span><i>✦</i><span>Alertas</span><i>✦</i><span>Sistemas internos</span><i>✦</i><span>Automações</span><i>✦</i><span>Sites</span><i>✦</i><span>Integrações</span><i>✦</i><span>Mantido no ar</span><i>✦</i>', 'todas'],
   // caso 1: bot
-  ['<p class="short">Três agentes de IA no WhatsApp para as garagens de ônibus pedirem peças ao laboratório.</p>', '<p class="short">Atendimento no WhatsApp que funciona sozinho.</p>'],
+  ['<p class="short">Três agentes de IA no WhatsApp para as garagens de ônibus pedirem peças ao laboratório, num sistema com mais de 2.300 testes automatizados.</p>', '<p class="short">Atendimento no WhatsApp que funciona sozinho.</p>'],
   ['<div><dt>Problema</dt><dd>Para pedir uma peça ou relatar um defeito, o funcionário tinha que ir pessoalmente até alguém do laboratório.</dd></div>', '<div><dt>Problema</dt><dd>Para pedir uma peça, o funcionário tinha que ir pessoalmente ao laboratório.</dd></div>'],
   ['<div><dt>Solução</dt><dd>Agentes Triagem, Pedido e Ocorrência (n8n, OpenAI, Evolution API), memória no Postgres e passagem para um humano.</dd></div>', '<div><dt>Solução</dt><dd>Um atendente no WhatsApp que entende o pedido, pede foto quando precisa, registra tudo e chama uma pessoa quando o assunto foge do combinado.</dd></div>'],
   ['<div><dt>Resultado</dt><dd>O pedido sai do celular, a qualquer hora, e fica registrado. Testado por agentes que simulam funcionários.</dd></div>', '<div><dt>Resultado</dt><dd>O pedido sai do celular, a qualquer hora, e nada se perde.</dd></div>'],
+  // a linha da stack do estágio é só da versão IA
+  ['\n            <div><dt>Sistema</dt><dd>Python, FastAPI, PostgreSQL e Docker, com mais de 2.300 testes automatizados.</dd></div>', ''],
   // caso 2: FindBus
   ['<p>Mostra se o ônibus que está chegando tem ar-condicionado. Cache em 3 camadas (Redis, Cloudflare e navegador).</p>', '<p>Informação em tempo real para a cidade inteira: mostra se o ônibus que está chegando tem ar-condicionado, rápido mesmo com muita gente acessando.</p>'],
   // caso 3: Radar
