@@ -55,6 +55,6 @@ for (const caminho of ['/ia/?teste', '/clientes/?teste']) {
     await expect(codigo.nth(0)).toHaveAttribute('href', 'https://github.com/MatheusBraga1106/extrator-faturas-agua');
     await expect(codigo.nth(1)).toHaveAttribute('href', 'https://github.com/MatheusBraga1106/robo-desviador');
     for (let i = 0; i < 2; i++) await expect(codigo.nth(i)).toHaveAttribute('target', '_blank');
-    await expect(page.locator('.ct-card .ct-nota')).toHaveText(['Em uso no CA da UFG · código privado', 'Código privado', 'Uso pessoal']);
+    await expect(page.locator('.ct-card .ct-nota')).toHaveText(['Código privado', 'Código privado', 'Uso pessoal']);
   });
 }
