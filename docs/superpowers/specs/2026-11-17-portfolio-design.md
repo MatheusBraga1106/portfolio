@@ -22,14 +22,29 @@ O site tem duas funções:
 Cada projeto aparece como **estudo de caso: problema → solução → resultado**, com acesso ao
 projeto real quando ele existe.
 
+### 1.1 Duas versões, uma em cada endereço (pedido dele em 17/11/2026)
+
+- **Versão IA** (`ia.<domínio>`), base do processo seletivo: mostra **como** ele usa IA. É a
+  Mistura aprovada, com as ferramentas nomeadas e um bloco a mais, **"Como eu uso IA"**. Vai no
+  currículo e no GitHub.
+- **Versão clientes** (`<domínio>` e `www.`), para o público geral: mostra **o que** ele consegue
+  fazer e **como fica**, sem nome de ferramenta nos casos e na vitrine ("um possível cliente não
+  quer saber o que eu uso"). Tem um bloco **"O que eu posso fazer por você"** no lugar de "Como eu
+  uso IA". Textos na seção 6.2.
+- **Iguais nas duas** (decisão dele): abertura 3D, caixa de ferramentas, infraestrutura e contato.
+- **Domínio decidido: `matheusbrg.com`** (o `matheusbraga.com` já tem dono; ele conferiu em
+  17/11/2026). Clientes em `matheusbrg.com` e `www.matheusbrg.com`; vagas em `ia.matheusbrg.com`.
+  O `.com` foi escolhido porque o público geral conhece, e `ia.` funciona igual para a vaga.
+
 ## 2. Objetivos, não objetivos e anti-objetivos
 
 **Objetivos**
-- Site no ar em domínio próprio `.dev`, com HTTPS, servido pelo Dokploy do Matheus.
+- As duas versões no ar em domínio próprio (extensão a definir, ver 1.1), com HTTPS, servidas por
+  um container só no Dokploy do Matheus.
 - Quatro casos principais, nesta ordem: Bot do Laboratório 3D, FindBus, Radar de Preços,
   Hub Sim Racing.
 - Uma vitrine de "Outros projetos" (5 projetos menores).
-- A URL nova substitui o hubdev.app no currículo, no README do perfil e no campo de site do
+- `ia.matheusbrg.com` substitui o hubdev.app no currículo, no README do perfil e no campo de site do
   perfil do GitHub (a troca em si é a última etapa, com aprovação dele).
 
 **Não objetivos (fora desta versão)**
@@ -150,6 +165,33 @@ A referência de comportamento e visual é o arquivo `mistura.html`. O site é *
 Rolagem suave com Lenis (um motor só), animações com GSAP + ScrollTrigger, cursor próprio só em
 mouse (não em toque).
 
+### 5.1 O que muda de uma versão para a outra
+
+A lista acima é a **versão IA** (a Mistura aprovada), com um bloco a mais, logo depois da vitrine:
+
+- **"Como eu uso IA"** (só na versão IA): quatro itens, só com fatos do README do perfil e do
+  currículo:
+  1. **Claude Code como equipe:** especificação e plano primeiro, tarefas divididas entre
+     subagentes e revisão a cada entrega.
+  2. **Vários agentes, um projeto:** no estágio, o desenvolvimento é dividido entre 3 frentes do
+     Claude (sistema, WhatsApp e coleta de dados), que conversam por contratos de API.
+  3. **Testes com agentes:** o bot do laboratório é testado por agentes que simulam funcionários
+     com perfis diferentes.
+  4. **IA fora do chat:** integrações via MCP, como a do Fusion 360, em que o Claude modelou uma
+     peça aprovada na primeira impressão.
+
+A **versão clientes** tem a mesma estrutura e o mesmo visual, com estas diferenças (textos na 6.2):
+
+- Abertura: mesmo 3D, com título e texto para cliente.
+- Os 4 casos: problema → resultado em linguagem de cliente, **sem nome de ferramenta**. As
+  interações (conversa, painel do FindBus, gráfico do Radar, volante) continuam.
+- Vitrine: a landing troca "Como eu trabalho" por um "Como funciona" de cliente e tira o filtro
+  "Feito com"; o catálogo e as fichas tiram as linhas "Feito com…" e os selos técnicos.
+- No lugar de "Como eu uso IA": **"O que eu posso fazer por você"**, com quatro serviços.
+- "O que eu faço" (as quatro linhas grandes) usa os mesmos nomes de serviço da versão clientes.
+- **Iguais nas duas:** abertura 3D (só muda o texto), caixa de ferramentas, infraestrutura e
+  contato.
+
 ## 6. Conteúdo e números (conferidos; não usar outros)
 
 | Item | Texto ou número | Fonte |
@@ -187,6 +229,22 @@ Dados de exemplo são permitidos desde que estejam marcados como exemplo na tela
 Ficaram **fora da vitrine** por decisão dele: Caçador de estágios, Caixa da impressora 3D e
 3d-web-dev-skills.
 
+### 6.2 Textos da versão clientes (proposta do autor, para ele revisar)
+
+Os mesmos fatos da tabela acima, sem nome de ferramenta. Nada novo é afirmado.
+
+| Lugar | Texto |
+|---|---|
+| Abertura | Título: "Do problema ao sistema funcionando." Texto: "Atendimento automático no WhatsApp, painéis, alertas e sistemas sob medida, feitos e mantidos no ar por mim." Botão: "Ver o que eu já fiz ↓" |
+| Bot | "Atendimento no WhatsApp que funciona sozinho". Problema: o funcionário tinha que ir pessoalmente ao laboratório para pedir uma peça. Solução: um atendente no WhatsApp que entende o pedido, pede foto quando precisa, registra tudo e chama uma pessoa quando o assunto foge do combinado. Resultado: o pedido sai do celular, a qualquer hora, e nada se perde. |
+| FindBus | "Informação em tempo real para a cidade inteira". Mostra se o ônibus que está chegando tem ar-condicionado, rápido mesmo com muita gente acessando. Resultado: 12,6 mil visitas por mês. |
+| Radar | "Alertas automáticos de preço". Acompanha preços em várias lojas e avisa no Telegram quando bate a meta, quando volta ao estoque ou quando chega ao menor preço do mês. Nunca compra nada. |
+| Hub Sim Racing | "Um aplicativo com cara de produto". Volante, câmbio, pedais e telemetria numa janela só, com 3D e o celular como painel. Resultado: 9 versões publicadas, gratuito. |
+| Landing da vitrine | Faixa: "Sistemas sob medida · do primeiro esboço ao sistema no ar". Selo: "Problema parado é tempo perdido". Título: "Do problema ao sistema no ar". Áreas: Atendimento automático, Painéis e sistemas, Alertas e automações. Selos: "Feito sob medida", "Fica no ar com segurança", "Testado antes de entregar", "Acompanho depois". |
+| Como funciona (clientes) | 01 Você me conta o problema · 02 Eu mostro a solução antes de construir · 03 Entrego no ar e acompanho. |
+| O que eu posso fazer por você | Atendimento automático no WhatsApp · Painéis e sistemas internos · Alertas e automações · Sites e aplicativos com cara de produto. |
+| Catálogo e fichas | "Serve para…" e o resultado de cada projeto; sem "Feito com…". |
+
 **Imagens reais disponíveis** (já copiadas em `mockups/img/`): volante e painel de corrida do Hub
 Sim Racing, busca e mapa do FindBus, demonstração do Radar. Origem:
 `D:\Claude\simracing-hub\docs\prints\` e `OneDrive\Área de Trabalho\post-findbus\`. Não usar as
@@ -194,13 +252,15 @@ fotos de teste da geladeira (podem mostrar pessoas).
 
 ## 7. Domínio, hospedagem e deploy
 
-- **Domínio:** um `.dev` com o nome dele, comprado na Cloudflare Registrar. **O nome ainda não está
-  decidido** (ele vai conferir; `matheusbraga.dev` é o candidato). O código usa um nome provisório
-  guardado num lugar só (por exemplo, uma constante no `sitemap.xml`, no `robots.txt` e nas tags
-  canônica e Open Graph, trocada por um único buscar-e-substituir), e o nome final entra antes do
-  deploy. A compra é dele.
-- **DNS:** registro A do domínio (e `www`) apontando para a VPS, **com proxy da Cloudflare ligado**
-  (o IP não pode aparecer). SSL/TLS da Cloudflare em "Full (strict)", como nos outros domínios.
+- **Domínio:** `matheusbrg.com`, comprado por ele na Cloudflare Registrar.
+- **DNS:** registros A de `matheusbrg.com`, `www` e `ia` apontando para a VPS, **com proxy da
+  Cloudflare ligado** (o IP não pode aparecer). SSL/TLS da Cloudflare em "Full (strict)", como nos
+  outros domínios.
+- **Duas páginas, um container:** `clientes/index.html` e `ia/index.html` dividem `assets/`. O nginx
+  escolhe a página pelo endereço: `ia.matheusbrg.com` → `ia/index.html`; `matheusbrg.com` e `www`
+  → `clientes/index.html`. Cada versão tem a sua canônica, o seu Open Graph e o seu `sitemap.xml`.
+  O que é igual nas duas (abertura, caixa de ferramentas, infraestrutura, contato) é conferido por
+  teste, para as duas páginas não se separarem com o tempo.
 - **Repositório novo e público** na conta MatheusBraga1106 (nome sugerido: `portfolio`; público
   confirmado por ele em 17/11/2026). O código também é vitrine: README caprichado em português
   (o que é, como rodar localmente, como fica no ar) e código limpo. Nada sensível entra: sem IPs,
@@ -216,7 +276,7 @@ fotos de teste da geladeira (podem mostrar pessoas).
   `dokploy-network`. Nenhuma variável de ambiente é necessária, então o `.env` fica vazio (deixar
   um `.env.example` dizendo isso).
 - **Dokploy:** projeto novo, serviço do tipo Compose apontando para o repositório, autodeploy
-  ligado. Em Domains: o domínio → `portfolio-web`, porta 80, HTTPS, Let's Encrypt. **Depois de
+  ligado. Em Domains: `matheusbrg.com`, `www.matheusbrg.com` e `ia.matheusbrg.com`, os três → `portfolio-web`, porta 80, HTTPS, Let's Encrypt. **Depois de
   cadastrar o domínio, fazer outro Deploy.**
 - **Entregável de deploy:** um `DEPLOY.md` no repositório com esse passo a passo, escrito para ele
   seguir sozinho.
@@ -250,7 +310,7 @@ fotos de teste da geladeira (podem mostrar pessoas).
 
 ## 9. Depois de no ar (com aprovação dele)
 
-1. Trocar hubdev.app pela URL nova em
+1. Trocar hubdev.app por `ia.matheusbrg.com` em
    `D:\Downloads\MedidorAR\curriculo\curriculo-ifood-ai-builder.html` e gerar o PDF de novo
    (Edge headless, `--print-to-pdf`).
 2. Trocar no README do perfil (`D:\Downloads\MedidorAR\curriculo\github-perfil\README.md`) e

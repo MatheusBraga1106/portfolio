@@ -2,10 +2,12 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Transformar o mockup aprovado "Mistura" num site estático de verdade, com testes e pronto para o
-Dokploy, no repositório público `MatheusBraga1106/portfolio`.
+**Goal:** Transformar o mockup aprovado "Mistura" num site estático de verdade, em duas versões (IA em
+`ia.matheusbrg.com`, clientes em `matheusbrg.com`), com testes e pronto para o Dokploy, no repositório
+público `MatheusBraga1106/portfolio`.
 
-**Architecture:** Uma página só (`index.html`) em HTML, CSS e JS puros, sem etapa de build. O CSS e o JS
+**Architecture:** Duas páginas (`ia/index.html` e `clientes/index.html`) que dividem `assets/`, em HTML,
+CSS e JS puros, sem etapa de build. O nginx escolhe a página pelo endereço. O CSS e o JS
 são divididos por seção. As bibliotecas e as fontes ficam dentro do repositório. Um container `nginx`
 serve os arquivos. Os testes rodam no Node: `node:test` para as funções puras e Playwright (com o Edge
 instalado na máquina, sem baixar navegador) para a página.
@@ -26,7 +28,9 @@ comportamento vêm de lá, e o que este plano diz por cima dele vale mais.
 - Proibido: contagem de commits, heatmap, "quantos projetos", tema de ônibus, códigos tipo MB-01, link para o repositório do FindBus, IPs, `.env` real e dados internos da empresa.
 - Sem CDN: tudo carregado de `assets/vendor/` e `assets/fonts/`. As versões são as de cima, exatas.
 - Serviço do compose: `portfolio-web`, com `expose: 80`, **sem `ports`**, na rede externa `dokploy-network`.
-- Domínio provisório: o token `__DOMINIO__` (por exemplo, em `https://__DOMINIO__/`). Ele é trocado em todos os arquivos por `scripts/definir-dominio.mjs`.
+- Domínio: `matheusbrg.com` (clientes, com `www`) e `ia.matheusbrg.com` (IA). Os caminhos de arquivo nas páginas são absolutos (`/assets/...`), porque as duas páginas vivem em pastas diferentes.
+- O que é igual nas duas versões (estrutura da abertura, `#caixa`, `#infra`, `#contato`, rodapé) tem que ser idêntico no HTML; um teste compara.
+- Versão clientes: nenhum nome de ferramenta em `#viagem`, `#vitrine` e `#servicos` (lista do teste na Task 7).
 - Conteúdo visível por padrão: nada começa com `opacity:0` esperando um gatilho de rolagem. Filtros animam só o movimento. Nada de `transition` de CSS na mesma propriedade que o GSAP anima.
 - Navegação por clique: nunca `lenis.scrollTo`. Usar `irPara(y, instantaneo)` (animação própria sobre a rolagem nativa). Toda mudança de altura das janelas chama `lenis.resize()`.
 - Com `prefers-reduced-motion: reduce`: sem Lenis, sem 3D, sem física. A viagem e as janelas viram seções normais.
@@ -34,8 +38,8 @@ comportamento vêm de lá, e o que este plano diz por cima dele vale mais.
 
 ## Review Focus
 
-1. **Celular (≤ 860 px):** a página não pode rolar para o lado e nenhuma janela pode prender a rolagem. Tudo continua legível em 390 px de largura. Teste na Task 7.
-2. **Movimento reduzido:** todo texto e todo cartão ficam visíveis, e os quatro casos e as sete janelas aparecem como seções normais. Teste na Task 7.
+1. **Celular (≤ 860 px):** a página não pode rolar para o lado e nenhuma janela pode prender a rolagem. Tudo continua legível em 390 px de largura. Teste na Task 8.
+2. **Movimento reduzido:** todo texto e todo cartão ficam visíveis, e os quatro casos e as sete janelas aparecem como seções normais. Teste na Task 8.
 3. **Recarregar no meio da viagem:** a mesma parada aparece de novo (o estado vem da rolagem). Teste na Task 3.
 4. **Redimensionar depois de carregar:** os cliques "Catálogo" e "Ver projeto" continuam caindo na janela certa depois de mudar de 1280 para 1000 px de largura. Teste na Task 5.
 5. **Sem WebGL:** aparece a colagem estática no lugar do 3D, sem erro no console. Teste na Task 2.
@@ -46,7 +50,9 @@ comportamento vêm de lá, e o que este plano diz por cima dele vale mais.
 
 ```
 D:\Claude\portfolio\
-  index.html                    a página: todas as seções, na ordem da spec §5
+  ia/index.html                 versão IA: todas as seções, na ordem da spec §5, + "Como eu uso IA"
+  clientes/index.html           versão clientes (spec §5.1 e §6.2), mesma estrutura
+  index.html                    só para desenvolvimento: dois links (ia/ e clientes/); o nginx não o serve
   assets/css/base.css           tokens, tipografia, topo fixo, cursor, utilidades, movimento reduzido
   assets/css/abertura.css       abertura 3D e faixa de ferramentas
   assets/css/viagem.css         linha do tempo e as 4 paradas
@@ -64,11 +70,11 @@ D:\Claude\portfolio\
   assets/vendor/                gsap.min.js, ScrollTrigger.min.js, lenis.min.js, three.module.js, matter.min.js, LICENCAS.md
   assets/fonts/                 woff2 de Archivo, Big Shoulders Display, Geist, Geist Mono + fontes.css
   assets/img/                   telas reais em webp + og.png
-  robots.txt  sitemap.xml  favicon.svg
+  robots-ia.txt  robots-clientes.txt  sitemap-ia.xml  sitemap-clientes.xml  favicon.svg
   nginx.conf  Dockerfile  docker-compose.yml  .env.example  .dockerignore  .gitignore
   README.md  DEPLOY.md
   package.json  playwright.config.mjs
-  scripts/servir.mjs  scripts/definir-dominio.mjs  scripts/otimizar-imagens.mjs
+  scripts/servir.mjs  scripts/otimizar-imagens.mjs
   tests/unit/*.test.mjs        node:test
   tests/e2e/*.spec.mjs         Playwright (Edge)
 ```
@@ -78,7 +84,8 @@ D:\Claude\portfolio\
 ### Task 1: Base do projeto e casca da página
 
 **Files:**
-- Create: `package.json`, `playwright.config.mjs`, `scripts/servir.mjs`, `.gitignore`, `index.html`, `assets/css/base.css`, `assets/fonts/*`, `assets/vendor/*`, `assets/js/main.js`, `assets/js/rolagem.js`, `tests/e2e/casca.spec.mjs`
+- Create: `package.json`, `playwright.config.mjs`, `scripts/servir.mjs`, `.gitignore`, `index.html` (links de desenvolvimento), `ia/index.html`, `assets/css/base.css`, `assets/fonts/*`, `assets/vendor/*`, `assets/js/main.js`, `assets/js/rolagem.js`, `tests/e2e/ajuda.mjs`, `tests/e2e/casca.spec.mjs`
+- As Tasks 2 a 6 constroem a **versão IA** (`/ia/`). A versão clientes nasce dela na Task 7.
 
 **Interfaces:**
 - Produces: `scripts/servir.mjs <pasta> <porta>`: servidor estático só em `127.0.0.1` (padrão: `.` e `5320`).
@@ -89,12 +96,12 @@ D:\Claude\portfolio\
 - [ ] **Step 1:** `git init` em `D:\Claude\portfolio` (sem remoto). O `package.json` (privado, `"type": "module"`) tem os scripts `"servir": "node scripts/servir.mjs . 5320"`, `"test": "node --test tests/unit"` e `"e2e": "playwright test"`, e só `@playwright/test` em `devDependencies`. Rodar `npm install` com `PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1`. O `.gitignore` tem `node_modules/`, `test-results/`, `playwright-report/` e `.env`.
 - [ ] **Step 2:** `playwright.config.mjs`: `webServer` rodando `npm run servir`, `baseURL http://127.0.0.1:5320`, e o projeto `desktop` (1280×800, `channel: 'msedge'`).
 - [ ] **Step 3: Escrever o teste que falha** `tests/e2e/casca.spec.mjs`:
-  - `carrega sem erros`: abre `/?teste`, junta os erros do console, espera `[]`, e confere `title` = `Matheus Braga · AI Builder`.
+  - `carrega sem erros`: abre `/ia/?teste`, junta os erros do console, espera `[]`, e confere `title` = `Matheus Braga · AI Builder`.
   - `sem dependência externa`: nenhuma requisição sai de `127.0.0.1`.
   - `topo`: o link "Trabalho" leva a `#viagem`, "Infra" a `#infra` e "Contato" a `#contato`.
 - [ ] **Step 4:** Rodar `npx playwright test casca`. Esperado: FALHA (não há `index.html`).
 - [ ] **Step 5:** Copiar os vendors nas versões exatas para `assets/vendor/` (baixados uma vez dos mesmos endereços que o mockup usa) e anotar a licença de cada um em `LICENCAS.md`. Baixar as fontes como woff2 e escrever `fontes.css` com `font-display: swap` e fallbacks.
-- [ ] **Step 6:** Criar `index.html` com `lang="pt-BR"`, o título, o topo fixo e as `<section>` vazias com os ids da spec (`#hero`, `#viagem`, `#vitrine`, `#caixa`, `#infra`, `#contato`). Os scripts de vendor ficam em `<script defer>`, e `main.js` como module. O `base.css` traz os tokens `:root` do mockup (cores, `--display`, `--sign`, `--text`, `--mono`, `--ease`), o topo, o cursor e o bloco de movimento reduzido. Escrever `rolagem.js` e `main.js` (Lenis ligado ao ScrollTrigger, cursor, `__site`).
+- [ ] **Step 6:** Criar `ia/index.html` com `lang="pt-BR"`, o título, o topo fixo e as `<section>` vazias com os ids da spec (`#hero`, `#viagem`, `#vitrine`, `#caixa`, `#infra`, `#contato`). Os scripts de vendor ficam em `<script defer>`, e `main.js` como module. O `base.css` traz os tokens `:root` do mockup (cores, `--display`, `--sign`, `--text`, `--mono`, `--ease`), o topo, o cursor e o bloco de movimento reduzido. Escrever `rolagem.js` e `main.js` (Lenis ligado ao ScrollTrigger, cursor, `__site`).
 - [ ] **Step 7:** Rodar `npx playwright test casca`. Esperado: PASSA.
 - [ ] **Step 8:** Commit `"Base do portfólio: casca, vendors locais, fontes e testes"`.
 
@@ -186,17 +193,23 @@ D:\Claude\portfolio\
 - [ ] **Step 4:** Rodar o teste. Esperado: PASSA.
 - [ ] **Step 5:** Commit `"Vitrine: landing, catálogo e fichas em janelas empilhadas"`.
 
-### Task 6: Caixa de ferramentas, infraestrutura, o que eu faço e contato
+### Task 6: "Como eu uso IA", caixa de ferramentas, infraestrutura, o que eu faço e contato
 
 **Files:**
 - Create: `assets/css/final.css`, `assets/js/caixa.js`, `assets/js/contato.js`, `tests/e2e/final.spec.mjs`
-- Modify: `index.html`, `assets/js/main.js`
+- Modify: `ia/index.html`, `assets/js/main.js`
+
+O bloco **"Como eu uso IA"** (`<section id="servicos" class="ia-uso">`) entra logo depois da vitrine,
+com os quatro itens da spec §5.1, no visual da seção de infraestrutura (fundo escuro, numeração
+01–04 porque é uma lista, título grande e frase curta). Na versão clientes, o mesmo `#servicos` vira
+"O que eu posso fazer por você" (Task 7).
 
 **Interfaces:**
 - Consumes: `noVisivel` (Task 1).
 - Produces: `iniciarCaixa(): void` (a física começa quando 35% da caixa aparece, e não antes) e `iniciarContato(): void`.
 
 - [ ] **Step 1: Escrever o teste que falha** `final.spec.mjs`:
+  - `como eu uso IA`: `#servicos` tem 4 itens; os títulos contêm `Claude Code como equipe`, `Vários agentes, um projeto`, `Testes com agentes` e `IA fora do chat`.
   - `ferramentas visíveis antes da física`: as 16 `.chip` estão visíveis com a página no topo.
   - `física liga`: rolar até `#caixa` e, em até 3 s, `#caixa` tem a classe `phys` e os chips estão posicionados por `transform`.
   - `copiar e-mail`: com permissão de área de transferência, clicar `#mag` → o texto do botão contém `copiado`, e a área de transferência tem `mmatheusbragamed@gmail.com`.
@@ -206,53 +219,78 @@ D:\Claude\portfolio\
 - [ ] **Step 4:** Rodar o teste. Esperado: PASSA.
 - [ ] **Step 5:** Commit `"Caixa de ferramentas, infraestrutura e contato"`.
 
-### Task 7: Celular, movimento reduzido, metadados e domínio
+### Task 7: Versão clientes
 
 **Files:**
-- Create: `scripts/definir-dominio.mjs`, `robots.txt`, `sitemap.xml`, `favicon.svg`, `assets/img/og.png`, `tests/unit/definir-dominio.test.mjs`, `tests/e2e/acessivel.spec.mjs`
-- Modify: `index.html` (meta, canônica, Open Graph), `playwright.config.mjs` (projetos `celular` 390×844 e `reduzido` com `reducedMotion: 'reduce'`)
+- Create: `clientes/index.html`, `tests/e2e/versoes.spec.mjs`
+- Modify: `index.html` (link para a versão clientes)
 
 **Interfaces:**
-- Produces: `definirDominio(pasta: string, dominio: string): string[]` (devolve os arquivos alterados). Também roda como CLI: `node scripts/definir-dominio.mjs matheusbraga.dev`. Recusa domínio que não case com `/^[a-z0-9-]+(\.[a-z0-9-]+)+$/`.
+- Consumes: todos os módulos das Tasks 1–6, sem mudança. A versão clientes só troca textos e tira linhas no HTML; o JS funciona igual nas duas páginas, porque se apoia nos mesmos ids e classes.
 
-- [ ] **Step 1: Escrever os testes que falham**:
-  - `definir-dominio.test.mjs`: numa cópia temporária com `__DOMINIO__` em `index.html`, `robots.txt` e `sitemap.xml`, `definirDominio(tmp, 'exemplo.dev')` troca todos (nenhum `__DOMINIO__` sobra) e devolve os 3 arquivos. `definirDominio(tmp, 'http://x')` lança erro.
+- [ ] **Step 1: Escrever o teste que falha** `versoes.spec.mjs` (roda nas duas páginas):
+  - `as duas carregam sem erros`: `/ia/?teste` e `/clientes/?teste`, com o console limpo.
+  - `partes iguais`: o `outerHTML` de `#caixa`, `#infra`, `#contato` e `footer` é igual nas duas páginas.
+  - `clientes sem ferramentas`: o texto visível de `#viagem`, `#vitrine` e `#servicos` em `/clientes/` não contém nenhuma destas palavras (sem diferenciar maiúsculas): `n8n`, `OpenAI`, `Evolution`, `Postgres`, `Claude`, `Python`, `FastAPI`, `Redis`, `Cloudflare`, `Dokploy`, `Docker`, `ESP32`, `Arduino`, `Tesseract`, `ADB`, `scrcpy`, `Node`, `Playwright`, `Feito com`.
+  - `textos de cliente`: em `/clientes/`, o h1 tem o nome `Do problema ao sistema funcionando.`, e `#servicos` tem o título `O que eu posso fazer por você` com 4 itens.
+  - `IA continua com as ferramentas`: em `/ia/`, `#viagem` contém `n8n` e `#servicos` tem o título `Como eu uso IA`.
+- [ ] **Step 2:** Rodar `npx playwright test versoes`. Esperado: FALHA (não há `clientes/index.html`).
+- [ ] **Step 3:** Criar `clientes/index.html` a partir de `ia/index.html`, trocando os textos pelos da spec §6.2: abertura, os 4 casos (as interações continuam), landing da vitrine (faixa, áreas, selos, "Como funciona"), catálogo e fichas sem "Feito com…", e `#servicos` como "O que eu posso fazer por você". Título da página: `Matheus Braga · Sistemas sob medida`.
+- [ ] **Step 4:** Rodar `npx playwright test`. Esperado: PASSA (todas as specs, nas duas páginas).
+- [ ] **Step 5:** Commit `"Versão clientes, com as partes comuns iguais às da versão IA"`.
+
+### Task 8: Celular, movimento reduzido e metadados
+
+**Files:**
+- Create: `robots-ia.txt`, `robots-clientes.txt`, `sitemap-ia.xml`, `sitemap-clientes.xml`, `favicon.svg`, `assets/img/og-ia.png`, `assets/img/og-clientes.png`, `tests/e2e/acessivel.spec.mjs`
+- Modify: `ia/index.html` e `clientes/index.html` (meta, canônica, Open Graph), `playwright.config.mjs` (projetos `celular` 390×844 e `reduzido` com `reducedMotion: 'reduce'`)
+
+- [ ] **Step 1: Escrever os testes que falham** (rodam nas duas páginas):
+  - `metadados`: `/ia/` tem a canônica `https://ia.matheusbrg.com/` e `og:image` `https://ia.matheusbrg.com/assets/img/og-ia.png`; `/clientes/` tem `https://matheusbrg.com/` e `og-clientes.png`.
   - `acessivel.spec.mjs`, projeto `celular`: `document.documentElement.scrollWidth <= innerWidth` no topo, no meio da viagem e no meio da vitrine. Rolar a página inteira com `mouse.wheel` até o rodapé ficar visível.
   - Projeto `reduzido`: `html` com classe `flat`; os 4 `h2` das paradas e os 7 títulos das janelas visíveis, e nenhum elemento de conteúdo com `opacity` < 1.
   - Projeto `desktop`: navegação por Tab chega aos botões "Ver o catálogo", "Ver projeto" e "Copiar e-mail" com contorno visível.
-- [ ] **Step 2:** Rodar `npm test` e `npx playwright test acessivel`. Esperado: FALHA.
-- [ ] **Step 3:** Implementar `definir-dominio.mjs`, as metas (descrição, `og:title`, `og:description`, `og:image` = `https://__DOMINIO__/assets/img/og.png`, canônica), `robots.txt` (`Sitemap: https://__DOMINIO__/sitemap.xml`), `sitemap.xml` com uma URL, `favicon.svg` (o quadrado "MB"), e `og.png` de 1200×630 feito a partir da abertura (print do Edge headless). Tirar os ganchos de teste do mockup (`__box`, `__startBox`, `__dbg` e o selo "mockup"); o `__site` fica só com `?teste`.
+- [ ] **Step 2:** Rodar `npx playwright test acessivel`. Esperado: FALHA.
+- [ ] **Step 3:** Escrever as metas de cada página (descrição, `og:title`, `og:description`, `og:image`, canônica), os dois `robots-*.txt` (cada um com o `Sitemap:` do seu endereço), os dois `sitemap-*.xml` com uma URL cada, `favicon.svg` (o quadrado "MB") e os dois `og-*.png` de 1200×630, feitos a partir da abertura de cada versão (print do Edge headless). Tirar os ganchos de teste do mockup (`__box`, `__startBox`, `__dbg` e o selo "mockup"); o `__site` fica só com `?teste`.
 - [ ] **Step 4:** Rodar tudo. Esperado: PASSA.
 - [ ] **Step 5:** Rodar o Lighthouse no projeto `celular` (`npx lighthouse http://127.0.0.1:5320 --form-factor=mobile --only-categories=performance,accessibility --chrome-flags=--headless`, apontando `CHROME_PATH` para o Edge). Esperado: as duas categorias ≥ 90. Corrigir o que estiver abaixo antes de seguir.
-- [ ] **Step 6:** Commit `"Celular, movimento reduzido, metadados e domínio provisório"`.
+- [ ] **Step 6:** Commit `"Celular, movimento reduzido e metadados das duas versões"`.
 
-### Task 8: Container, compose e documentação
+### Task 9: Container, compose e documentação
 
 **Files:**
 - Create: `nginx.conf`, `Dockerfile`, `.dockerignore`, `docker-compose.yml`, `.env.example`, `DEPLOY.md`, `README.md`, `tests/unit/deploy.test.mjs`
 
 **Interfaces:**
-- Produces: imagem `nginx:1.27-alpine` que serve a raiz do site em `/usr/share/nginx/html`, com o health check em `/healthz` (resposta `ok`).
+- Produces: imagem `nginx:1.27-alpine` que serve o site em `/usr/share/nginx/html`, com o health check em `/healthz` (resposta `ok`). Um `map $host` escolhe a versão: host que começa com `ia.` → `/ia/index.html`, `/robots-ia.txt` e `/sitemap-ia.xml`; qualquer outro → as versões `clientes`. Os caminhos `/robots.txt` e `/sitemap.xml` são reescritos para o arquivo da versão. `/ia/` e `/clientes/` diretos respondem 404, para não haver dois endereços com a mesma página.
 
 - [ ] **Step 1: Escrever o teste que falha** `deploy.test.mjs` (lê os arquivos como texto):
   - `docker-compose.yml` tem o serviço `portfolio-web`, `expose` com `80`, nenhuma chave `ports:` e `networks: dokploy-network` com `external: true`.
   - `.dockerignore` contém `node_modules`, `tests`, `.git` e `scripts`.
   - Nenhum arquivo do repositório (fora de `node_modules`) contém um IP no formato `\b\d{1,3}(\.\d{1,3}){3}\b`, com exceção de `127.0.0.1`.
 - [ ] **Step 2:** Rodar `npm test`. Esperado: FALHA.
-- [ ] **Step 3:** Escrever os arquivos. O `nginx.conf` tem gzip, `Cache-Control: public, max-age=31536000, immutable` em `/assets/`, `no-cache` em `index.html`, os cabeçalhos `X-Content-Type-Options: nosniff` e `Referrer-Policy: strict-origin-when-cross-origin`, e uma CSP só com `'self'` (sem `unsafe-inline` em script). O `Dockerfile` copia só os arquivos do site. O `.env.example` diz que nenhuma variável é necessária. O `DEPLOY.md` segue a spec §7, passo a passo, incluindo "depois de cadastrar o domínio, faça outro Deploy". O `README.md` (público, em português) diz o que é o site, como rodar localmente, como testar e como fica no ar.
+- [ ] **Step 3:** Escrever os arquivos. O `nginx.conf` tem gzip, `Cache-Control: public, max-age=31536000, immutable` em `/assets/`, `no-cache` em `index.html`, os cabeçalhos `X-Content-Type-Options: nosniff` e `Referrer-Policy: strict-origin-when-cross-origin`, e uma CSP só com `'self'` (sem `unsafe-inline` em script). O `Dockerfile` copia só os arquivos do site. O `.env.example` diz que nenhuma variável é necessária. O `DEPLOY.md` segue a spec §7, passo a passo: comprar `matheusbrg.com`, criar os registros A de `@`, `www` e `ia` com proxy, cadastrar os três domínios no serviço `portfolio-web` e fazer outro Deploy depois disso. O `README.md` (público, em português) diz o que é o site, como rodar localmente, como testar e como fica no ar.
 - [ ] **Step 4:** Rodar `npm test`. Esperado: PASSA.
-- [ ] **Step 5:** Com o Docker: `docker build -t portfolio-teste .`, depois `docker run --rm -d -p 5399:80 --name pt portfolio-teste`, e `curl -s 127.0.0.1:5399/healthz` responde `ok`. Conferir que `curl -sI 127.0.0.1:5399/` traz a CSP. Depois `docker rm -f pt`. Se o Docker estiver desligado, registrar no relatório que este passo não rodou.
+- [ ] **Step 5:** Com o Docker: `docker build -t portfolio-teste .`, depois `docker run --rm -d -p 5399:80 --name pt portfolio-teste`. Esperado:
+  - `curl -s 127.0.0.1:5399/healthz` responde `ok`;
+  - `curl -s -H "Host: ia.matheusbrg.com" 127.0.0.1:5399/` traz `<title>Matheus Braga · AI Builder</title>`;
+  - `curl -s -H "Host: matheusbrg.com" 127.0.0.1:5399/` e com `Host: www.matheusbrg.com` trazem `Matheus Braga · Sistemas sob medida`;
+  - `curl -s -H "Host: ia.matheusbrg.com" 127.0.0.1:5399/robots.txt` contém `https://ia.matheusbrg.com/sitemap.xml`;
+  - `curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:5399/ia/` responde `404`;
+  - `curl -sI 127.0.0.1:5399/` traz a CSP.
+  
+  Depois `docker rm -f pt`. Se o Docker estiver desligado, registrar no relatório que este passo não rodou.
 - [ ] **Step 6:** Rodar a suíte inteira (`npm test` e `npx playwright test`). Esperado: tudo passa.
 - [ ] **Step 7:** Commit `"Container nginx, compose para o Dokploy e documentação"`.
 
-### Task 9: Publicação (cada passo só com aprovação do Matheus)
+### Task 10: Publicação (cada passo só com aprovação do Matheus)
 
 Não é código. É uma lista de pedidos, um por vez, e cada um espera um "sim".
 
 - [ ] **Step 1:** Pedir aprovação para criar o repositório **público** `MatheusBraga1106/portfolio` e dar push na `main`. Antes, rodar `git status` e mostrar a ele a lista de arquivos.
-- [ ] **Step 2:** Ele compra o domínio e faz o deploy seguindo o `DEPLOY.md`. Com o nome final, rodar `node scripts/definir-dominio.mjs <dominio>`, rodar os testes e pedir aprovação para o commit e o push.
-- [ ] **Step 3:** Conferir o site no ar: HTTPS válido (sem 526), sem erros no console e Lighthouse no celular ≥ 90.
-- [ ] **Step 4:** Pedir aprovação, separadamente, para cada troca de hubdev.app pela URL nova:
+- [ ] **Step 2:** Ele compra `matheusbrg.com` e faz o deploy seguindo o `DEPLOY.md` (os três endereços no mesmo serviço, e outro Deploy depois de cadastrar os domínios).
+- [ ] **Step 3:** Conferir os três endereços no ar: HTTPS válido (sem 526), a versão certa em cada um, sem erros no console e Lighthouse no celular ≥ 90.
+- [ ] **Step 4:** Pedir aprovação, separadamente, para cada troca de hubdev.app por `ia.matheusbrg.com`:
   - `D:\Downloads\MedidorAR\curriculo\curriculo-ifood-ai-builder.html`, gerando o PDF de novo (Edge `--print-to-pdf`);
   - `curriculo\github-perfil\README.md`, com push no repositório `MatheusBraga1106/MatheusBraga1106`;
   - o campo website do perfil do GitHub.

@@ -1,0 +1,6 @@
+/* Fontes servidas pelo próprio site (sem Google Fonts). Arquivos do Fontsource, licença OFL-1.1. */
+@font-face{font-family:"Archivo";src:url("/assets/fonts/archivo-latin-standard-normal.woff2") format("woff2");font-weight:100 900;font-stretch:62% 125%;font-style:normal;font-display:swap}
+@font-face{font-family:"Big Shoulders Display";src:url("/assets/fonts/big-shoulders-display-latin-800-normal.woff2") format("woff2");font-weight:800;font-style:normal;font-display:swap}
+@font-face{font-family:"Big Shoulders Display";src:url("/assets/fonts/big-shoulders-display-latin-900-normal.woff2") format("woff2");font-weight:900;font-style:normal;font-display:swap}
+@font-face{font-family:"Geist";src:url("/assets/fonts/geist-latin-wght-normal.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:"Geist Mono";src:url("/assets/fonts/geist-mono-latin-wght-normal.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
