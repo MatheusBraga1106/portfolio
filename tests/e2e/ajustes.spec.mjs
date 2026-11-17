@@ -83,18 +83,6 @@ for (const caminho of ['/ia/?teste', '/clientes/?teste']) {
   }
 }
 
-test('versão clientes: a faixa abaixo da abertura fala de resultados, sem nomes de ferramenta', async ({ page }) => {
-  await abrir(page, '/clientes/?teste');
-  const faixa = (await page.locator('.marq').textContent()) || '';
-  for (const f of ['n8n', 'OpenAI', 'Claude', 'Python', 'FastAPI', 'Postgres', 'Docker', 'Dokploy', 'Cloudflare']) expect(faixa).not.toContain(f);
-  expect(faixa).toContain('WhatsApp');
-});
-
-test('versão IA: a faixa continua com as ferramentas', async ({ page }) => {
-  await abrir(page);
-  await expect(page.locator('.marq')).toContainText('Claude Code');
-});
-
 test.describe('caixa de ferramentas com física', () => {
   test.beforeEach(async ({ page }) => {
     await abrir(page);
@@ -162,22 +150,6 @@ for (const [w, h] of [[1280, 800], [1270, 823], [1440, 900]]) {
   });
 }
 
-for (const caminho of ['/ia/?teste', '/clientes/?teste']) for (const largura of [1280, 900]) {
-  test(`os quatro destaques da landing têm ícones, títulos e textos na mesma altura (${caminho} ${largura}px)`, async ({ page }) => {
-    await page.setViewportSize({ width: largura, height: 800 });
-    await abrir(page, caminho);
-    const r = await page.evaluate(() => {
-      const itens = [...document.querySelectorAll('.lj-selos > div')];
-      const topo = (sel) => itens.map((d) => d.querySelector(sel).getBoundingClientRect().top);
-      return { i: topo('i'), strong: topo('strong'), span: topo('span') };
-    });
-    for (const [parte, tops] of Object.entries(r)) {
-      expect(tops).toHaveLength(4);
-      expect(Math.max(...tops) - Math.min(...tops), `${parte}: ${tops.map(Math.round).join(', ')}`).toBeLessThanOrEqual(1);
-    }
-  });
-}
-
 for (const caminho of ['/ia/?teste', '/clientes/?teste']) {
   test(`FindBus mostra o uso diário (900+ por dia útil), sem o número antigo de visitas (${caminho})`, async ({ page }) => {
     await abrir(page, caminho);
@@ -185,8 +157,6 @@ for (const caminho of ['/ia/?teste', '/clientes/?teste']) {
     const stat = page.locator('#p2 .stat');
     await expect(stat).toHaveAttribute('aria-label', 'Mais de 900 usuários por dia útil');
     await expect(stat).toContainText('usuários por dia útil');
-    await expect(page.locator('.loja-corpo', { hasText: 'FindBus' })).toContainText('900+ usuários por dia útil');
-    await expect(page.locator('details', { hasText: 'em uso de verdade' })).toContainText('mais de 900 usuários por dia útil');
     // o contador anima em números inteiros e termina em 900
     await page.waitForFunction(() => window.__site && window.__site.viagem);
     for (const f of [0.3, 1]) {

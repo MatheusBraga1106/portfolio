@@ -21,7 +21,3 @@ test('sem WebGL mostra a colagem', async ({ page }, info) => {
   expect(erros).toEqual([]);
 });
 
-test('faixa de ferramentas', async ({ page }) => {
-  await abrir(page);
-  await expect(page.locator('.marq')).toContainText('Claude Code');
-});

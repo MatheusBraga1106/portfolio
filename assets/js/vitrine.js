@@ -32,6 +32,26 @@ function ligarCatalogo(mudou) {
 }
 
 /** Liga a vitrine. Devolve irParaJanela(k, instantaneo) e refazer() (mede de novo as janelas). */
+/** "Ver mais" do catálogo: abre o diálogo do projeto; X, Esc ou clique no fundo fecham e o foco volta ao botão. */
+function ligarDetalhes(lenis) {
+  document.querySelectorAll('[data-detalhe]').forEach((botao) => {
+    const d = document.getElementById(botao.dataset.detalhe);
+    if (!d || typeof d.showModal !== 'function') return;
+    botao.addEventListener('click', () => {
+      d.showModal();
+      document.documentElement.classList.add('modal-aberto');
+      if (lenis) lenis.stop(); // a rolagem suave não mexe na página por trás
+    });
+    d.querySelector('.ct-fechar').addEventListener('click', () => d.close());
+    d.addEventListener('click', (e) => { if (e.target === d) d.close(); }); // clique no fundo escuro
+    d.addEventListener('close', () => {
+      document.documentElement.classList.remove('modal-aberto');
+      if (lenis) lenis.start();
+      botao.focus();
+    });
+  });
+}
+
 export function iniciarVitrine(lenis) {
   const janelas = [...document.querySelectorAll('.win')];
   if (!janelas.length) return null;
@@ -39,6 +59,7 @@ export function iniciarVitrine(lenis) {
   const celular = matchMedia('(max-width: 860px)');
   desenhar();
   ligarCatalogo(() => refazer());
+  ligarDetalhes(lenis);
 
   // um marcador antes de cada janela guarda a posição natural dela (a janela presa não serve para isso)
   const marcas = janelas.map((w) => { const m = document.createElement('div'); m.className = 'win-mark'; m.setAttribute('aria-hidden', 'true'); w.before(m); return m; });

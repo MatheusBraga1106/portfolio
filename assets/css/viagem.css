@@ -53,9 +53,6 @@
 .m small{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;opacity:.55}
 .m.sys{justify-self:center;background:transparent;border:1.5px dashed #121711;border-radius:999px;font-family:var(--mono);font-size:11px}
 .m.off{opacity:0;transform:translateY(8px)}
-.agents{display:flex;gap:8px;flex-wrap:wrap}
-.agent{font-family:var(--mono);font-size:11px;padding:6px 10px;border-radius:999px;border:1.5px solid #121711;transition:background .25s,color .25s}
-.agent.on{background:#121711;color:var(--bot)}
 
 .s2{background:var(--bus);color:#e4eaf5}.s2 .btn{--bf:var(--bus)}
 .stat{font-family:var(--sign);font-weight:900;font-size:clamp(60px,7vw,116px);line-height:.85;font-variant-numeric:tabular-nums}
@@ -121,7 +118,7 @@
   .grid{grid-template-columns:1fr;align-content:start;align-items:start;gap:10px}
   .copy2{gap:8px}
   .copy2 h2{font-size:clamp(38px,11vw,60px)}
-  .copy2 > p:not(.short),.agents{display:none}
+  .copy2 > p:not(.short){display:none}
   /* a legenda fica: sem ela o número sozinho não diz o que mede */
   .stat small{font-size:13px;margin-top:4px}
   .btn{padding:9px 14px;font-size:13px}

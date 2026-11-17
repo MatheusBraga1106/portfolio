@@ -49,5 +49,4 @@ test('a conversa do bot aparece com a rolagem', async ({ page }) => {
   await abrir(page); await pronto(page);
   await irParaParada(page, 1);
   await expect(page.locator('#msgs .m.off')).toHaveCount(0);
-  await expect(page.locator('.agent.on')).toHaveText('Humano');
 });

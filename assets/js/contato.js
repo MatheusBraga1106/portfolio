@@ -11,7 +11,6 @@ export function iniciarContato() {
     gsap.fromTo('#pkt', { left: '10%' }, { left: '90%', duration: 2.4, ease: 'power1.inOut', repeat: -1, repeatDelay: 0.5 });
   }
   if (G) {
-    noVisivel('.svc ul', () => gsap.fromTo('.svc li a', { yPercent: 100 }, { yPercent: 0, duration: 0.8, ease: 'power4.out', stagger: 0.07, clearProps: 'transform' }));
     noVisivel('.ct h2', () => gsap.fromTo('.ct h2', { yPercent: 30, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 1, ease: 'power4.out', clearProps: 'transform,opacity' }));
   }
 

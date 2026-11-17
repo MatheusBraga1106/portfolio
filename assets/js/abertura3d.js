@@ -62,9 +62,8 @@ export async function iniciarAbertura() {
     let px = 0, py = 0, tx = 0, ty = 0, prog = 0, alvoProg = 0;
     addEventListener('pointermove', (e) => { tx = e.clientX / innerWidth - 0.5; ty = e.clientY / innerHeight - 0.5; }, { passive: true });
     if (window.gsap && window.ScrollTrigger) {
-      ScrollTrigger.create({ trigger: '#hero', start: 'top top', end: '+=140%', pin: true, scrub: true, refreshPriority: 1, onUpdate: (s) => { alvoProg = s.progress; } });
-      gsap.to('#hero .copy', { opacity: 0, y: -60, ease: 'none', scrollTrigger: { trigger: '#hero', start: 'top top', end: '+=55%', scrub: true } });
-      gsap.to('#hero .hint', { opacity: 0, ease: 'none', scrollTrigger: { trigger: '#hero', start: 'top top', end: '+=20%', scrub: true } });
+      ScrollTrigger.create({ trigger: '#hero', start: 'top top', end: '+=45%', pin: true, scrub: true, refreshPriority: 1, onUpdate: (s) => { alvoProg = s.progress; } });
+      gsap.to('#hero .copy', { opacity: 0, y: -60, ease: 'none', scrollTrigger: { trigger: '#hero', start: 'top top', end: '+=35%', scrub: true } });
       ScrollTrigger.sort(); ScrollTrigger.refresh();
     }
 
