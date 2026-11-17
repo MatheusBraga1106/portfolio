@@ -1,0 +1,17 @@
+# Pronto para o Dokploy (serviço do tipo "Compose").
+# O nome do serviço leva o prefixo do projeto: no Dokploy os projetos dividem a rede dokploy-network,
+# e o nome do serviço vira o endereço dentro dela (um "web" genérico colidiria com outros projetos).
+services:
+  portfolio-web:
+    build: .
+    restart: unless-stopped
+    # sem "ports": o site chega ao container pelo Traefik do Dokploy, através da rede dokploy-network
+    expose:
+      - "80"
+    networks:
+      - dokploy-network
+
+# Rede criada pelo Dokploy. Para rodar fora dele, crie uma vez com: docker network create dokploy-network
+networks:
+  dokploy-network:
+    external: true
