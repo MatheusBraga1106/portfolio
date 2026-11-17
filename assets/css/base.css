@@ -3,7 +3,7 @@
   Visual escuro de propósito (um mundo só, sem tema claro): cada seção define as suas cores por cima destes tokens.
 */
 :root{
-  --ink:#0c0c0b; --paper:#efede8; --dim:#8e8b85; --rule:#2a2927; --yellow:#ffd400; --amber:#f5a524; --signal:#ea1d2c;
+  --ink:#0c0c0b; --paper:#efede8; --dim:#8e8b85; --rule:#2a2927; --yellow:#ffd400; --amber:#f5a524; --signal:#cc1424;
   --bot:#b7c4ad; --bus:#16203a; --radar:#c6bdd3; --race:#121110;
   --display:"Archivo","Helvetica Neue",Arial,sans-serif;
   --sign:"Big Shoulders Display",Impact,sans-serif;

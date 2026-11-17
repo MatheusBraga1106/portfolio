@@ -8,7 +8,18 @@ import { iniciarContato } from './contato.js';
 
 const reduzido = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const toque = matchMedia('(pointer: coarse)').matches;
-const G = !!window.gsap;
+
+// GSAP, ScrollTrigger e Lenis só em tela grande com mouse: é lá que existem o pino da abertura 3D,
+// a rolagem suave e o cursor. No celular a página funciona igual sem eles (e carrega bem mais rápido).
+const telaGrande = matchMedia('(min-width: 861px)').matches && !toque;
+const carregar = (src) => new Promise((ok, falhou) => { const s = document.createElement('script'); s.src = src; s.onload = ok; s.onerror = falhou; document.head.append(s); });
+if (!reduzido && telaGrande) {
+  try {
+    await Promise.all([carregar('/assets/vendor/gsap.min.js'), carregar('/assets/vendor/lenis.min.js')]);
+    await carregar('/assets/vendor/ScrollTrigger.min.js');
+  } catch { /* sem as bibliotecas a página continua completa, só sem as animações */ }
+}
+const G = !!(window.gsap && window.ScrollTrigger);
 if (reduzido) document.documentElement.classList.add('flat');
 if (G) gsap.registerPlugin(ScrollTrigger);
 

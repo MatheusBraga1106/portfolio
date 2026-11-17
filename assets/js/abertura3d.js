@@ -18,6 +18,8 @@ function webglDisponivel() {
 /** Liga a cena. Devolve true se o WebGL subiu (e marca html.has-gl); false deixa a colagem. */
 export async function iniciarAbertura() {
   if (matchMedia('(prefers-reduced-motion: reduce)').matches || !webglDisponivel()) return false;
+  // no celular fica a colagem: o Three.js (655 KB) é o que mais pesa num aparelho mais lento
+  if (matchMedia('(max-width: 860px), (pointer: coarse)').matches) return false;
   const canvas = document.getElementById('gl');
   if (!canvas) return false;
   try {

@@ -1,11 +1,28 @@
-// Caixa de ferramentas com física (Matter.js). As peças ficam visíveis paradas; a física só começa
-// quando 35% da caixa aparece na tela, e para quando ela sai (ou a aba fica oculta).
+// Caixa de ferramentas com física (Matter.js). As peças ficam visíveis paradas; o Matter.js só é baixado
+// quando a caixa se aproxima, a física começa quando 35% dela aparece e para quando ela sai (ou a aba fica oculta).
+
+let carregando = null;
+/** Baixa o Matter.js uma vez só. */
+function carregarMatter() {
+  if (window.Matter) return Promise.resolve();
+  if (!carregando) carregando = new Promise((ok, falhou) => {
+    const s = document.createElement('script');
+    s.src = '/assets/vendor/matter.min.js'; s.onload = ok; s.onerror = falhou;
+    document.head.append(s);
+  });
+  return carregando;
+}
 
 export function iniciarCaixa() {
   const caixa = document.getElementById('caixa');
-  if (!caixa || !window.Matter || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!caixa || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  new IntersectionObserver((es, io) => { if (es[0].isIntersecting) { io.disconnect(); carregarMatter().catch(() => {}); } }, { rootMargin: '800px 0px' }).observe(caixa);
   let comecou = false;
-  new IntersectionObserver((es) => { if (es[0].isIntersecting && !comecou) { comecou = true; comecar(caixa); } }, { threshold: 0.35 }).observe(caixa);
+  new IntersectionObserver((es) => {
+    if (!es[0].isIntersecting || comecou) return;
+    comecou = true;
+    carregarMatter().then(() => comecar(caixa)).catch(() => { /* sem física: as peças continuam paradas e visíveis */ });
+  }, { threshold: 0.35 }).observe(caixa);
 }
 
 function comecar(caixa) {

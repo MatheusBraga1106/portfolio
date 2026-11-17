@@ -47,11 +47,16 @@ export function iniciarVitrine(lenis) {
 
   const efeitos = () => {
     if (parado()) { janelas.forEach((w) => { w.style.transform = ''; w.style.filter = ''; }); return; }
+    // primeiro todas as leituras de layout, depois todas as escritas (evita recalcular a página a cada janela)
+    const leituras = janelas.map((w, i) => {
+      const prox = janelas[i + 1];
+      const p = w._ov ? prender((scrollY - presaEm(i)) / w._ov) : 0;
+      const cob = prox ? prender((innerHeight - prox.getBoundingClientRect().top) / Math.max(1, innerHeight - topoPreso(w) - 16)) : 0;
+      return { p, cob };
+    });
     janelas.forEach((w, i) => {
-      const pg = w.querySelector('.win-page'), prox = janelas[i + 1];
-      if (pg && w._ov) { const p = prender((scrollY - presaEm(i)) / w._ov); pg.style.transform = 'translate3d(0,' + (-p * w._ov).toFixed(1) + 'px,0)'; }
-      let cob = 0;
-      if (prox) cob = prender((innerHeight - prox.getBoundingClientRect().top) / Math.max(1, innerHeight - topoPreso(w) - 16));
+      const pg = w.querySelector('.win-page'), { p, cob } = leituras[i];
+      if (pg && w._ov) pg.style.transform = 'translate3d(0,' + (-p * w._ov).toFixed(1) + 'px,0)';
       w.style.transform = cob ? 'scale(' + (1 - 0.05 * cob).toFixed(4) + ')' : '';
       w.style.filter = cob ? 'brightness(' + (1 - 0.38 * cob).toFixed(3) + ')' : '';
     });

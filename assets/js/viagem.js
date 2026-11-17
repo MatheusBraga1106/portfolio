@@ -50,12 +50,12 @@ function paradaRadar() {
   const X = (i) => 6 + i * (530 / (P.length - 1)), Y = (v) => 10 + ((432 - v) / 64) * 170;
   const svg = document.getElementById('spark');
   svg.innerHTML = '<line x1="6" x2="536" y1="' + Y(META) + '" y2="' + Y(META) + '" stroke="#1f9d57" stroke-width="2" stroke-dasharray="6 6"/><text x="544" y="' + (Y(META) + 4) + '" font-family="Geist Mono, monospace" font-size="12" fill="#1f9d57">meta</text><path id="pl" d="' + P.map((v, i) => (i ? 'L' : 'M') + X(i).toFixed(1) + ' ' + Y(v).toFixed(1)).join(' ') + '" fill="none" stroke="#17131d" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/><circle id="pd" r="7" fill="#17131d" stroke="#fff" stroke-width="3"/>';
-  const pl = document.getElementById('pl'), pd = document.getElementById('pd'), PL = pl.getTotalLength();
+  const pl = document.getElementById('pl'), pd = document.getElementById('pd'); let PL = 0; // medido no primeiro uso, fora da carga da página
   const preco = document.getElementById('price'), tag = document.getElementById('tag'), aviso = document.getElementById('toast');
   return (p) => {
     const f = p * (P.length - 1), i = Math.floor(f), k = f - i;
     const v = i >= P.length - 1 ? P[P.length - 1] : P[i] + (P[i + 1] - P[i]) * k;
-    pl.style.strokeDasharray = PL; pl.style.strokeDashoffset = PL * (1 - p);
+    if (!PL) PL = pl.getTotalLength(); pl.style.strokeDasharray = PL; pl.style.strokeDashoffset = PL * (1 - p);
     pd.setAttribute('cx', (X(0) + (X(P.length - 1) - X(0)) * p).toFixed(1)); pd.setAttribute('cy', Y(v).toFixed(1));
     preco.textContent = brl(v);
     const bateu = v <= META;
@@ -102,7 +102,6 @@ export function iniciarViagem(lenis) {
   const camadas = cenas.map((s) => [...s.querySelectorAll('[data-depth]')]);
   const ponteiro = document.getElementById('ponteiro'), feito = document.getElementById('done'), onde = document.getElementById('onde');
   const topo = () => trilho.getBoundingClientRect().top + scrollY;
-  const progresso = () => { const h = trilho.offsetHeight - innerHeight; return h > 0 ? prender((scrollY - topo()) / h) : 0; };
   const yDaParada = (k) => topo() + ((k * CICLO + DWELL * 0.8) / SPAN) * (trilho.offsetHeight - innerHeight);
 
   const fb = paradaFindBus(reduzido);
@@ -111,7 +110,11 @@ export function iniciarViagem(lenis) {
 
   const desenhar = () => {
     if (reduzido) { quadros.forEach((q) => q(1)); return; }
-    const t = viagem(progresso(), N), pos = t.i + t.fe;
+    // todas as leituras de layout primeiro; depois só escritas (ler depois de escrever força o navegador
+    // a recalcular a página inteira a cada quadro)
+    const r = trilho.getBoundingClientRect(), curso = trilho.offsetHeight - innerHeight;
+    const t = viagem(curso > 0 ? prender(-r.top / curso) : 0, N), pos = t.i + t.fe;
+    const naTela = r.top < innerHeight && r.bottom > 0;
     faixa.style.transform = 'translate3d(' + (-pos / N * 100).toFixed(4) + '%,0,0)';
     camadas.forEach((lista, k) => { const off = k - pos; lista.forEach((el) => { el.style.transform = 'translate3d(' + (off * parseFloat(el.dataset.depth) * 40).toFixed(2) + 'vw,0,0)'; }); });
     quadros.forEach((q, k) => q(k < t.i ? 1 : k === t.i ? t.dw : 0));
@@ -119,8 +122,7 @@ export function iniciarViagem(lenis) {
     ponteiro.style.left = 'calc(14px + (100% - 28px) * ' + frac.toFixed(4) + ')';
     feito.style.width = 'calc((100% - 28px) * ' + frac.toFixed(4) + ')';
     cenas.forEach((s, k) => { const perto = Math.abs(k - pos) < 1; s.toggleAttribute('inert', !perto); s.style.visibility = perto ? 'visible' : 'hidden'; });
-    const r = trilho.getBoundingClientRect();
-    fb.relogio(Math.abs(1 - pos) < 1 && r.top < innerHeight && r.bottom > 0);
+    fb.relogio(Math.abs(1 - pos) < 1 && naTela);
     if (t.atual !== mostrado) {
       mostrado = t.atual;
       marcos.forEach((a, k) => { if (k === t.atual) a.setAttribute('aria-current', 'step'); else a.removeAttribute('aria-current'); });
@@ -145,6 +147,6 @@ export function iniciarViagem(lenis) {
   // sempre que o ScrollTrigger recalcula, a viagem se redesenha a partir da rolagem atual
   if (window.ScrollTrigger) ScrollTrigger.addEventListener('refresh', desenhar);
   if (document.fonts) document.fonts.ready.then(desenhar);
-  desenhar();
+  requestAnimationFrame(desenhar); // primeiro desenho no próximo quadro, fora da tarefa que carrega a página
   return { rolarPara, desenhar };
 }

@@ -1,5 +1,5 @@
 /* Vitrine do estágio em janelas empilhadas: landing → catálogo → fichas. Cada janela rola por dentro com a página (portado do mockup Mistura v9). */
-.jw{--v-red:#d6301f;--v-org:#ff6a2b;--v-blk:#151515;--v-bg:#f2f2f2;--v-line:#e1e1e1;--v-soft:#555;--v-zap:#1fa855;--cond:"Archivo","Arial Narrow",sans-serif;padding-block:clamp(40px,7vh,80px);border-top:1px solid var(--rule)}
+.jw{--v-red:#d6301f;--v-org:#ff6a2b;--v-blk:#151515;--v-bg:#f2f2f2;--v-line:#e1e1e1;--v-soft:#555;--v-zap:#15803d;--v-red-txt:#b3261a;--cond:"Archivo","Arial Narrow",sans-serif;padding-block:clamp(40px,7vh,80px);border-top:1px solid var(--rule)}
 .win{position:sticky;top:calc(70px + var(--i) * 14px);height:calc(100vh - 100px);min-height:520px;margin-bottom:30vh;background:var(--v-bg);color:var(--v-blk);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;transform-origin:50% 0;box-shadow:0 -14px 50px -18px rgba(0,0,0,.65);color-scheme:light}
 .win:last-child{margin-bottom:0}
 .win-vp{flex:1;min-height:0;overflow:hidden;position:relative}
@@ -32,7 +32,7 @@
 .win-cam small{font-size:11.5px;color:var(--v-soft)}
 .win-cam strong{font-size:14.5px}
 .win-cam.prin{background:var(--v-red);border-color:var(--v-red);color:#fff}
-.win-cam.prin small{color:#ffd9d3}
+.win-cam.prin small{color:#fff}
 a.win-cam{transition:transform .18s var(--ease)}
 a.win-cam:hover{transform:translateY(-2px)}
 .win-ilu{min-width:0;display:grid;place-items:center}
@@ -54,7 +54,7 @@ a.win-cam:hover{transform:translateY(-2px)}
 .lj-caminho small{font-size:12.5px;color:#c9c9c9}
 .lj-caminho strong{font-size:15px}
 .lj-caminho.prin{background:var(--v-red);border-color:var(--v-red)}
-.lj-caminho.prin small{color:rgba(255,255,255,.85)}
+.lj-caminho.prin small{color:#fff}
 .lj-heroi-foto{min-width:0}
 .lj-heroi-foto svg{width:100%;height:auto;display:block;overflow:visible}
 .lj-wrap{padding:0 clamp(16px,3vw,40px) clamp(28px,4vw,48px)}
@@ -71,7 +71,7 @@ a.win-cam:hover{transform:translateY(-2px)}
 .lj-tit{font:800 30px/1.1 var(--cond);font-stretch:78%;text-transform:uppercase;margin:0;display:inline-block;padding-bottom:8px;border-bottom:4px solid var(--v-org)}
 .lj-sub{margin:12px 0 0;color:var(--v-soft)}
 .lj-cab{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:18px}
-.lj-cab a{color:var(--v-red);font-weight:600;text-decoration:none;font-size:14px}
+.lj-cab a{color:var(--v-red-txt);font-weight:600;text-decoration:none;font-size:14px}
 .lj-cats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px}
 .lj-cats a{display:grid;gap:2px;text-decoration:none;color:var(--v-blk);background:#fff;border:1px solid var(--v-line);border-left:5px solid var(--v-red);border-radius:6px;padding:16px 18px;font:800 20px var(--cond);font-stretch:80%;text-transform:uppercase}
 .lj-cats a span{font:400 12px var(--text);color:var(--v-soft);text-transform:none}
@@ -84,7 +84,7 @@ a.win-cam:hover{transform:translateY(-2px)}
 .loja-foto img{object-fit:cover;object-position:top;max-width:none}
 a.loja-card{display:block;text-decoration:none;color:inherit}
 .loja-corpo{padding:9px 11px 11px;display:grid;gap:1px}
-.loja-corpo small{color:var(--v-red);text-transform:uppercase;letter-spacing:.05em;font-size:10.5px;font-weight:600}
+.loja-corpo small{color:var(--v-red-txt);text-transform:uppercase;letter-spacing:.05em;font-size:10.5px;font-weight:600}
 .loja-corpo b{font-size:14px;line-height:1.25}
 .loja-corpo em{font-style:normal;font-size:12px;color:var(--v-soft)}
 .lj-passos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:22px}
@@ -125,10 +125,10 @@ a.loja-card{display:block;text-decoration:none;color:inherit}
 .ct-foto{aspect-ratio:4/3;border-bottom:1px solid #dcdde0;background:#fff;display:grid;place-items:center;padding:6px}
 .ct-foto svg{width:100%;height:100%}
 .ct-corpo{padding:10px 12px 12px;display:grid;gap:3px;align-content:start}
-.ct-corpo small{color:#8a8d91;text-transform:uppercase;letter-spacing:.06em;font-size:11px;font-weight:600}
-.ct-corpo h5{margin:0;font-weight:600;font-size:15px;line-height:1.35}
+.ct-corpo small{color:#63666a;text-transform:uppercase;letter-spacing:.06em;font-size:11px;font-weight:600}
+.ct-corpo h4{margin:0;font-weight:600;font-size:15px;line-height:1.35}
 .ct-corpo p{margin:0;font-size:13px;color:#5c5f63}
-.ct-corpo em{font-style:normal;font-size:12.5px;color:#8a8d91}
+.ct-corpo em{font-style:normal;font-size:12.5px;color:#63666a}
 .ct-corpo a{margin-top:8px;text-align:center;border:1px solid #1b1b1b;border-radius:2px;color:#1b1b1b;font-weight:600;font-size:14px;padding:8px;text-decoration:none}
 .ct-corpo a:hover{background:#1b1b1b;color:#fff}
 
@@ -150,3 +150,6 @@ a.loja-card{display:block;text-decoration:none;color:inherit}
 .flat .win{position:relative;top:auto;height:auto}
 .flat .win-vp{overflow:visible}
 
+
+/* contraste (Lighthouse): selo laranja sobre fundo claro fica mais escuro; o laranja vivo só sobre o fundo escuro */
+.win-heroi .win-selo,.lj-wrap .win-selo{color:#c2410c}

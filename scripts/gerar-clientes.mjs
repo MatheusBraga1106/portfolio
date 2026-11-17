@@ -8,6 +8,11 @@ const trocas = [
   // cabeçalho da página
   ['<title>Matheus Braga · AI Builder</title>', '<title>Matheus Braga · Sistemas sob medida</title>'],
   ['content="AI Builder, Engenharia de Computação na UFG. Agentes de IA, automações e sistemas internos, do protótipo ao servidor."', 'content="Atendimento automático no WhatsApp, painéis, alertas e sistemas sob medida, feitos e mantidos no ar por Matheus Braga, de Goiânia."'],
+  // endereço e compartilhamento
+  ['https://ia.matheusbrg.com/', 'https://matheusbrg.com/', 'todas'],
+  ['/assets/img/og-ia.png', '/assets/img/og-clientes.png'],
+  ['<meta property="og:title" content="Matheus Braga · AI Builder">', '<meta property="og:title" content="Matheus Braga · Sistemas sob medida">'],
+  ['<meta property="og:description" content="Agentes de IA, automações e sistemas internos em uso, do protótipo ao servidor.">', '<meta property="og:description" content="Atendimento automático no WhatsApp, painéis, alertas e sistemas sob medida, no ar.">'],
   // abertura
   ['<span class="sr">Construo com IA e coloco no ar.</span><span aria-hidden="true" class="split">Construo com IA e coloco no ar.</span>', '<span class="sr">Do problema ao sistema funcionando.</span><span aria-hidden="true" class="split">Do problema ao sistema funcionando.</span>'],
   ['<p>AI Builder · Engenharia de Computação na UFG. Agentes, automações e sistemas internos, do protótipo ao meu próprio servidor.</p><a class="cta" href="#viagem" data-hover>Ver os projetos ↓</a>', '<p>Atendimento automático no WhatsApp, painéis, alertas e sistemas sob medida, feitos e mantidos no ar por mim.</p><a class="cta" href="#viagem" data-hover>Ver o que eu já fiz ↓</a>'],

@@ -12,6 +12,16 @@ export default defineConfig({
   projects: [
     { name: 'desktop', use: { viewport: { width: 1280, height: 800 } } },
     {
+      name: 'celular',
+      testMatch: /acessivel\.spec\.mjs/,
+      use: { viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true, deviceScaleFactor: 2 },
+    },
+    {
+      name: 'reduzido',
+      testMatch: /acessivel\.spec\.mjs/,
+      use: { viewport: { width: 1280, height: 800 }, reducedMotion: 'reduce' },
+    },
+    {
       name: 'sem-webgl',
       testMatch: /abertura\.spec\.mjs/,
       use: { viewport: { width: 1280, height: 800 }, launchOptions: { args: ['--disable-webgl', '--disable-3d-apis'] } },

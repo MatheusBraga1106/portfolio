@@ -5,17 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Matheus Braga · AI Builder</title>
   <meta name="description" content="AI Builder, Engenharia de Computação na UFG. Agentes de IA, automações e sistemas internos, do protótipo ao servidor.">
+  <link rel="canonical" href="https://ia.matheusbrg.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ia.matheusbrg.com/">
+  <meta property="og:title" content="Matheus Braga · AI Builder">
+  <meta property="og:description" content="Agentes de IA, automações e sistemas internos em uso, do protótipo ao servidor.">
+  <meta property="og:image" content="https://ia.matheusbrg.com/assets/img/og-ia.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="pt_BR">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/assets/fonts/archivo-latin-standard-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/fonts/fontes.css">
   <link rel="stylesheet" href="/assets/css/base.css">
   <link rel="stylesheet" href="/assets/css/abertura.css">
   <link rel="stylesheet" href="/assets/css/viagem.css">
   <link rel="stylesheet" href="/assets/css/vitrine.css">
   <link rel="stylesheet" href="/assets/css/final.css">
-  <script defer src="/assets/vendor/gsap.min.js"></script>
-  <script defer src="/assets/vendor/ScrollTrigger.min.js"></script>
-  <script defer src="/assets/vendor/lenis.min.js"></script>
-  <script defer src="/assets/vendor/matter.min.js"></script>
   <script type="module" src="/assets/js/main.js"></script>
 </head>
 <body>
@@ -24,7 +32,7 @@
 
   <main>
     <section class="hero" id="hero" aria-label="Abertura">
-      <div class="poster" aria-hidden="true"><img src="/assets/img/racing-volante.webp" alt=""><img src="/assets/img/radar-demo.webp" alt=""><img src="/assets/img/findbus-busca.webp" alt=""><img src="/assets/img/racing-painel.webp" alt=""></div>
+      <div class="poster" aria-hidden="true"><img src="/assets/img/racing-volante-700.webp" srcset="/assets/img/racing-volante-700.webp 700w, /assets/img/racing-volante.webp 1400w" sizes="(max-width: 860px) 50vw, 40vw" alt="" fetchpriority="high"><img src="/assets/img/radar-demo-700.webp" srcset="/assets/img/radar-demo-700.webp 700w, /assets/img/radar-demo.webp 1400w" sizes="(max-width: 860px) 50vw, 40vw" alt=""><img src="/assets/img/findbus-busca-700.webp" srcset="/assets/img/findbus-busca-700.webp 700w, /assets/img/findbus-busca.webp 1400w" sizes="(max-width: 860px) 50vw, 40vw" alt=""><img src="/assets/img/racing-painel-700.webp" srcset="/assets/img/racing-painel-700.webp 700w, /assets/img/racing-painel.webp 1400w" sizes="(max-width: 860px) 50vw, 40vw" alt=""></div>
       <canvas id="gl" aria-hidden="true"></canvas>
       <div class="veil"></div>
       <div class="hint g"><div class="w lbl"><span>telas reais dos projetos</span><span>mova o mouse · role para ver os projetos</span></div></div>
@@ -237,11 +245,11 @@
             <div>
               <div class="ct-res" id="ctRes" aria-live="polite">5 projetos</div>
               <div class="ct-grade" id="ctGrade">
-                <article class="ct-card" data-cat="auto" data-k="extrator faturas agua pdf ocr"><div class="ct-foto" data-desenho="faturas"></div><div class="ct-corpo"><small>Automação · Pesquisa</small><h5>Extrator de faturas de água</h5><p>Serve para auditar contas de água de órgãos públicos</p><em>Feito com Python e Tesseract</em><a href="#" data-win="2" data-hover>Ver projeto</a></div></article>
-                <article class="ct-card" data-cat="hw" data-k="monitor mercado confianca geladeira esp32"><div class="ct-foto" data-desenho="geladeira"></div><div class="ct-corpo"><small>Hardware</small><h5>Monitor do mercado de confiança</h5><p>Serve para a geladeira sem atendente do CA da UFG</p><em>Feito com ESP32-S3 e câmera</em><a href="#" data-win="3" data-hover>Ver projeto</a></div></article>
-                <article class="ct-card" data-cat="hw ia" data-k="robo desviador rede neural"><div class="ct-foto" data-desenho="robo"></div><div class="ct-corpo"><small>Hardware · IA</small><h5>Robô desviador</h5><p>Serve para treinar uma rede neural que desvia de obstáculos</p><em>Feito com Python e Arduino</em><a href="#" data-win="4" data-hover>Ver projeto</a></div></article>
-                <article class="ct-card" data-cat="infra" data-k="central celulares android servidor"><div class="ct-foto" data-desenho="celulares"></div><div class="ct-corpo"><small>Infra</small><h5>Central de celulares</h5><p>Serve para cuidar de celulares que viraram servidores</p><em>Feito com Python, ADB e scrcpy</em><a href="#" data-win="5" data-hover>Ver projeto</a></div></article>
-                <article class="ct-card" data-cat="ia" data-k="comanda conta bar foto"><div class="ct-foto" data-desenho="comanda"></div><div class="ct-corpo"><small>IA</small><h5>Comanda</h5><p>Serve para dividir a conta do bar pela foto da comanda</p><em>Feito como skill do Claude</em><a href="#" data-win="6" data-hover>Ver projeto</a></div></article>
+                <article class="ct-card" data-cat="auto" data-k="extrator faturas agua pdf ocr"><div class="ct-foto" data-desenho="faturas"></div><div class="ct-corpo"><small>Automação · Pesquisa</small><h4>Extrator de faturas de água</h4><p>Serve para auditar contas de água de órgãos públicos</p><em>Feito com Python e Tesseract</em><a href="#" data-win="2" data-hover>Ver projeto</a></div></article>
+                <article class="ct-card" data-cat="hw" data-k="monitor mercado confianca geladeira esp32"><div class="ct-foto" data-desenho="geladeira"></div><div class="ct-corpo"><small>Hardware</small><h4>Monitor do mercado de confiança</h4><p>Serve para a geladeira sem atendente do CA da UFG</p><em>Feito com ESP32-S3 e câmera</em><a href="#" data-win="3" data-hover>Ver projeto</a></div></article>
+                <article class="ct-card" data-cat="hw ia" data-k="robo desviador rede neural"><div class="ct-foto" data-desenho="robo"></div><div class="ct-corpo"><small>Hardware · IA</small><h4>Robô desviador</h4><p>Serve para treinar uma rede neural que desvia de obstáculos</p><em>Feito com Python e Arduino</em><a href="#" data-win="4" data-hover>Ver projeto</a></div></article>
+                <article class="ct-card" data-cat="infra" data-k="central celulares android servidor"><div class="ct-foto" data-desenho="celulares"></div><div class="ct-corpo"><small>Infra</small><h4>Central de celulares</h4><p>Serve para cuidar de celulares que viraram servidores</p><em>Feito com Python, ADB e scrcpy</em><a href="#" data-win="5" data-hover>Ver projeto</a></div></article>
+                <article class="ct-card" data-cat="ia" data-k="comanda conta bar foto"><div class="ct-foto" data-desenho="comanda"></div><div class="ct-corpo"><small>IA</small><h4>Comanda</h4><p>Serve para dividir a conta do bar pela foto da comanda</p><em>Feito como skill do Claude</em><a href="#" data-win="6" data-hover>Ver projeto</a></div></article>
               </div>
             </div>
           </div>

@@ -20,7 +20,7 @@ test('a física liga quando a caixa aparece', async ({ page }) => {
   await abrir(page);
   await page.waitForFunction(() => window.__site && window.__site.irPara);
   await page.evaluate(() => { const c = document.getElementById('caixa'); window.__site.irPara(c.getBoundingClientRect().top + scrollY, true); });
-  await expect(page.locator('#caixa')).toHaveClass(/phys/, { timeout: 3000 });
+  await expect(page.locator('#caixa')).toHaveClass(/phys/, { timeout: 8000 }); // o Matter.js é baixado sob demanda
   await expect(page.locator('#caixa .chip').first()).toHaveAttribute('style', /translate/);
 });
 
