@@ -1,6 +1,7 @@
 // Entrada do site: rolagem suave, cursor e links internos. Cada seção liga a sua parte aqui.
 import { irPara } from './rolagem.js';
 import { iniciarAbertura, prepararTitulo } from './abertura3d.js';
+import { iniciarViagem } from './viagem.js';
 
 const reduzido = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const toque = matchMedia('(pointer: coarse)').matches;
@@ -27,8 +28,13 @@ if (cur && !toque && G && !reduzido) {
   document.addEventListener('pointerout', (e) => { if (e.target.closest('[data-hover], a, button')) cur.classList.remove('big'); });
 }
 
-// links internos (#secao): rolam até a seção. Links com data-go/data-win/data-inner têm tratamento próprio.
+prepararTitulo();
+iniciarAbertura();
+const viagemSite = iniciarViagem(lenis);
+
+// links internos (#secao): rolam até a seção. Links com data-go/data-win/data-inner e os #p1..#p4 têm tratamento próprio.
 document.querySelectorAll('a[href^="#"]:not([href="#"]):not([data-go]):not([data-win]):not([data-inner])').forEach((a) => {
+  if (/^#p\d$/.test(a.getAttribute('href'))) return;
   a.addEventListener('click', (e) => {
     const alvo = document.querySelector(a.getAttribute('href'));
     if (!alvo) return;
@@ -37,9 +43,6 @@ document.querySelectorAll('a[href^="#"]:not([href="#"]):not([data-go]):not([data
   });
 });
 
-prepararTitulo();
-iniciarAbertura();
-
-const site = { lenis, irPara, viagem: null, vitrine: null };
+const site = { lenis, irPara, viagem: viagemSite, vitrine: null };
 if (new URLSearchParams(location.search).has('teste')) window.__site = site;
 export default site;
