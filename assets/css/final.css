@@ -27,13 +27,6 @@
 .live span::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:#5fd38d;margin-right:8px;vertical-align:1px}
 @media (max-width:760px){.net{grid-template-columns:1fr;gap:18px}.net .ln,.pkt{display:none}.node{grid-template-columns:55px 1fr;justify-items:start;text-align:left;align-items:center}.node span{grid-column:2}}
 
-.svc{padding-block:clamp(60px,9vh,110px);border-top:1px solid var(--rule)}
-.svc ul{list-style:none;margin:18px 0 0;padding:0}
-.svc li{border-bottom:1px solid var(--rule);overflow:hidden}
-.svc a{display:flex;justify-content:space-between;align-items:baseline;gap:16px;text-decoration:none;padding-block:12px;font-family:var(--display);font-weight:300;font-stretch:120%;font-size:clamp(34px,7vw,108px);line-height:1;letter-spacing:-.035em;transition:font-weight .25s var(--ease),color .25s,padding-left .35s var(--ease)}
-.svc a span{font-family:var(--mono);font-size:12px;font-weight:400;letter-spacing:.08em;color:var(--dim);white-space:nowrap;font-stretch:100%}
-.svc a:hover,.svc a:focus-visible{font-weight:850;padding-left:.25em;color:#fff}
-@media (max-width:560px){.svc a{flex-direction:column;gap:4px}}
 .ct{background:var(--signal);color:#fff;padding-block:clamp(80px,14vh,170px)}
 .ct h2{font-family:var(--display);font-stretch:118%;font-weight:900;font-size:clamp(36px,12vw,200px);line-height:.84;letter-spacing:-.045em;margin:14px 0 36px}
 .mag{display:inline-flex;flex-direction:column;justify-content:center;align-items:center;width:clamp(140px,16vw,190px);aspect-ratio:1;border-radius:50%;background:var(--yellow);color:var(--ink);font:700 15px var(--text);border:0;cursor:pointer;padding:12px}

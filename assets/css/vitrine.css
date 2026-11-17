@@ -21,7 +21,6 @@
 .win-menu em,.win-menu a.zap{font-style:normal;background:var(--v-zap);color:#fff;border-radius:6px;padding:6px 10px;font-weight:600;text-decoration:none}
 .win-volta{color:#cfcfcf;text-decoration:none;font-size:13.5px;margin-right:6px}
 .win-volta:hover{color:#fff}
-.win-tag{font-size:12px;color:#aaa}
 .win-selo{display:inline-block;font-size:12.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--v-org)}
 .win h3{font-family:var(--display);font-stretch:72%;font-weight:850;font-size:clamp(36px,4.8vw,72px);line-height:.92;text-transform:uppercase;margin:0;letter-spacing:-.005em;text-wrap:balance}
 
@@ -45,9 +44,10 @@ a.win-cam:hover{transform:translateY(-2px)}
 .win-selos b{display:block;font-family:var(--display);font-stretch:75%;font-weight:800;font-size:22px;text-transform:uppercase;line-height:1.05}
 .win-selos span{font-size:12.5px;color:var(--v-soft)}
 
-/* landing: abertura escura, seletor sobreposto, selos, categorias, destaques, passos, "não achou", dúvidas */
-.lj-heroi{background:linear-gradient(100deg,#151515 0 56%,#2a2a2a 56%);color:#fff}
-.lj-heroi-grade{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(20px,4vw,48px);align-items:center;padding:clamp(28px,5vw,56px) clamp(16px,3vw,40px) clamp(64px,8vw,96px)}
+/* landing: só a abertura escura com os dois caminhos (catálogo e contato) */
+/* a abertura escura ocupa a janela toda (a landing agora é só ela), com o conteúdo no meio */
+.lj-heroi{flex:1 0 auto;display:grid;align-content:center;background:linear-gradient(100deg,#151515 0 56%,#2a2a2a 56%);color:#fff}
+.lj-heroi-grade{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(20px,4vw,48px);align-items:center;padding:clamp(28px,5vw,56px) clamp(16px,3vw,40px)}
 .lj-heroi h3{color:#fff;margin-top:12px}
 .lj-heroi-texto{font-size:16px;color:#c9c9c9;margin:16px 0 22px;max-width:52ch;line-height:1.6}
 .lj-caminhos{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:560px}
@@ -59,51 +59,6 @@ a.win-cam:hover{transform:translateY(-2px)}
 .lj-caminho.prin small{color:#fff}
 .lj-heroi-foto{min-width:0}
 .lj-heroi-foto svg{width:100%;height:auto;display:block;overflow:visible}
-.lj-wrap{padding:0 clamp(16px,3vw,40px) clamp(28px,4vw,48px)}
-.lj-veiculo{position:relative;margin-top:-44px;background:#fff;border-radius:6px;box-shadow:0 10px 30px rgba(15,25,45,.14);padding:16px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) auto;gap:12px;align-items:end}
-.lj-veiculo label{display:grid;gap:5px;font-size:12px;font-weight:600;color:var(--v-soft)}
-.lj-veiculo label span{border:1px solid #cfd2d6;border-radius:6px;padding:10px 12px;font-size:14px;font-weight:400;color:#333;background:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.lj-veiculo-btn{background:var(--v-red);color:#fff;text-decoration:none;font-weight:700;padding:11px 22px;border-radius:6px;white-space:nowrap}
-.lj-selos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin:34px 0 8px;text-align:center}
-/* os quatro destaques dividem as mesmas três linhas (subgrid): ícone, título e texto ficam na mesma altura
-   em todos, mesmo quando um título quebra em duas linhas */
-.lj-selos div{display:grid;grid-row:span 3;grid-template-rows:subgrid;row-gap:8px;justify-items:center;align-content:start;min-width:0}
-.lj-selos i{width:50px;height:50px;border-radius:50%;background:var(--v-red);color:#fff;display:grid;place-items:center;font-style:normal;font-size:20px}
-.lj-selos strong{font-size:14.5px}
-.lj-selos span{font-size:13px;color:var(--v-soft)}
-.lj-secao{padding-top:40px}
-.lj-tit{font:800 30px/1.1 var(--cond);font-stretch:78%;text-transform:uppercase;margin:0;display:inline-block;padding-bottom:8px;border-bottom:4px solid var(--v-org)}
-.lj-sub{margin:12px 0 0;color:var(--v-soft)}
-.lj-cab{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:18px}
-.lj-cab a{color:var(--v-red-txt);font-weight:600;text-decoration:none;font-size:14px}
-.lj-cats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px}
-.lj-cats a{display:grid;gap:2px;text-decoration:none;color:var(--v-blk);background:#fff;border:1px solid var(--v-line);border-left:5px solid var(--v-red);border-radius:6px;padding:16px 18px;font:800 20px var(--cond);font-stretch:80%;text-transform:uppercase}
-.lj-cats a span{font:400 12px var(--text);color:var(--v-soft);text-transform:none}
-.lj-cats a:hover{border-color:var(--v-red)}
-.loja-dest{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;min-width:0}
-.loja-card{background:#fff;border:1px solid var(--v-line);border-radius:6px;overflow:hidden;min-width:0;transition:border-color .18s}
-.loja-card:hover{border-color:var(--v-red)}
-.loja-foto{position:relative;aspect-ratio:16/10;background:#fafafa;border-bottom:1px solid var(--v-line)}
-.loja-foto svg,.loja-foto img{position:absolute;inset:0;width:100%;height:100%}
-.loja-foto img{object-fit:cover;object-position:top;max-width:none}
-a.loja-card{display:block;text-decoration:none;color:inherit}
-.loja-corpo{padding:9px 11px 11px;display:grid;gap:1px}
-.loja-corpo small{color:var(--v-red-txt);text-transform:uppercase;letter-spacing:.05em;font-size:10.5px;font-weight:600}
-.loja-corpo b{font-size:14px;line-height:1.25}
-.loja-corpo em{font-style:normal;font-size:12px;color:var(--v-soft)}
-.lj-passos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:22px}
-.lj-passos div{background:#fff;border-top:5px solid var(--v-red);border-radius:6px;padding:20px;box-shadow:0 2px 10px rgba(15,25,45,.06)}
-.lj-passos b{display:block;font:800 32px/1 var(--cond);font-stretch:80%;color:var(--v-red)}
-.lj-passos h5{font:800 19px/1.2 var(--cond);font-stretch:80%;text-transform:uppercase;margin:10px 0 6px}
-.lj-passos p{margin:0;color:var(--v-soft);font-size:14.5px;line-height:1.55}
-.lj-naoachou{display:flex;align-items:center;justify-content:space-between;gap:20px;background:var(--v-zap);color:#fff;border-radius:6px;padding:24px 28px;flex-wrap:wrap}
-.lj-naoachou h4{font:800 26px/1.15 var(--cond);font-stretch:80%;text-transform:uppercase;margin:0 0 6px}
-.lj-naoachou p{margin:0;max-width:56ch;color:rgba(255,255,255,.92)}
-.lj-naoachou-btn{text-decoration:none;background:#fff;color:#12703a;font:800 15px var(--cond);text-transform:uppercase;padding:13px 20px;border-radius:6px}
-.lj-duvidas{display:grid;gap:8px;margin-top:18px}
-.lj-duvidas details{background:#fff;border:1px solid var(--v-line);border-radius:6px;padding:14px 16px}
-.lj-duvidas summary{cursor:pointer;font-weight:600}
-.lj-duvidas p{margin:8px 0 0;color:var(--v-soft)}
 
 /* catálogo: visual sóbrio, lateral com busca e categorias, grade de cartões */
 .win-cat .win-page{background:#fff}
@@ -144,9 +99,6 @@ a.loja-card{display:block;text-decoration:none;color:inherit}
   .lj-heroi{background:#151515}
   .win-ilu svg,.lj-heroi-foto svg{max-width:300px;margin-inline:auto}
   .win-caminhos,.lj-caminhos{grid-template-columns:1fr}
-  .lj-veiculo{grid-template-columns:1fr}
-  .lj-selos,.loja-dest{grid-template-columns:1fr 1fr}
-  .lj-cats,.lj-passos{grid-template-columns:1fr}
   .ct-lado{border-right:0;padding-right:0}
   .win-menu a:not(.on):not(.zap),.win-menu em{display:none}
   .win-selos b{font-size:17px}
@@ -156,7 +108,7 @@ a.loja-card{display:block;text-decoration:none;color:inherit}
 
 
 /* contraste (Lighthouse): selo laranja sobre fundo claro fica mais escuro; o laranja vivo só sobre o fundo escuro */
-.win-heroi .win-selo,.lj-wrap .win-selo{color:#c2410c}
+.win-heroi .win-selo{color:#c2410c}
 
 /* busca e filtro do catálogo: o atributo hidden precisa vencer o display:grid do cartão */
 .ct-card[hidden]{display:none}

@@ -49,7 +49,7 @@ for (const v of VERSOES) {
     // nenhum texto ou cartão com opacidade efetiva menor que 1
     const apagados = await page.evaluate(() => {
       const efetiva = (el) => { let o = 1; for (let e = el; e && e.nodeType === 1; e = e.parentElement) o *= parseFloat(getComputedStyle(e).opacity); return o; };
-      return [...document.querySelectorAll('main h1, main h2, main h3, main h4, main h5, main p, main li, .ct-card, .loja-card, .chip, #msgs .m')]
+      return [...document.querySelectorAll('main h1, main h2, main h3, main h4, main h5, main p, main li, .ct-card, .chip, #msgs .m')]
         .filter((el) => el.closest('[aria-hidden="true"]') === null && efetiva(el) < 0.99)
         .map((el) => el.tagName + '.' + el.className + ': ' + (el.textContent || '').trim().slice(0, 30));
     });

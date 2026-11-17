@@ -7,14 +7,12 @@ const prender = (x) => (x < 0 ? 0 : x > 1 ? 1 : x);
 const suave = (a, b, x) => { const t = prender((x - a) / (b - a)); return t * t * (3 - 2 * t); };
 const brl = (v) => 'R$ ' + v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-/** Parada 1: a conversa aparece com a rolagem e o agente da vez acende. */
+/** Parada 1: a conversa aparece com a rolagem. */
 function paradaBot() {
   const msgs = [...document.querySelectorAll('#msgs .m')];
-  const agentes = {}; document.querySelectorAll('.agent').forEach((a) => { agentes[a.dataset.a] = a; });
   return (p) => {
-    const n = Math.round(p * msgs.length); let aceso = null;
-    msgs.forEach((m, j) => { const on = j < n; m.classList.toggle('off', !on); if (on && m.dataset.agent) aceso = m.dataset.agent; });
-    Object.keys(agentes).forEach((k) => agentes[k].classList.toggle('on', k === aceso));
+    const n = Math.round(p * msgs.length);
+    msgs.forEach((m, j) => m.classList.toggle('off', j >= n));
   };
 }
 

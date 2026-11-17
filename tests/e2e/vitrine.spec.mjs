@@ -31,17 +31,19 @@ test('Catálogo, Ver projeto e voltar levam à janela certa', async ({ page }) =
   expect(Math.abs((await topos(page))[1] - 84)).toBeLessThanOrEqual(2);
 });
 
-test('a landing rola por dentro junto com a página', async ({ page }) => {
+// a landing agora cabe numa janela; o catálogo, numa tela baixa, ainda rola por dentro
+test('uma janela mais alta que a tela rola por dentro junto com a página', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 600 });
   await abrir(page); await pronto(page);
   const meio = await page.evaluate(() => {
-    const w = document.querySelector('.win');
-    window.__site.vitrine.irParaJanela(0, true);
+    const w = document.querySelectorAll('.win')[1];
+    window.__site.vitrine.irParaJanela(1, true);
     scrollBy(0, Math.round(w._ov / 2));
     dispatchEvent(new Event('scroll'));
     return Math.round(w._ov / 2);
   });
-  expect(meio).toBeGreaterThan(100);
-  const ty = await page.evaluate(() => new DOMMatrix(getComputedStyle(document.querySelector('.win .win-page')).transform).m42);
+  expect(meio).toBeGreaterThan(50);
+  const ty = await page.evaluate(() => new DOMMatrix(getComputedStyle(document.querySelectorAll('.win')[1].querySelector('.win-page')).transform).m42);
   expect(Math.abs(ty + meio)).toBeLessThanOrEqual(3);
 });
 
@@ -68,18 +70,7 @@ test('depois de redimensionar, Catálogo ainda cai no lugar', async ({ page }) =
   expect(Math.abs((await topos(page))[1] - 84)).toBeLessThanOrEqual(2);
 });
 
-test('destaque da landing leva à parada da viagem', async ({ page }) => {
-  await abrir(page); await pronto(page);
-  await page.evaluate(() => window.__site.vitrine.irParaJanela(0, true));
-  await page.evaluate(() => { const w = document.querySelector('.win'); scrollBy(0, w._ov); dispatchEvent(new Event('scroll')); });
-  await page.locator('.loja-card[href="#p2"]').click();
-  await page.waitForTimeout(2000);
-  await page.evaluate(() => dispatchEvent(new Event('scroll')));
-  await expect(page.locator('#onde')).toHaveText('02 / 04 · FindBus');
-});
-
 test('ilustrações desenhadas', async ({ page }) => {
   await abrir(page); await pronto(page);
   await expect(page.locator('[data-desenho] svg')).toHaveCount(11);
-  await expect(page.locator('.loja-foto[data-peca] svg')).toHaveCount(1);
 });
