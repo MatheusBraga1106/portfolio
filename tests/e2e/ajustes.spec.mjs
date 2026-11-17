@@ -161,3 +161,19 @@ for (const [w, h] of [[1280, 800], [1270, 823], [1440, 900]]) {
     }
   });
 }
+
+for (const caminho of ['/ia/?teste', '/clientes/?teste']) for (const largura of [1280, 900]) {
+  test(`os quatro destaques da landing têm ícones, títulos e textos na mesma altura (${caminho} ${largura}px)`, async ({ page }) => {
+    await page.setViewportSize({ width: largura, height: 800 });
+    await abrir(page, caminho);
+    const r = await page.evaluate(() => {
+      const itens = [...document.querySelectorAll('.lj-selos > div')];
+      const topo = (sel) => itens.map((d) => d.querySelector(sel).getBoundingClientRect().top);
+      return { i: topo('i'), strong: topo('strong'), span: topo('span') };
+    });
+    for (const [parte, tops] of Object.entries(r)) {
+      expect(tops).toHaveLength(4);
+      expect(Math.max(...tops) - Math.min(...tops), `${parte}: ${tops.map(Math.round).join(', ')}`).toBeLessThanOrEqual(1);
+    }
+  });
+}
