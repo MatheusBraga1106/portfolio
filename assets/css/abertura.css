@@ -10,8 +10,10 @@
 .has-gl .poster{display:none}
 .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,12,11,0) 30%,rgba(12,12,11,.85) 92%);pointer-events:none}
 .hero .copy{position:absolute;left:0;right:0;bottom:clamp(28px,7vh,72px)}
-.hero .copy .w{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,360px);gap:28px;align-items:end}
+.hero .copy .w{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,min(360px,32vw));gap:28px;align-items:end}
 .hero h1{font-family:var(--display);font-stretch:116%;font-weight:850;font-size:clamp(44px,8.6vw,138px);line-height:.88;letter-spacing:-.035em;margin:0}
+/* título com palavra longa ("funcionando.", na versão clientes): menor, para caber ao lado do texto */
+.hero h1.longa{font-size:clamp(34px,6.6vw,112px)}
 .hero h1 .wd{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.06em}
 .hero h1 .wd>span{display:inline-block}
 .hero .side{display:grid;gap:16px}

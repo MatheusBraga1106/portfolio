@@ -30,15 +30,20 @@ export function iniciarCaixa() {
 function comecar(caixa) {
   const { Engine, Bodies, Body, Composite, Constraint, Runner, Events } = Matter;
   const pecas = [...caixa.querySelectorAll('.chip')];
-  const r0 = caixa.getBoundingClientRect(), W = r0.width, H = r0.height;
+  // área de dentro da caixa: sem a borda amarela de baixo (senão as peças afundam nela)
+  const r0 = caixa.getBoundingClientRect(), W = caixa.clientWidth, H = caixa.clientHeight;
+  const x0 = r0.left + caixa.clientLeft, y0 = r0.top + caixa.clientTop;
   // posição de partida = onde cada peça estava parada, um pouco acima (elas caem dali)
-  const inicio = pecas.map((el) => { const r = el.getBoundingClientRect(); return { x: r.left - r0.left + r.width / 2, y: r.top - r0.top + r.height / 2, w: r.width, h: r.height }; });
+  const inicio = pecas.map((el) => { const r = el.getBoundingClientRect(); return { x: r.left - x0 + r.width / 2, y: r.top - y0 + r.height / 2, w: r.width, h: r.height }; });
   caixa.classList.add('phys');
   const motor = Engine.create({ gravity: { y: 1.1 } }), corredor = Runner.create();
   Composite.add(motor.world, [
     Bodies.rectangle(W / 2, H + 100, W * 3, 200, { isStatic: true }),
-    Bodies.rectangle(-100, H / 2, 200, H * 4, { isStatic: true }),
-    Bodies.rectangle(W + 100, H / 2, 200, H * 4, { isStatic: true }),
+    // paredes bem altas e um teto invisível acima da caixa: uma peça jogada com força sobe, some por um
+    // instante (a caixa corta o que passa da borda) e cai de volta, em vez de pular a parede e se perder
+    Bodies.rectangle(-100, -H, 200, H * 6, { isStatic: true }),
+    Bodies.rectangle(W + 100, -H, 200, H * 6, { isStatic: true }),
+    Bodies.rectangle(W / 2, -H * 3 - 100, W * 3, 200, { isStatic: true }),
   ]);
   const itens = pecas.map((el, i) => {
     const s = inicio[i];
@@ -46,7 +51,11 @@ function comecar(caixa) {
     Composite.add(motor.world, corpo);
     return { el, corpo, w: s.w, h: s.h };
   });
+  // cada peça gira no máximo 0,9 rad (~50°) para os dois lados: o nome continua legível depois de chacoalhar
+  const LIMITE = 0.9;
   const sincronizar = () => itens.forEach((it) => {
+    const a = Math.atan2(Math.sin(it.corpo.angle), Math.cos(it.corpo.angle));
+    if (Math.abs(a) > LIMITE) { Body.setAngle(it.corpo, Math.sign(a) * LIMITE); Body.setAngularVelocity(it.corpo, 0); }
     const p = it.corpo.position;
     it.el.style.transform = 'translate(' + (p.x - it.w / 2).toFixed(1) + 'px,' + (p.y - it.h / 2).toFixed(1) + 'px) rotate(' + it.corpo.angle.toFixed(3) + 'rad)';
   });

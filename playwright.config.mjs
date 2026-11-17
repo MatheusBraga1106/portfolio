@@ -10,10 +10,10 @@ export default defineConfig({
   use: { baseURL: 'http://127.0.0.1:5320', channel: 'msedge' },
   webServer: { command: 'node scripts/servir.mjs . 5320', url: 'http://127.0.0.1:5320/', reuseExistingServer: true, timeout: 20_000 },
   projects: [
-    { name: 'desktop', use: { viewport: { width: 1280, height: 800 } } },
+    { name: 'desktop', testIgnore: /estreito\.spec\.mjs/, use: { viewport: { width: 1280, height: 800 } } },
     {
       name: 'celular',
-      testMatch: /(acessivel|revisao)\.spec\.mjs/,
+      testMatch: /(acessivel|revisao|estreito)\.spec\.mjs/,
       use: { viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true, deviceScaleFactor: 2 },
     },
     {

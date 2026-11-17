@@ -42,6 +42,21 @@ if (cur && !toque && G && !reduzido) {
   document.addEventListener('pointerout', (e) => { if (e.target.closest('[data-hover], a, button')) cur.classList.remove('big'); });
 }
 
+// topo: some ao rolar para baixo (para não ficar por cima do conteúdo) e volta ao rolar para cima.
+// Só decide depois de um passo de 8 px, porque a rolagem suave avança de pouco em pouco.
+const topo = document.querySelector('header.top');
+if (topo) {
+  let ultimo = scrollY;
+  addEventListener('scroll', () => {
+    const y = scrollY;
+    if (y < innerHeight * 0.5) { topo.classList.remove('oculto'); ultimo = y; return; }
+    if (Math.abs(y - ultimo) < 8) return;
+    topo.classList.toggle('oculto', y > ultimo && !topo.contains(document.activeElement));
+    ultimo = y;
+  }, { passive: true });
+  topo.addEventListener('focusin', () => topo.classList.remove('oculto'));
+}
+
 prepararTitulo();
 iniciarAbertura();
 const viagemSite = iniciarViagem(lenis);
