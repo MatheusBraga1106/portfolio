@@ -1,0 +1,10 @@
+node_modules
+tests
+.git
+scripts
+.superpowers
+docs
+test-results
+playwright-report
+*.md
+!assets/vendor/LICENCAS.md

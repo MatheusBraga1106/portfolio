@@ -1,0 +1,58 @@
+/* Caixa de ferramentas, infraestrutura, o que eu faço, contato e rodapé (portado do mockup Mistura v9). */
+.box{position:relative;height:78vh;min-height:520px;overflow:hidden;border-top:1px solid var(--rule);border-bottom:6px solid var(--yellow)}
+.box .head{position:absolute;inset:0 0 auto;z-index:3;padding-top:clamp(40px,8vh,80px)}
+.box h2{font-family:var(--display);font-stretch:108%;font-weight:700;font-size:clamp(30px,4.2vw,60px);line-height:1;letter-spacing:-.02em;margin:10px 0 8px;max-width:18ch}
+.box .head p{margin:0;color:var(--dim)}
+.box .tools{display:flex;gap:8px;margin-top:14px}
+.box .tools button{font:600 13.5px var(--text);border:1px solid var(--paper);background:transparent;color:var(--paper);padding:9px 14px;border-radius:999px;cursor:pointer}
+.pile{position:absolute;inset:auto 0 0;display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:0 16px 24px}
+.phys .pile{inset:0;display:block;padding:0}
+.chip{font-family:var(--mono);font-size:15px;padding:12px 18px;border-radius:999px;background:var(--paper);color:var(--ink);white-space:nowrap;user-select:none;touch-action:none;cursor:grab}
+.chip.y{background:var(--yellow)}.chip.o{background:transparent;color:var(--paper);border:1.5px solid var(--paper)}
+.phys .chip{position:absolute;left:0;top:0;will-change:transform}
+.chip.drag{cursor:grabbing}
+
+/* infra */
+.infra{padding-block:clamp(80px,12vh,140px);border-top:1px solid var(--rule)}
+.infra h2{font-family:var(--display);font-stretch:108%;font-weight:700;font-size:clamp(30px,4.2vw,60px);line-height:1;letter-spacing:-.02em;margin:14px 0 36px;max-width:20ch}
+.net{position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.net .ln{position:absolute;left:10%;right:10%;top:27px;height:1px;background:#3a3834}
+.pkt{position:absolute;top:22px;left:10%;width:11px;height:11px;border-radius:50%;background:var(--yellow);box-shadow:0 0 18px 4px rgba(255,212,0,.5)}
+.node{position:relative;display:grid;gap:6px;justify-items:center;text-align:center}
+.node i{width:55px;height:55px;border-radius:50%;border:1px solid #4a4843;background:var(--ink);display:grid;place-items:center;font:500 11px var(--mono);color:var(--dim);font-style:normal}
+.node b{font-weight:600}.node span{color:var(--dim);font-size:13px;max-width:18ch}
+.live{display:flex;flex-wrap:wrap;gap:8px;margin-top:34px}
+.live span{font-family:var(--mono);font-size:11.5px;border:1px solid #3a3936;padding:6px 10px;border-radius:999px}
+.live span::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:#5fd38d;margin-right:8px;vertical-align:1px}
+@media (max-width:760px){.net{grid-template-columns:1fr;gap:18px}.net .ln,.pkt{display:none}.node{grid-template-columns:55px 1fr;justify-items:start;text-align:left;align-items:center}.node span{grid-column:2}}
+
+.svc{padding-block:clamp(60px,9vh,110px);border-top:1px solid var(--rule)}
+.svc ul{list-style:none;margin:18px 0 0;padding:0}
+.svc li{border-bottom:1px solid var(--rule);overflow:hidden}
+.svc a{display:flex;justify-content:space-between;align-items:baseline;gap:16px;text-decoration:none;padding-block:12px;font-family:var(--display);font-weight:300;font-stretch:120%;font-size:clamp(34px,7vw,108px);line-height:1;letter-spacing:-.035em;transition:font-weight .25s var(--ease),color .25s,padding-left .35s var(--ease)}
+.svc a span{font-family:var(--mono);font-size:12px;font-weight:400;letter-spacing:.08em;color:var(--dim);white-space:nowrap;font-stretch:100%}
+.svc a:hover,.svc a:focus-visible{font-weight:850;padding-left:.25em;color:#fff}
+@media (max-width:560px){.svc a{flex-direction:column;gap:4px}}
+.ct{background:var(--signal);color:#fff;padding-block:clamp(80px,14vh,170px)}
+.ct h2{font-family:var(--display);font-stretch:118%;font-weight:900;font-size:clamp(56px,12vw,200px);line-height:.84;letter-spacing:-.045em;margin:14px 0 36px}
+.mag{display:inline-grid;place-items:center;width:clamp(140px,16vw,190px);aspect-ratio:1;border-radius:50%;background:var(--yellow);color:var(--ink);font:700 15px var(--text);border:0;cursor:pointer;padding:12px}
+.ct .row{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.ct code{font-family:var(--mono);font-size:15px;user-select:all}
+.ft{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-block:22px;color:var(--dim);font-family:var(--mono);font-size:11.5px}
+.ft nav{display:flex;gap:16px}
+
+
+/* Como eu uso IA (só na versão IA): lista numerada porque é uma sequência de práticas */
+.ia-uso{padding-block:clamp(80px,12vh,140px);border-top:1px solid var(--rule)}
+.ia-uso h2{font-family:var(--display);font-stretch:108%;font-weight:700;font-size:clamp(30px,4.2vw,60px);line-height:1;letter-spacing:-.02em;margin:14px 0 36px}
+.uso{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;counter-reset:uso;border-top:1px solid var(--rule)}
+.uso li{counter-increment:uso;display:grid;gap:8px;padding:26px 28px 30px 0;border-bottom:1px solid var(--rule);min-width:0}
+.uso li:nth-child(odd){border-right:1px solid var(--rule)}
+.uso li:nth-child(even){padding-left:28px}
+.uso li::before{content:counter(uso,decimal-leading-zero);font-family:var(--mono);font-size:12px;color:var(--yellow);letter-spacing:.1em}
+.uso b{font-family:var(--display);font-stretch:110%;font-weight:700;font-size:clamp(22px,2.2vw,30px);line-height:1.1}
+.uso span{color:#bdb9b2;max-width:52ch}
+@media (max-width:760px){.uso{grid-template-columns:1fr}.uso li:nth-child(odd){border-right:0}.uso li:nth-child(even){padding-left:0}}
+
+/* no celular as peças ficam paradas e o dedo rola a página normalmente */
+@media (max-width:860px),(pointer:coarse){.chip{touch-action:auto;cursor:default}}
