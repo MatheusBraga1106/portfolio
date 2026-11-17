@@ -1,6 +1,8 @@
 /* Vitrine do estágio em janelas empilhadas: landing → catálogo → fichas. Cada janela rola por dentro com a página (portado do mockup Mistura v9). */
 .jw{--v-red:#d6301f;--v-org:#ff6a2b;--v-blk:#151515;--v-bg:#f2f2f2;--v-line:#e1e1e1;--v-soft:#555;--v-zap:#15803d;--v-red-txt:#b3261a;--cond:"Archivo","Arial Narrow",sans-serif;padding-block:clamp(40px,7vh,80px);border-top:1px solid var(--rule)}
-.win{position:sticky;top:calc(70px + var(--i) * 14px);height:calc(100vh - 100px);min-height:520px;margin-bottom:30vh;background:var(--v-bg);color:var(--v-blk);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;transform-origin:50% 0;box-shadow:0 -14px 50px -18px rgba(0,0,0,.65);color-scheme:light}
+/* cada janela desce 14 px a mais que a anterior (o degrau da pilha) e fica 14 px mais baixa:
+   a borda de baixo de todas fica no mesmo lugar, 30 px acima do fim da tela */
+.win{position:sticky;top:calc(70px + var(--i) * 14px);height:calc(100vh - 100px - var(--i) * 14px);min-height:520px;margin-bottom:30vh;background:var(--v-bg);color:var(--v-blk);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;transform-origin:50% 0;box-shadow:0 -14px 50px -18px rgba(0,0,0,.65);color-scheme:light}
 .win:last-child{margin-bottom:0}
 .win-vp{flex:1;min-height:0;overflow:hidden;overflow:clip;position:relative}
 .win-page{min-height:100%;display:flex;flex-direction:column;will-change:transform}

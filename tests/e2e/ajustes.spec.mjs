@@ -137,3 +137,27 @@ test.describe('caixa de ferramentas com física', () => {
     }
   });
 });
+
+for (const [w, h] of [[1280, 800], [1270, 823], [1440, 900]]) {
+  test(`janelas da vitrine cabem inteiras na tela, até o fim da página de dentro (${w}×${h})`, async ({ page }) => {
+    await page.setViewportSize({ width: w, height: h });
+    await abrir(page, '/clientes/?teste');
+    await page.waitForFunction(() => window.__site && window.__site.vitrine);
+    const n = await page.locator('.win').count();
+    for (let i = 0; i < n; i++) {
+      // fim da rolagem de dentro da janela i: é quando ela mostra o que tem embaixo
+      await page.evaluate((i) => {
+        const win = document.querySelectorAll('.win')[i], marca = document.querySelectorAll('.win-mark')[i];
+        const preso = marca.getBoundingClientRect().top + scrollY - (parseFloat(getComputedStyle(win).top) || 0);
+        window.__site.irPara(preso + (win._ov || 0), true);
+      }, i);
+      await page.waitForTimeout(120);
+      const r = await page.evaluate((i) => {
+        const win = document.querySelectorAll('.win')[i], pg = win.querySelector('.win-page');
+        return { janela: win.getBoundingClientRect().bottom, ultimo: pg.lastElementChild.getBoundingClientRect().bottom, tela: innerHeight };
+      }, i);
+      expect(r.janela, `janela ${i + 1} passa da tela`).toBeLessThanOrEqual(r.tela);
+      expect(r.ultimo, `fim da janela ${i + 1} cortado`).toBeLessThanOrEqual(r.janela + 1);
+    }
+  });
+}
