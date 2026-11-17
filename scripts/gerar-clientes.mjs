@@ -9,7 +9,7 @@ const trocas = [
   ['<title>Matheus Braga · AI Builder</title>', '<title>Matheus Braga · Sistemas sob medida</title>'],
   ['content="AI Builder, Engenharia de Computação na UFG. Agentes de IA, automações e sistemas internos, do protótipo ao servidor."', 'content="Atendimento automático no WhatsApp, painéis, alertas e sistemas sob medida, feitos e mantidos no ar por Matheus Braga, de Goiânia."'],
   // endereço e compartilhamento
-  ['https://ia.matheusbrg.com/', 'https://matheusbrg.com/', 'todas'],
+  ['https://ia.matheusbragadev.com/', 'https://matheusbragadev.com/', 'todas'],
   ['/assets/img/og-ia.png', '/assets/img/og-clientes.png'],
   ['<meta property="og:title" content="Matheus Braga · AI Builder">', '<meta property="og:title" content="Matheus Braga · Sistemas sob medida">'],
   ['<meta property="og:description" content="Agentes de IA, automações e sistemas internos em uso, do protótipo ao servidor.">', '<meta property="og:description" content="Atendimento automático no WhatsApp, painéis, alertas e sistemas sob medida, no ar.">'],

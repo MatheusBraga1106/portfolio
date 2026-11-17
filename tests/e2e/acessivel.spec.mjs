@@ -2,8 +2,8 @@ import { test, expect } from '@playwright/test';
 import { abrir } from './ajuda.mjs';
 
 const VERSOES = [
-  { caminho: '/ia/?teste', canonica: 'https://ia.matheusbrg.com/', og: 'https://ia.matheusbrg.com/assets/img/og-ia.png' },
-  { caminho: '/clientes/?teste', canonica: 'https://matheusbrg.com/', og: 'https://matheusbrg.com/assets/img/og-clientes.png' },
+  { caminho: '/ia/?teste', canonica: 'https://ia.matheusbragadev.com/', og: 'https://ia.matheusbragadev.com/assets/img/og-ia.png' },
+  { caminho: '/clientes/?teste', canonica: 'https://matheusbragadev.com/', og: 'https://matheusbragadev.com/assets/img/og-clientes.png' },
 ];
 const so = (info, nome) => test.skip(info.project.name !== nome, 'só no projeto ' + nome);
 
