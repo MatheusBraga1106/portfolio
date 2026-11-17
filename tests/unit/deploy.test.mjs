@@ -48,3 +48,14 @@ test('nenhum IP no repositório além de 127.0.0.1', () => {
   andar('.');
   assert.deepEqual(achados, []);
 });
+
+test('healthcheck começa a valer logo (sem 30 s fora do ar a cada deploy)', () => {
+  const f = ler('Dockerfile');
+  assert.match(f, /--start-interval=1s/);
+  assert.match(f, /--start-period=\d+s/);
+});
+
+test('CSS e JS do site sem cache longo (a Cloudflare também guarda)', () => {
+  const n = ler('nginx.conf');
+  assert.match(n, /location ~ \^\/assets\/\(css\|js\)\/[\s\S]*?no-cache/);
+});

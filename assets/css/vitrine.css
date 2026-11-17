@@ -2,7 +2,7 @@
 .jw{--v-red:#d6301f;--v-org:#ff6a2b;--v-blk:#151515;--v-bg:#f2f2f2;--v-line:#e1e1e1;--v-soft:#555;--v-zap:#15803d;--v-red-txt:#b3261a;--cond:"Archivo","Arial Narrow",sans-serif;padding-block:clamp(40px,7vh,80px);border-top:1px solid var(--rule)}
 .win{position:sticky;top:calc(70px + var(--i) * 14px);height:calc(100vh - 100px);min-height:520px;margin-bottom:30vh;background:var(--v-bg);color:var(--v-blk);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;transform-origin:50% 0;box-shadow:0 -14px 50px -18px rgba(0,0,0,.65);color-scheme:light}
 .win:last-child{margin-bottom:0}
-.win-vp{flex:1;min-height:0;overflow:hidden;position:relative}
+.win-vp{flex:1;min-height:0;overflow:hidden;overflow:clip;position:relative}
 .win-page{min-height:100%;display:flex;flex-direction:column;will-change:transform}
 .win-bar{display:flex;align-items:center;gap:7px;height:34px;padding:0 14px;background:#232323;flex:none}
 .win-bar i{width:10px;height:10px;border-radius:50%;background:#555;flex:none}
@@ -153,3 +153,6 @@ a.loja-card{display:block;text-decoration:none;color:inherit}
 
 /* contraste (Lighthouse): selo laranja sobre fundo claro fica mais escuro; o laranja vivo só sobre o fundo escuro */
 .win-heroi .win-selo,.lj-wrap .win-selo{color:#c2410c}
+
+/* busca e filtro do catálogo: o atributo hidden precisa vencer o display:grid do cartão */
+.ct-card[hidden]{display:none}

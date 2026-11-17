@@ -52,6 +52,10 @@ const trocas = [
   ['<em>Feito com Python, ADB e scrcpy</em>', '<em>Bateria, rede e tela remota</em>'],
   ['<em>Feito como skill do Claude</em>', '<em>Divide por pessoa, com a taxa</em>'],
   // fichas: sem ferramentas
+  ['<p>Extrai as faturas de água de órgãos públicos, com OCR para documentos digitalizados e validação cruzada entre os campos.</p>', '<p>Extrai as faturas de água de órgãos públicos, lendo até documentos escaneados, e confere os campos entre si.</p>'],
+  ['<div><b>HC-SR04</b><span>sensores ultrassônicos</span></div>', '<div><b>Sensores</b><span>de distância, como num carro</span></div>'],
+  ['<p>Um robô que desvia de obstáculos com sensores HC-SR04. Você joga, a sua rede joga, e vocês competem.</p>', '<p>Um robô que desvia de obstáculos com sensores de distância. Você joga, a sua rede joga, e vocês competem.</p>'],
+  ['<p>Uma central no computador acompanha celulares Android que viraram servidores: bateria, temperatura, rede e tela remota, com aviso quando algo foge do normal.</p>', '<p>Uma central no computador acompanha celulares antigos que viraram servidores: bateria, temperatura, rede e tela remota, com aviso quando algo foge do normal.</p>'],
   ['<span class="win-tag">Automação · Python</span>', '<span class="win-tag">Automação · Pesquisa</span>'],
   ['<div><b>OCR</b><span>Python e Tesseract</span></div>', '<div><b>Digitalizadas</b><span>lê até fatura escaneada</span></div>'],
   ['<span class="win-tag">Hardware · ESP32-S3</span>', '<span class="win-tag">Hardware · Centro Acadêmico</span>'],

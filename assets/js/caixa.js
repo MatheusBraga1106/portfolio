@@ -16,6 +16,8 @@ function carregarMatter() {
 export function iniciarCaixa() {
   const caixa = document.getElementById('caixa');
   if (!caixa || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  // no celular as peças ficam paradas: arrastar com o dedo brigaria com a rolagem da página
+  if (matchMedia('(max-width: 860px), (pointer: coarse)').matches) return;
   new IntersectionObserver((es, io) => { if (es[0].isIntersecting) { io.disconnect(); carregarMatter().catch(() => {}); } }, { rootMargin: '800px 0px' }).observe(caixa);
   let comecou = false;
   new IntersectionObserver((es) => {

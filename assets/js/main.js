@@ -68,7 +68,9 @@ addEventListener('pagehide', () => { try { sessionStorage.setItem(CHAVE, String(
 function devolverRolagem() {
   let y = null;
   try { y = sessionStorage.getItem(CHAVE); } catch { /* sem armazenamento */ }
-  if (y === null || location.hash) return;
+  // só ao recarregar ou voltar/avançar: uma visita nova começa pela abertura, do topo
+  const nav = performance.getEntriesByType('navigation')[0];
+  if (y === null || location.hash || !nav || !['reload', 'back_forward'].includes(nav.type)) return;
   if (vitrineSite) vitrineSite.refazer();
   irPara(Number(y), true);
   dispatchEvent(new Event('scroll'));

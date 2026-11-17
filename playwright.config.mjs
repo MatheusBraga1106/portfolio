@@ -13,7 +13,7 @@ export default defineConfig({
     { name: 'desktop', use: { viewport: { width: 1280, height: 800 } } },
     {
       name: 'celular',
-      testMatch: /acessivel\.spec\.mjs/,
+      testMatch: /(acessivel|revisao)\.spec\.mjs/,
       use: { viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true, deviceScaleFactor: 2 },
     },
     {

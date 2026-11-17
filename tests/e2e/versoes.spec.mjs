@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { abrir } from './ajuda.mjs';
 
-const FERRAMENTAS = ['n8n', 'OpenAI', 'Evolution', 'Postgres', 'Claude', 'Python', 'FastAPI', 'Redis', 'Cloudflare', 'Dokploy', 'Docker', 'ESP32', 'Arduino', 'Tesseract', 'ADB', 'scrcpy', 'Node', 'Playwright', 'Feito com'];
+const FERRAMENTAS = ['n8n', 'OpenAI', 'Evolution', 'Postgres', 'Claude', 'Python', 'FastAPI', 'Redis', 'Cloudflare', 'Dokploy', 'Docker', 'ESP32', 'Arduino', 'Tesseract', 'ADB', 'scrcpy', 'Node', 'Playwright', 'Feito com', 'HC-SR04', 'OCR', 'FFBeast', 'Android'];
 const PARTES_IGUAIS = ['#caixa', '#infra', '#contato', 'footer'];
 
 test('as duas versões carregam sem erros', async ({ page }) => {
@@ -28,6 +28,7 @@ test('as partes comuns são idênticas nas duas', async ({ page }) => {
 test('a versão clientes não fala de ferramentas', async ({ page }) => {
   await abrir(page, '/clientes/?teste');
   for (const sel of ['#viagem', '#vitrine', '#servicos']) {
+    // textContent inclui também o que é só decorativo (palavras gigantes com aria-hidden)
     const texto = (await page.locator(sel).textContent()).toLowerCase();
     for (const f of FERRAMENTAS) expect(texto, `${sel} contém "${f}"`).not.toContain(f.toLowerCase());
   }

@@ -10,4 +10,4 @@ COPY assets/ /usr/share/nginx/html/assets/
 COPY favicon.svg robots-ia.txt robots-clientes.txt sitemap-ia.xml sitemap-clientes.xml /usr/share/nginx/html/
 
 EXPOSE 80
-HEALTHCHECK --interval=30s --timeout=5s --start-period=5s CMD wget -qO- http://127.0.0.1/healthz || exit 1
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --start-interval=1s CMD wget -qO- http://127.0.0.1/healthz || exit 1

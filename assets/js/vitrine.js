@@ -13,7 +13,7 @@ function desenhar() {
 }
 
 /** Busca (sem acento) e categorias do catálogo. */
-function ligarCatalogo() {
+function ligarCatalogo(mudou) {
   const botoes = [...document.querySelectorAll('#ctCats button')], cartoes = [...document.querySelectorAll('.ct-card')];
   const res = document.getElementById('ctRes'), busca = document.getElementById('ctBusca');
   if (!busca) return;
@@ -25,6 +25,7 @@ function ligarCatalogo() {
       c.hidden = !ok; if (ok) n++;
     });
     res.textContent = n ? n + (n === 1 ? ' projeto' : ' projetos') : 'Nenhum projeto com esse nome';
+    if (mudou) mudou(); // a altura da janela do catálogo mudou
   };
   botoes.forEach((b) => b.addEventListener('click', () => { filtro = b.dataset.f; botoes.forEach((x) => x.classList.toggle('atual', x === b)); aplicar(); }));
   busca.addEventListener('input', aplicar);
@@ -37,7 +38,7 @@ export function iniciarVitrine(lenis) {
   const reduzido = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const celular = matchMedia('(max-width: 860px)');
   desenhar();
-  ligarCatalogo();
+  ligarCatalogo(() => refazer());
 
   // um marcador antes de cada janela guarda a posição natural dela (a janela presa não serve para isso)
   const marcas = janelas.map((w) => { const m = document.createElement('div'); m.className = 'win-mark'; m.setAttribute('aria-hidden', 'true'); w.before(m); return m; });
@@ -89,6 +90,23 @@ export function iniciarVitrine(lenis) {
     const desloc = alvo.getBoundingClientRect().top - pg.getBoundingClientRect().top - 60;
     irPara(presaEm(i) + Math.min(w._ov, Math.max(0, desloc)) + 2);
   }));
+
+  // Teclado (Tab) e busca da página podem tentar rolar a janela por dentro: isso é desfeito, e quem rola é
+  // a página, até deixar o elemento com foco no meio da janela.
+  janelas.forEach((w, i) => {
+    const vp = w.querySelector('.win-vp'), pg = w.querySelector('.win-page');
+    if (!vp || !pg) return;
+    vp.addEventListener('scroll', () => { if (vp.scrollTop || vp.scrollLeft) { vp.scrollTop = 0; vp.scrollLeft = 0; } });
+    w.addEventListener('focusin', (e) => {
+      vp.scrollTop = 0;
+      if (parado() || !w._ov) return;
+      const alvo = e.target.getBoundingClientRect(), caixa = vp.getBoundingClientRect();
+      if (alvo.top >= caixa.top && alvo.bottom <= caixa.bottom) return;
+      const desloc = alvo.top - pg.getBoundingClientRect().top - vp.clientHeight / 3;
+      irPara(presaEm(i) + Math.min(w._ov, Math.max(0, desloc)) + 2, true);
+      efeitos();
+    });
+  });
 
   addEventListener('scroll', efeitos, { passive: true });
   if (lenis) lenis.on('scroll', efeitos);

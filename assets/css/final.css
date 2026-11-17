@@ -53,3 +53,6 @@
 .uso b{font-family:var(--display);font-stretch:110%;font-weight:700;font-size:clamp(22px,2.2vw,30px);line-height:1.1}
 .uso span{color:#bdb9b2;max-width:52ch}
 @media (max-width:760px){.uso{grid-template-columns:1fr}.uso li:nth-child(odd){border-right:0}.uso li:nth-child(even){padding-left:0}}
+
+/* no celular as peças ficam paradas e o dedo rola a página normalmente */
+@media (max-width:860px),(pointer:coarse){.chip{touch-action:auto;cursor:default}}
