@@ -200,7 +200,7 @@ A **versão clientes** tem a mesma estrutura e o mesmo visual, com estas diferen
 | Bot: problema | O funcionário da garagem tinha que ir pessoalmente até alguém do laboratório para pedir peça ou relatar defeito | o Matheus, 17/11/2026 |
 | Bot: solução | 3 agentes (Triagem, Pedido, Ocorrência) no n8n, OpenAI, Evolution API, memória no Postgres, passagem para humano fora do escopo | currículo/README |
 | Bot: resultado | Pedido sai do celular, a qualquer hora, e fica registrado; testes com agentes que simulam funcionários (personas) | currículo/README |
-| FindBus | 12,6 mil visitas por mês (Cloudflare, 30 dias até 17/11/2026); 630 visitas nos 3 primeiros dias; cache em 3 camadas (Redis, Cloudflare, navegador) | currículo |
+| FindBus | 900 a 1.000 usuários por dia útil (informado por ele em 17/11/2026; o site mostra "900+"). Antes: 12,6 mil visitas por mês (Cloudflare, 30 dias até 17/11/2026); 630 visitas nos 3 primeiros dias; cache em 3 camadas (Redis, Cloudflare, navegador) | currículo |
 | Radar | coletor com navegador real por IP brasileiro; servidor no Dokploy; alertas na meta, na volta ao estoque e no menor preço em 30 dias; nunca compra | README do radar |
 | Radar demo | https://radar-demo.hubdev.app (no ar desde 17/11/2026) | — |
 | Hub Sim Racing | 9 versões publicadas, mais de 670 testes; site https://matheusbraga1106.github.io/hub-sim-racing/ ; GitHub público | README do perfil |

@@ -177,3 +177,22 @@ for (const caminho of ['/ia/?teste', '/clientes/?teste']) for (const largura of 
     }
   });
 }
+
+for (const caminho of ['/ia/?teste', '/clientes/?teste']) {
+  test(`FindBus mostra o uso diário (900+ por dia útil), sem o número antigo de visitas (${caminho})`, async ({ page }) => {
+    await abrir(page, caminho);
+    expect(await page.content()).not.toContain('12,6');
+    const stat = page.locator('#p2 .stat');
+    await expect(stat).toHaveAttribute('aria-label', 'Mais de 900 usuários por dia útil');
+    await expect(stat).toContainText('usuários por dia útil');
+    await expect(page.locator('.loja-corpo', { hasText: 'FindBus' })).toContainText('900+ usuários por dia útil');
+    await expect(page.locator('details', { hasText: 'em uso de verdade' })).toContainText('mais de 900 usuários por dia útil');
+    // o contador anima em números inteiros e termina em 900
+    await page.waitForFunction(() => window.__site && window.__site.viagem);
+    for (const f of [0.3, 1]) {
+      await page.evaluate((f) => { const r = document.getElementById('viagem'); window.__site.irPara(r.getBoundingClientRect().top + scrollY + (r.offsetHeight - innerHeight) * (0.25 + 0.12 * f), true); }, f);
+      await page.waitForTimeout(200);
+      await expect(page.locator('#cnt')).toHaveText(/^\d{1,3}$/);
+    }
+  });
+}

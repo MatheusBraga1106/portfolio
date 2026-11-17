@@ -55,3 +55,11 @@ for (const caminho of ['/ia/', '/clientes/']) {
     expect(lum.reduce((m, v) => Math.max(m, v), 0), 'luminância do ponto mais claro atrás do título').toBeLessThanOrEqual(0.15);
   });
 }
+
+test('no celular o número do FindBus vem com a legenda', async ({ page }) => {
+  await abrir(page, '/ia/?teste');
+  await page.waitForFunction(() => window.__site && window.__site.viagem);
+  await page.evaluate(() => window.__site.viagem.rolarPara(1, true));
+  await expect(page.locator('#p2 .stat small')).toBeVisible();
+  await expect(page.locator('#p2 .stat small')).toHaveText('usuários por dia útil');
+});
