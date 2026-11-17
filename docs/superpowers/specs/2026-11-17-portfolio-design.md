@@ -32,8 +32,8 @@ projeto real quando ele existe.
   quer saber o que eu uso"). Tem um bloco **"O que eu posso fazer por você"** no lugar de "Como eu
   uso IA". Textos na seção 6.2.
 - **Iguais nas duas** (decisão dele): abertura 3D, caixa de ferramentas, infraestrutura e contato.
-- **Domínio decidido: `matheusbrg.com`** (o `matheusbraga.com` já tem dono; ele conferiu em
-  17/11/2026). Clientes em `matheusbrg.com` e `www.matheusbrg.com`; vagas em `ia.matheusbrg.com`.
+- **Domínio decidido: `matheusbragadev.com`** (o `matheusbraga.com` e o `matheusbraga.dev` já têm dono;
+  ele comprou este em 17/11/2026). Clientes em `matheusbragadev.com` e `www.matheusbragadev.com`; vagas em `ia.matheusbragadev.com`.
   O `.com` foi escolhido porque o público geral conhece, e `ia.` funciona igual para a vaga.
 
 ## 2. Objetivos, não objetivos e anti-objetivos
@@ -44,7 +44,7 @@ projeto real quando ele existe.
 - Quatro casos principais, nesta ordem: Bot do Laboratório 3D, FindBus, Radar de Preços,
   Hub Sim Racing.
 - Uma vitrine de "Outros projetos" (5 projetos menores).
-- `ia.matheusbrg.com` substitui o hubdev.app no currículo, no README do perfil e no campo de site do
+- `ia.matheusbragadev.com` substitui o hubdev.app no currículo, no README do perfil e no campo de site do
   perfil do GitHub (a troca em si é a última etapa, com aprovação dele).
 
 **Não objetivos (fora desta versão)**
@@ -252,12 +252,12 @@ fotos de teste da geladeira (podem mostrar pessoas).
 
 ## 7. Domínio, hospedagem e deploy
 
-- **Domínio:** `matheusbrg.com`, comprado por ele na Cloudflare Registrar.
-- **DNS:** registros A de `matheusbrg.com`, `www` e `ia` apontando para a VPS, **com proxy da
+- **Domínio:** `matheusbragadev.com`, comprado por ele na Cloudflare Registrar.
+- **DNS:** registros A de `matheusbragadev.com`, `www` e `ia` apontando para a VPS, **com proxy da
   Cloudflare ligado** (o IP não pode aparecer). SSL/TLS da Cloudflare em "Full (strict)", como nos
   outros domínios.
 - **Duas páginas, um container:** `clientes/index.html` e `ia/index.html` dividem `assets/`. O nginx
-  escolhe a página pelo endereço: `ia.matheusbrg.com` → `ia/index.html`; `matheusbrg.com` e `www`
+  escolhe a página pelo endereço: `ia.matheusbragadev.com` → `ia/index.html`; `matheusbragadev.com` e `www`
   → `clientes/index.html`. Cada versão tem a sua canônica, o seu Open Graph e o seu `sitemap.xml`.
   O que é igual nas duas (abertura, caixa de ferramentas, infraestrutura, contato) é conferido por
   teste, para as duas páginas não se separarem com o tempo.
@@ -276,7 +276,7 @@ fotos de teste da geladeira (podem mostrar pessoas).
   `dokploy-network`. Nenhuma variável de ambiente é necessária, então o `.env` fica vazio (deixar
   um `.env.example` dizendo isso).
 - **Dokploy:** projeto novo, serviço do tipo Compose apontando para o repositório, autodeploy
-  ligado. Em Domains: `matheusbrg.com`, `www.matheusbrg.com` e `ia.matheusbrg.com`, os três → `portfolio-web`, porta 80, HTTPS, Let's Encrypt. **Depois de
+  ligado. Em Domains: `matheusbragadev.com`, `www.matheusbragadev.com` e `ia.matheusbragadev.com`, os três → `portfolio-web`, porta 80, HTTPS, Let's Encrypt. **Depois de
   cadastrar o domínio, fazer outro Deploy.**
 - **Entregável de deploy:** um `DEPLOY.md` no repositório com esse passo a passo, escrito para ele
   seguir sozinho.
@@ -310,7 +310,7 @@ fotos de teste da geladeira (podem mostrar pessoas).
 
 ## 9. Depois de no ar (com aprovação dele)
 
-1. Trocar hubdev.app por `ia.matheusbrg.com` em
+1. Trocar hubdev.app por `ia.matheusbragadev.com` em
    `D:\Downloads\MedidorAR\curriculo\curriculo-ifood-ai-builder.html` e gerar o PDF de novo
    (Edge headless, `--print-to-pdf`).
 2. Trocar no README do perfil (`D:\Downloads\MedidorAR\curriculo\github-perfil\README.md`) e

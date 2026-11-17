@@ -4,8 +4,8 @@ Site pessoal em duas versões, servidas pelo mesmo container:
 
 | Endereço | Versão | Para quem |
 |---|---|---|
-| [ia.matheusbrg.com](https://ia.matheusbrg.com) | IA | vagas e processos seletivos: como eu uso IA para construir |
-| [matheusbrg.com](https://matheusbrg.com) | clientes | quem precisa de um sistema: o que eu faço e como fica |
+| [ia.matheusbragadev.com](https://ia.matheusbragadev.com) | IA | vagas e processos seletivos: como eu uso IA para construir |
+| [matheusbragadev.com](https://matheusbragadev.com) | clientes | quem precisa de um sistema: o que eu faço e como fica |
 
 As duas mostram os mesmos projetos reais (bot de WhatsApp com agentes de IA, FindBus, Radar de Preços,
 Hub Sim Racing e outros), com uma abertura em 3D, uma viagem horizontal pelos casos e uma vitrine em

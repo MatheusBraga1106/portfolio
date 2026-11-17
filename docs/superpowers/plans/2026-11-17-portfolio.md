@@ -3,7 +3,7 @@
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Transformar o mockup aprovado "Mistura" num site estático de verdade, em duas versões (IA em
-`ia.matheusbrg.com`, clientes em `matheusbrg.com`), com testes e pronto para o Dokploy, no repositório
+`ia.matheusbragadev.com`, clientes em `matheusbragadev.com`), com testes e pronto para o Dokploy, no repositório
 público `MatheusBraga1106/portfolio`.
 
 **Architecture:** Duas páginas (`ia/index.html` e `clientes/index.html`) que dividem `assets/`, em HTML,
@@ -28,7 +28,7 @@ comportamento vêm de lá, e o que este plano diz por cima dele vale mais.
 - Proibido: contagem de commits, heatmap, "quantos projetos", tema de ônibus, códigos tipo MB-01, link para o repositório do FindBus, IPs, `.env` real e dados internos da empresa.
 - Sem CDN: tudo carregado de `assets/vendor/` e `assets/fonts/`. As versões são as de cima, exatas.
 - Serviço do compose: `portfolio-web`, com `expose: 80`, **sem `ports`**, na rede externa `dokploy-network`.
-- Domínio: `matheusbrg.com` (clientes, com `www`) e `ia.matheusbrg.com` (IA). Os caminhos de arquivo nas páginas são absolutos (`/assets/...`), porque as duas páginas vivem em pastas diferentes.
+- Domínio: `matheusbragadev.com` (clientes, com `www`) e `ia.matheusbragadev.com` (IA). Os caminhos de arquivo nas páginas são absolutos (`/assets/...`), porque as duas páginas vivem em pastas diferentes.
 - O que é igual nas duas versões (estrutura da abertura, `#caixa`, `#infra`, `#contato`, rodapé) tem que ser idêntico no HTML; um teste compara.
 - Versão clientes: nenhum nome de ferramenta em `#viagem`, `#vitrine` e `#servicos` (lista do teste na Task 7).
 - Conteúdo visível por padrão: nada começa com `opacity:0` esperando um gatilho de rolagem. Filtros animam só o movimento. Nada de `transition` de CSS na mesma propriedade que o GSAP anima.
@@ -246,7 +246,7 @@ com os quatro itens da spec §5.1, no visual da seção de infraestrutura (fundo
 - Modify: `ia/index.html` e `clientes/index.html` (meta, canônica, Open Graph), `playwright.config.mjs` (projetos `celular` 390×844 e `reduzido` com `reducedMotion: 'reduce'`)
 
 - [ ] **Step 1: Escrever os testes que falham** (rodam nas duas páginas):
-  - `metadados`: `/ia/` tem a canônica `https://ia.matheusbrg.com/` e `og:image` `https://ia.matheusbrg.com/assets/img/og-ia.png`; `/clientes/` tem `https://matheusbrg.com/` e `og-clientes.png`.
+  - `metadados`: `/ia/` tem a canônica `https://ia.matheusbragadev.com/` e `og:image` `https://ia.matheusbragadev.com/assets/img/og-ia.png`; `/clientes/` tem `https://matheusbragadev.com/` e `og-clientes.png`.
   - `acessivel.spec.mjs`, projeto `celular`: `document.documentElement.scrollWidth <= innerWidth` no topo, no meio da viagem e no meio da vitrine. Rolar a página inteira com `mouse.wheel` até o rodapé ficar visível.
   - Projeto `reduzido`: `html` com classe `flat`; os 4 `h2` das paradas e os 7 títulos das janelas visíveis, e nenhum elemento de conteúdo com `opacity` < 1.
   - Projeto `desktop`: navegação por Tab chega aos botões "Ver o catálogo", "Ver projeto" e "Copiar e-mail" com contorno visível.
@@ -269,13 +269,13 @@ com os quatro itens da spec §5.1, no visual da seção de infraestrutura (fundo
   - `.dockerignore` contém `node_modules`, `tests`, `.git` e `scripts`.
   - Nenhum arquivo do repositório (fora de `node_modules`) contém um IP no formato `\b\d{1,3}(\.\d{1,3}){3}\b`, com exceção de `127.0.0.1`.
 - [ ] **Step 2:** Rodar `npm test`. Esperado: FALHA.
-- [ ] **Step 3:** Escrever os arquivos. O `nginx.conf` tem gzip, `Cache-Control: public, max-age=31536000, immutable` em `/assets/`, `no-cache` em `index.html`, os cabeçalhos `X-Content-Type-Options: nosniff` e `Referrer-Policy: strict-origin-when-cross-origin`, e uma CSP só com `'self'` (sem `unsafe-inline` em script). O `Dockerfile` copia só os arquivos do site. O `.env.example` diz que nenhuma variável é necessária. O `DEPLOY.md` segue a spec §7, passo a passo: comprar `matheusbrg.com`, criar os registros A de `@`, `www` e `ia` com proxy, cadastrar os três domínios no serviço `portfolio-web` e fazer outro Deploy depois disso. O `README.md` (público, em português) diz o que é o site, como rodar localmente, como testar e como fica no ar.
+- [ ] **Step 3:** Escrever os arquivos. O `nginx.conf` tem gzip, `Cache-Control: public, max-age=31536000, immutable` em `/assets/`, `no-cache` em `index.html`, os cabeçalhos `X-Content-Type-Options: nosniff` e `Referrer-Policy: strict-origin-when-cross-origin`, e uma CSP só com `'self'` (sem `unsafe-inline` em script). O `Dockerfile` copia só os arquivos do site. O `.env.example` diz que nenhuma variável é necessária. O `DEPLOY.md` segue a spec §7, passo a passo: comprar `matheusbragadev.com`, criar os registros A de `@`, `www` e `ia` com proxy, cadastrar os três domínios no serviço `portfolio-web` e fazer outro Deploy depois disso. O `README.md` (público, em português) diz o que é o site, como rodar localmente, como testar e como fica no ar.
 - [ ] **Step 4:** Rodar `npm test`. Esperado: PASSA.
 - [ ] **Step 5:** Com o Docker: `docker build -t portfolio-teste .`, depois `docker run --rm -d -p 5399:80 --name pt portfolio-teste`. Esperado:
   - `curl -s 127.0.0.1:5399/healthz` responde `ok`;
-  - `curl -s -H "Host: ia.matheusbrg.com" 127.0.0.1:5399/` traz `<title>Matheus Braga · AI Builder</title>`;
-  - `curl -s -H "Host: matheusbrg.com" 127.0.0.1:5399/` e com `Host: www.matheusbrg.com` trazem `Matheus Braga · Sistemas sob medida`;
-  - `curl -s -H "Host: ia.matheusbrg.com" 127.0.0.1:5399/robots.txt` contém `https://ia.matheusbrg.com/sitemap.xml`;
+  - `curl -s -H "Host: ia.matheusbragadev.com" 127.0.0.1:5399/` traz `<title>Matheus Braga · AI Builder</title>`;
+  - `curl -s -H "Host: matheusbragadev.com" 127.0.0.1:5399/` e com `Host: www.matheusbragadev.com` trazem `Matheus Braga · Sistemas sob medida`;
+  - `curl -s -H "Host: ia.matheusbragadev.com" 127.0.0.1:5399/robots.txt` contém `https://ia.matheusbragadev.com/sitemap.xml`;
   - `curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:5399/ia/` responde `404`;
   - `curl -sI 127.0.0.1:5399/` traz a CSP.
   
@@ -288,9 +288,9 @@ com os quatro itens da spec §5.1, no visual da seção de infraestrutura (fundo
 Não é código. É uma lista de pedidos, um por vez, e cada um espera um "sim".
 
 - [ ] **Step 1:** Pedir aprovação para criar o repositório **público** `MatheusBraga1106/portfolio` e dar push na `main`. Antes, rodar `git status` e mostrar a ele a lista de arquivos.
-- [ ] **Step 2:** Ele compra `matheusbrg.com` e faz o deploy seguindo o `DEPLOY.md` (os três endereços no mesmo serviço, e outro Deploy depois de cadastrar os domínios).
+- [ ] **Step 2:** Ele compra `matheusbragadev.com` e faz o deploy seguindo o `DEPLOY.md` (os três endereços no mesmo serviço, e outro Deploy depois de cadastrar os domínios).
 - [ ] **Step 3:** Conferir os três endereços no ar: HTTPS válido (sem 526), a versão certa em cada um, sem erros no console e Lighthouse no celular ≥ 90.
-- [ ] **Step 4:** Pedir aprovação, separadamente, para cada troca de hubdev.app por `ia.matheusbrg.com`:
+- [ ] **Step 4:** Pedir aprovação, separadamente, para cada troca de hubdev.app por `ia.matheusbragadev.com`:
   - `D:\Downloads\MedidorAR\curriculo\curriculo-ifood-ai-builder.html`, gerando o PDF de novo (Edge `--print-to-pdf`);
   - `curriculo\github-perfil\README.md`, com push no repositório `MatheusBraga1106/MatheusBraga1106`;
   - o campo website do perfil do GitHub.

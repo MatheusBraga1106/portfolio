@@ -1,18 +1,18 @@
 # Como colocar o portfólio no ar
 
-Um container só serve as duas versões: `ia.matheusbrg.com` (vagas) e `matheusbrg.com` com `www.` (clientes).
+Um container só serve as duas versões: `ia.matheusbragadev.com` (vagas) e `matheusbragadev.com` com `www.` (clientes).
 Nenhuma variável de ambiente é necessária.
 
 ## 1. Comprar o domínio
 
 1. No painel da Cloudflare, abra **Domain Registration → Register Domains**.
-2. Procure `matheusbrg.com` e compre (cerca de US$ 10 por ano).
+2. Procure `matheusbragadev.com` e compre (cerca de US$ 10 por ano). Já comprado em 17/11/2026.
 
 O domínio já fica com o DNS na Cloudflare.
 
 ## 2. DNS na Cloudflare
 
-Em **matheusbrg.com → DNS → Records**, crie três registros do tipo **A**, todos apontando para o IP da sua VPS
+Em **matheusbragadev.com → DNS → Records**, crie três registros do tipo **A**, todos apontando para o IP da sua VPS
 e **com a nuvem laranja ligada (Proxied)**, para o IP não aparecer:
 
 | Tipo | Nome | Conteúdo | Proxy |
@@ -39,19 +39,19 @@ Na aba **Domains** do serviço, adicione os três endereços. Todos vão para o 
 
 | Host | Service | Port | HTTPS | Certificate |
 |---|---|---|---|---|
-| `matheusbrg.com` | `portfolio-web` | 80 | ligado | Let's Encrypt |
-| `www.matheusbrg.com` | `portfolio-web` | 80 | ligado | Let's Encrypt |
-| `ia.matheusbrg.com` | `portfolio-web` | 80 | ligado | Let's Encrypt |
+| `matheusbragadev.com` | `portfolio-web` | 80 | ligado | Let's Encrypt |
+| `www.matheusbragadev.com` | `portfolio-web` | 80 | ligado | Let's Encrypt |
+| `ia.matheusbragadev.com` | `portfolio-web` | 80 | ligado | Let's Encrypt |
 
 **Depois de cadastrar os domínios, clique em Deploy de novo.** Domínio novo só passa a valer no deploy
 seguinte. Sem isso, a Cloudflare mostra o erro 526 (aconteceu com a demonstração do Radar).
 
 ## 5. Conferir
 
-- `https://matheusbrg.com` abre a versão **clientes** ("Do problema ao sistema funcionando.").
-- `https://www.matheusbrg.com` abre a mesma versão.
-- `https://ia.matheusbrg.com` abre a versão **IA** ("Construo com IA e coloco no ar.").
-- `https://ia.matheusbrg.com/robots.txt` aponta para `https://ia.matheusbrg.com/sitemap.xml`.
+- `https://matheusbragadev.com` abre a versão **clientes** ("Do problema ao sistema funcionando.").
+- `https://www.matheusbragadev.com` abre a mesma versão.
+- `https://ia.matheusbragadev.com` abre a versão **IA** ("Construo com IA e coloco no ar.").
+- `https://ia.matheusbragadev.com/robots.txt` aponta para `https://ia.matheusbragadev.com/sitemap.xml`.
 
 Se aparecer o erro 526, confira se os três domínios estão com **Let's Encrypt** e faça outro Deploy.
 
