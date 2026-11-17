@@ -65,7 +65,9 @@ a.win-cam:hover{transform:translateY(-2px)}
 .lj-veiculo label span{border:1px solid #cfd2d6;border-radius:6px;padding:10px 12px;font-size:14px;font-weight:400;color:#333;background:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .lj-veiculo-btn{background:var(--v-red);color:#fff;text-decoration:none;font-weight:700;padding:11px 22px;border-radius:6px;white-space:nowrap}
 .lj-selos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin:34px 0 8px;text-align:center}
-.lj-selos div{display:grid;justify-items:center;gap:8px;min-width:0}
+/* os quatro destaques dividem as mesmas três linhas (subgrid): ícone, título e texto ficam na mesma altura
+   em todos, mesmo quando um título quebra em duas linhas */
+.lj-selos div{display:grid;grid-row:span 3;grid-template-rows:subgrid;row-gap:8px;justify-items:center;align-content:start;min-width:0}
 .lj-selos i{width:50px;height:50px;border-radius:50%;background:var(--v-red);color:#fff;display:grid;place-items:center;font-style:normal;font-size:20px}
 .lj-selos strong{font-size:14.5px}
 .lj-selos span{font-size:13px;color:var(--v-soft)}
