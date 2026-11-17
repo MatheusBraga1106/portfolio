@@ -141,6 +141,9 @@ export function iniciarViagem(lenis) {
 
   ['scroll', 'resize', 'pageshow', 'load'].forEach((ev) => addEventListener(ev, desenhar, { passive: true }));
   if (lenis) lenis.on('scroll', desenhar);
+  // o pino da abertura e as janelas da vitrine mudam a altura da página depois do carregamento:
+  // sempre que o ScrollTrigger recalcula, a viagem se redesenha a partir da rolagem atual
+  if (window.ScrollTrigger) ScrollTrigger.addEventListener('refresh', desenhar);
   if (document.fonts) document.fonts.ready.then(desenhar);
   desenhar();
   return { rolarPara, desenhar };

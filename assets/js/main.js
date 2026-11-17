@@ -2,6 +2,7 @@
 import { irPara } from './rolagem.js';
 import { iniciarAbertura, prepararTitulo } from './abertura3d.js';
 import { iniciarViagem } from './viagem.js';
+import { iniciarVitrine } from './vitrine.js';
 
 const reduzido = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const toque = matchMedia('(pointer: coarse)').matches;
@@ -31,6 +32,7 @@ if (cur && !toque && G && !reduzido) {
 prepararTitulo();
 iniciarAbertura();
 const viagemSite = iniciarViagem(lenis);
+const vitrineSite = iniciarVitrine(lenis);
 
 // links internos (#secao): rolam até a seção. Links com data-go/data-win/data-inner e os #p1..#p4 têm tratamento próprio.
 document.querySelectorAll('a[href^="#"]:not([href="#"]):not([data-go]):not([data-win]):not([data-inner])').forEach((a) => {
@@ -43,6 +45,22 @@ document.querySelectorAll('a[href^="#"]:not([href="#"]):not([data-go]):not([data
   });
 });
 
-const site = { lenis, irPara, viagem: viagemSite, vitrine: null };
+// Recarregar: a restauração automática do navegador erra, porque a página muda de altura depois de carregar
+// (pino da abertura, margens das janelas). Guardamos a rolagem ao sair e devolvemos quando o layout assenta.
+const CHAVE = 'portfolio-rolagem:' + location.pathname;
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+addEventListener('pagehide', () => { try { sessionStorage.setItem(CHAVE, String(Math.round(scrollY))); } catch { /* sem armazenamento: começa do topo */ } });
+function devolverRolagem() {
+  let y = null;
+  try { y = sessionStorage.getItem(CHAVE); } catch { /* sem armazenamento */ }
+  if (y === null || location.hash) return;
+  if (vitrineSite) vitrineSite.refazer();
+  irPara(Number(y), true);
+  dispatchEvent(new Event('scroll'));
+}
+const assentar = () => requestAnimationFrame(() => requestAnimationFrame(devolverRolagem));
+if (document.readyState === 'complete') assentar(); else addEventListener('load', assentar, { once: true });
+
+const site = { lenis, irPara, viagem: viagemSite, vitrine: vitrineSite };
 if (new URLSearchParams(location.search).has('teste')) window.__site = site;
 export default site;

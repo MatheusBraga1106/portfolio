@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="/assets/css/base.css">
   <link rel="stylesheet" href="/assets/css/abertura.css">
   <link rel="stylesheet" href="/assets/css/viagem.css">
+  <link rel="stylesheet" href="/assets/css/vitrine.css">
   <script defer src="/assets/vendor/gsap.min.js"></script>
   <script defer src="/assets/vendor/ScrollTrigger.min.js"></script>
   <script defer src="/assets/vendor/lenis.min.js"></script>
@@ -135,7 +136,224 @@
     </div>
   </div>
 </div>
-    <section id="vitrine" aria-label="Vitrine e outros projetos"></section>
+<!-- ===== vitrine do estágio: landing → catálogo (com os outros projetos) → ficha de cada projeto ===== -->
+<section class="jw g" id="vitrine" aria-label="Vitrine e outros projetos">
+  <div class="w jw-pilha" id="jwPilha">
+
+    <!-- janela 1: landing no visual da vitrine do estágio, vendendo os projetos e a experiência dele -->
+    <article class="win win-loja" style="--i:0" aria-labelledby="w0">
+      <div class="win-bar"><i></i><i></i><i></i><span>projetos · Matheus Braga · no visual da vitrine que fiz no estágio</span></div>
+      <div class="win-vp"><div class="win-page">
+        <div class="win-faixa">Agentes de IA, automações e sistemas internos · do protótipo ao servidor</div>
+        <div class="win-topo"><b><span class="win-simb">MB</span> Projetos do Matheus</b>
+          <nav class="win-menu" aria-label="Menu da vitrine"><a href="#" data-win="1" data-hover>Catálogo</a><a href="#lj-como" data-inner="lj-como">Como eu trabalho</a><a href="#lj-duv" data-inner="lj-duv">Dúvidas</a><a class="zap" href="#contato" data-hover>Falar comigo</a></nav>
+        </div>
+        <div class="lj-heroi">
+          <div class="lj-heroi-grade">
+            <div>
+              <span class="win-selo">Problema parado é tempo perdido</span>
+              <h3 id="w0">Do problema ao sistema no ar</h3>
+              <p class="lj-heroi-texto">Construo agentes de IA, automações e sistemas internos, e coloco tudo no ar no meu próprio servidor. Veja o que já está em uso ou me conte um problema novo.</p>
+              <div class="lj-caminhos">
+                <a class="lj-caminho prin" href="#" data-win="1" data-hover><small>Projetos prontos</small><strong>Ver o catálogo →</strong></a>
+                <a class="lj-caminho" href="#contato" data-hover><small>Tem um problema?</small><strong>Falar comigo →</strong></a>
+              </div>
+            </div>
+            <div class="lj-heroi-foto" data-desenho="oficina" role="img" aria-label="Ilustração: notebook com código, servidor e placa ESP32"></div>
+          </div>
+        </div>
+        <div class="lj-wrap">
+          <div class="lj-veiculo" aria-label="Filtro rápido de projetos">
+            <label>Área<span>IA, automação, hardware ▾</span></label><label>Feito com<span>Python, n8n, ESP32… ▾</span></label><label>Situação<span>No ar ou em uso ▾</span></label>
+            <a class="lj-veiculo-btn" href="#" data-win="1" data-hover>Ver projetos</a>
+          </div>
+          <div class="lj-selos">
+            <div><i>▤</i><strong>Servidor próprio</strong><span>Hetzner, Dokploy e Cloudflare, mantidos por mim</span></div>
+            <div><i>✦</i><strong>IA em uso de verdade</strong><span>Agentes atendendo pessoas, não só demonstração</span></div>
+            <div><i>✓</i><strong>Testado antes de entregar</strong><span>Testes automáticos e agentes que simulam usuários</span></div>
+            <div><i>⚙</i><strong>Do hardware à web</strong><span>ESP32, Arduino, impressão 3D e interfaces</span></div>
+          </div>
+          <div class="lj-secao">
+            <h4 class="lj-tit">Áreas</h4><p class="lj-sub">Navegue pelo tipo de projeto.</p>
+            <div class="lj-cats"><a href="#" data-win="1">Agentes de IA<span>bot no WhatsApp, skill do Claude</span></a><a href="#" data-win="1">Automações<span>coleta, alertas, extração de dados</span></a><a href="#" data-win="1">Hardware<span>ESP32, sensores, robô</span></a></div>
+          </div>
+          <div class="lj-secao">
+            <div class="lj-cab"><h4 class="lj-tit">Projetos em destaque</h4><a href="#" data-win="1" data-hover>Ver o catálogo completo →</a></div>
+            <div class="loja-dest">
+              <a class="loja-card" href="#p1"><div class="loja-foto" data-peca="bot"></div><div class="loja-corpo"><small>Agente de IA · estágio</small><b>Bot do Laboratório 3D</b><em>3 agentes no WhatsApp, em uso</em></div></a>
+              <a class="loja-card" href="#p2"><div class="loja-foto"><img src="/assets/img/findbus-busca.webp" alt=""></div><div class="loja-corpo"><small>Sistema no ar</small><b>FindBus</b><em>12,6 mil visitas por mês</em></div></a>
+              <a class="loja-card" href="#p3"><div class="loja-foto"><img src="/assets/img/radar-demo.webp" alt=""></div><div class="loja-corpo"><small>Automação</small><b>Radar de Preços</b><em>Demonstração aberta</em></div></a>
+              <a class="loja-card" href="#p4"><div class="loja-foto"><img src="/assets/img/racing-volante.webp" alt="" style="object-position:50% 45%"></div><div class="loja-corpo"><small>App público</small><b>Hub Sim Racing</b><em>9 versões, 670+ testes</em></div></a>
+            </div>
+          </div>
+          <div class="lj-secao" id="lj-como">
+            <h4 class="lj-tit">Como eu trabalho</h4><p class="lj-sub">Do problema ao sistema em uso, com a IA como parte da equipe.</p>
+            <div class="lj-passos">
+              <div><b>01</b><h5>Entendo o problema</h5><p>Converso com quem usa e escrevo o que precisa ser resolvido antes de escrever código.</p></div>
+              <div><b>02</b><h5>Construo com IA</h5><p>Claude Code como equipe: plano primeiro, tarefas divididas entre subagentes e revisão a cada entrega.</p></div>
+              <div><b>03</b><h5>Coloco no ar e acompanho</h5><p>Deploy no meu servidor com Docker e Dokploy, e ajustes depois do uso real.</p></div>
+            </div>
+          </div>
+          <div class="lj-secao">
+            <div class="lj-naoachou"><div><h4>Tem um problema que dá para automatizar?</h4><p>Me conte o que acontece hoje e o que você queria que acontecesse. Eu respondo dizendo se dá para resolver e como.</p></div><a class="lj-naoachou-btn" href="#contato" data-hover>Falar comigo</a></div>
+          </div>
+          <div class="lj-secao lj-ult" id="lj-duv">
+            <h4 class="lj-tit">Dúvidas frequentes</h4>
+            <div class="lj-duvidas">
+              <details open><summary>Os projetos estão em uso de verdade?</summary><p>Sim. O bot do laboratório atende as garagens, o FindBus tem 12,6 mil visitas por mês, o monitor está no Centro Acadêmico desde out/2026 e o Radar tem uma demonstração aberta.</p></details>
+              <details><summary>Com quais tecnologias você trabalha?</summary><p>Python, FastAPI, n8n, OpenAI e Claude, PostgreSQL, Docker e Dokploy. No frontend, HTML, CSS e JavaScript puros.</p></details>
+              <details><summary>Onde você estuda e trabalha?</summary><p>Engenharia de Computação na UFG, em Goiânia. Estágio no Laboratório 3D do Grupo Odilon Santos e Iniciação Científica em auditoria de faturas.</p></details>
+            </div>
+          </div>
+        </div>
+      </div></div>
+    </article>
+
+<!-- janela 2: a aba Catálogo, igual à de peças, com os outros projetos no lugar -->
+    <article class="win win-cat" style="--i:1" aria-labelledby="wc">
+      <div class="win-bar"><i></i><i></i><i></i><span>projetos · Matheus Braga · catálogo</span></div>
+      <div class="win-vp"><div class="win-page">
+        <div class="win-faixa">Agentes de IA, automações e sistemas internos · do protótipo ao servidor</div>
+        <div class="win-topo"><b><span class="win-simb">MB</span> Projetos do Matheus</b>
+          <nav class="win-menu" aria-label="Menu da vitrine"><a href="#" data-win="0" data-hover>Início</a><a href="#" class="on" data-win="1">Catálogo</a><a class="zap" href="#contato" data-hover>Falar comigo</a></nav>
+        </div>
+        <div class="ct-miolo">
+          <div class="ct-intro"><h3 id="wc">Catálogo de projetos</h3><p>Outros projetos que construí, além dos quatro casos principais. Escolha uma categoria na lateral ou busque pelo nome.</p></div>
+          <div class="ct-shell">
+            <aside class="ct-lado">
+              <div class="ct-sec"><div class="ct-sec-t">Buscar</div><div class="ct-busca"><input type="text" id="ctBusca" placeholder="Nome do projeto" aria-label="Buscar projeto pelo nome"><span aria-hidden="true">⌕</span></div></div>
+              <div class="ct-sec"><div class="ct-sec-t">Categoria</div>
+                <div class="ct-cats" id="ctCats">
+                  <button type="button" class="atual" data-f="todos" data-hover><span>Todas</span><span>5</span></button>
+                  <button type="button" data-f="auto" data-hover><span>Automação</span><span>1</span></button>
+                  <button type="button" data-f="hw" data-hover><span>Hardware</span><span>2</span></button>
+                  <button type="button" data-f="ia" data-hover><span>IA</span><span>2</span></button>
+                  <button type="button" data-f="infra" data-hover><span>Infra</span><span>1</span></button>
+                </div>
+              </div>
+            </aside>
+            <div>
+              <div class="ct-res" id="ctRes" aria-live="polite">5 projetos</div>
+              <div class="ct-grade" id="ctGrade">
+                <article class="ct-card" data-cat="auto" data-k="extrator faturas agua pdf ocr"><div class="ct-foto" data-desenho="faturas"></div><div class="ct-corpo"><small>Automação · Pesquisa</small><h5>Extrator de faturas de água</h5><p>Serve para auditar contas de água de órgãos públicos</p><em>Feito com Python e Tesseract</em><a href="#" data-win="2" data-hover>Ver projeto</a></div></article>
+                <article class="ct-card" data-cat="hw" data-k="monitor mercado confianca geladeira esp32"><div class="ct-foto" data-desenho="geladeira"></div><div class="ct-corpo"><small>Hardware</small><h5>Monitor do mercado de confiança</h5><p>Serve para a geladeira sem atendente do CA da UFG</p><em>Feito com ESP32-S3 e câmera</em><a href="#" data-win="3" data-hover>Ver projeto</a></div></article>
+                <article class="ct-card" data-cat="hw ia" data-k="robo desviador rede neural"><div class="ct-foto" data-desenho="robo"></div><div class="ct-corpo"><small>Hardware · IA</small><h5>Robô desviador</h5><p>Serve para treinar uma rede neural que desvia de obstáculos</p><em>Feito com Python e Arduino</em><a href="#" data-win="4" data-hover>Ver projeto</a></div></article>
+                <article class="ct-card" data-cat="infra" data-k="central celulares android servidor"><div class="ct-foto" data-desenho="celulares"></div><div class="ct-corpo"><small>Infra</small><h5>Central de celulares</h5><p>Serve para cuidar de celulares que viraram servidores</p><em>Feito com Python, ADB e scrcpy</em><a href="#" data-win="5" data-hover>Ver projeto</a></div></article>
+                <article class="ct-card" data-cat="ia" data-k="comanda conta bar foto"><div class="ct-foto" data-desenho="comanda"></div><div class="ct-corpo"><small>IA</small><h5>Comanda</h5><p>Serve para dividir a conta do bar pela foto da comanda</p><em>Feito como skill do Claude</em><a href="#" data-win="6" data-hover>Ver projeto</a></div></article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div></div>
+    </article>
+
+    <article class="win" style="--i:2" aria-labelledby="w1">
+      <div class="win-bar"><i></i><i></i><i></i><span>extrator · pesquisa UFG</span></div>
+      <div class="win-vp"><div class="win-page">
+      <div class="win-faixa">Iniciação Científica · eficiência hídrica em órgãos públicos</div>
+      <div class="win-topo"><span><a class="win-volta" href="#" data-win="1" data-hover>← Catálogo</a> <b>Extrator de faturas</b></span><span class="win-tag">Automação · Python</span></div>
+      <div class="win-heroi">
+        <div class="win-txt">
+          <span class="win-selo">Pesquisa · UFG</span>
+          <h3 id="w1">Conta de água em PDF vira dado auditável</h3>
+          <p>Extrai as faturas de água de órgãos públicos, com OCR para documentos digitalizados e validação cruzada entre os campos.</p>
+          <div class="win-caminhos">
+            <a class="win-cam prin" href="https://github.com/MatheusBraga1106/extrator-faturas-agua" target="_blank" rel="noopener" data-hover><small>Código aberto</small><strong>Ver no GitHub ↗</strong></a>
+            <span class="win-cam"><small>Sistema da pesquisa</small><strong>Restrito à UFG e ao TJGO</strong></span>
+          </div>
+        </div>
+        <div class="win-ilu" data-desenho="faturas" role="img" aria-label="Ilustração: faturas em PDF virando uma planilha conferida"></div>
+      </div>
+      <div class="win-selos"><div><b>9.820</b><span>faturas processadas</span></div><div><b>217 → 63</b><span>suspeitas de erro</span></div><div><b>OCR</b><span>Python e Tesseract</span></div></div>
+      </div></div>
+    </article>
+
+    <article class="win" style="--i:3" aria-labelledby="w2">
+      <div class="win-bar"><i></i><i></i><i></i><span>monitor · centro acadêmico</span></div>
+      <div class="win-vp"><div class="win-page">
+      <div class="win-faixa">Em uso no Centro Acadêmico da UFG desde out/2026</div>
+      <div class="win-topo"><span><a class="win-volta" href="#" data-win="1" data-hover>← Catálogo</a> <b>Monitor do mercado de confiança</b></span><span class="win-tag">Hardware · ESP32-S3</span></div>
+      <div class="win-heroi">
+        <div class="win-txt">
+          <span class="win-selo">Hardware · CA da UFG</span>
+          <h3 id="w2">Geladeira sem atendente, com auditoria</h3>
+          <p>Câmera e sensores com ESP32-S3 registram cada retirada na geladeira do Centro Acadêmico, e um painel faz a auditoria.</p>
+          <div class="win-caminhos">
+            <span class="win-cam prin"><small>Em uso</small><strong>Desde out/2026</strong></span>
+            <span class="win-cam"><small>Código</small><strong>Projeto privado</strong></span>
+          </div>
+        </div>
+        <div class="win-ilu" data-desenho="geladeira" role="img" aria-label="Ilustração: geladeira com uma câmera em cima e um painel de auditoria"></div>
+      </div>
+      <div class="win-selos"><div><b>ESP32-S3</b><span>com câmera</span></div><div><b>Sensores</b><span>em cada retirada</span></div><div><b>Painel</b><span>de auditoria</span></div></div>
+      </div></div>
+    </article>
+
+    <article class="win" style="--i:4" aria-labelledby="w3">
+      <div class="win-bar"><i></i><i></i><i></i><span>robo-desviador · github</span></div>
+      <div class="win-vp"><div class="win-page">
+      <div class="win-faixa">Simulador com rede neural treinada por neuroevolução</div>
+      <div class="win-topo"><span><a class="win-volta" href="#" data-win="1" data-hover>← Catálogo</a> <b>Robô desviador</b></span><span class="win-tag">Hardware · IA</span></div>
+      <div class="win-heroi">
+        <div class="win-txt">
+          <span class="win-selo">Hardware · IA</span>
+          <h3 id="w3">Você contra a sua própria rede neural</h3>
+          <p>Um robô que desvia de obstáculos com sensores HC-SR04. Você joga, a sua rede joga, e vocês competem.</p>
+          <div class="win-caminhos">
+            <a class="win-cam prin" href="https://github.com/MatheusBraga1106/robo-desviador" target="_blank" rel="noopener" data-hover><small>Código aberto</small><strong>Ver no GitHub ↗</strong></a>
+            <span class="win-cam"><small>Feito com</small><strong>Python e Arduino</strong></span>
+          </div>
+        </div>
+        <div class="win-ilu" data-desenho="robo" role="img" aria-label="Ilustração: robô com sensores ultrassônicos entre obstáculos e uma rede neural acima"></div>
+      </div>
+      <div class="win-selos"><div><b>HC-SR04</b><span>sensores ultrassônicos</span></div><div><b>Neuroevolução</b><span>a rede aprende jogando</span></div><div><b>Você × rede</b><span>competição</span></div></div>
+      </div></div>
+    </article>
+
+    <article class="win" style="--i:5" aria-labelledby="w4">
+      <div class="win-bar"><i></i><i></i><i></i><span>central de celulares</span></div>
+      <div class="win-vp"><div class="win-page">
+      <div class="win-faixa">Celulares antigos que viraram mini-servidores</div>
+      <div class="win-topo"><span><a class="win-volta" href="#" data-win="1" data-hover>← Catálogo</a> <b>Central de celulares</b></span><span class="win-tag">Infra · Python</span></div>
+      <div class="win-heroi">
+        <div class="win-txt">
+          <span class="win-selo">Infra</span>
+          <h3 id="w4">Celular velho virou servidor</h3>
+          <p>Uma central no computador acompanha celulares Android que viraram servidores: bateria, temperatura, rede e tela remota, com aviso quando algo foge do normal.</p>
+          <div class="win-caminhos">
+            <span class="win-cam prin"><small>Feito com</small><strong>Python, ADB e scrcpy</strong></span>
+            <span class="win-cam"><small>Código</small><strong>Projeto privado</strong></span>
+          </div>
+        </div>
+        <div class="win-ilu" data-desenho="celulares" role="img" aria-label="Ilustração: três celulares em pé ligados a um monitor com a bateria de cada um"></div>
+      </div>
+      <div class="win-selos"><div><b>Bateria</b><span>e temperatura</span></div><div><b>Aviso</b><span>quando algo foge do normal</span></div><div><b>Tela remota</b><span>sem pegar o celular</span></div></div>
+      </div></div>
+    </article>
+
+    <article class="win" style="--i:6" aria-labelledby="w5">
+      <div class="win-bar"><i></i><i></i><i></i><span>comanda · skill do claude</span></div>
+      <div class="win-vp"><div class="win-page">
+      <div class="win-faixa">Para dividir a conta do bar sem calculadora</div>
+      <div class="win-topo"><span><a class="win-volta" href="#" data-win="1" data-hover>← Catálogo</a> <b>Comanda</b></span><span class="win-tag">IA · Skill do Claude</span></div>
+      <div class="win-heroi">
+        <div class="win-txt">
+          <span class="win-selo">IA · Skill do Claude</span>
+          <h3 id="w5">Foto da comanda, conta dividida</h3>
+          <p>Manda a foto da comanda e recebe uma página para marcar quem consumiu cada item, já com a taxa de serviço.</p>
+          <div class="win-caminhos">
+            <span class="win-cam prin"><small>Como funciona</small><strong>Foto → página → total de cada um</strong></span>
+            <span class="win-cam"><small>Uso</small><strong>Pessoal</strong></span>
+          </div>
+        </div>
+        <div class="win-ilu" data-desenho="comanda" role="img" aria-label="Ilustração: comanda de bar dividida em três partes"></div>
+      </div>
+      <div class="win-selos"><div><b>Lê a foto</b><span>da comanda</span></div><div><b>Por pessoa</b><span>quem consumiu o quê</span></div><div><b>Taxa</b><span>de serviço incluída</span></div></div>
+      </div></div>
+    </article>
+
+  </div>
+</section>
     <section id="caixa" aria-label="Caixa de ferramentas"></section>
     <section id="infra" aria-label="Como fica no ar"></section>
     <section id="contato" aria-label="Contato"></section>
