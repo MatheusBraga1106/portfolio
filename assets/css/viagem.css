@@ -121,7 +121,9 @@
   .grid{grid-template-columns:1fr;align-content:start;align-items:start;gap:10px}
   .copy2{gap:8px}
   .copy2 h2{font-size:clamp(38px,11vw,60px)}
-  .copy2 > p:not(.short),.agents,.stat small{display:none}
+  .copy2 > p:not(.short),.agents{display:none}
+  /* a legenda fica: sem ela o número sozinho não diz o que mede */
+  .stat small{font-size:13px;margin-top:4px}
   .btn{padding:9px 14px;font-size:13px}
   .stat{font-size:clamp(40px,12vw,64px)}
   .pr{display:none}.short{display:block;font-size:14.5px}

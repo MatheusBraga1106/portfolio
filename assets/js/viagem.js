@@ -41,7 +41,7 @@ function paradaFindBus(reduzido) {
     if (reduzido || v === ligado) return; ligado = v; clearInterval(timer);
     if (v) timer = setInterval(() => { age += 1; if (age >= 3) passo(); else idade.textContent = age; }, 830);
   };
-  return { quadro: (p) => { cnt.textContent = (12.6 * suave(0, 0.6, p)).toFixed(1).replace('.', ','); }, relogio };
+  return { quadro: (p) => { cnt.textContent = String(Math.round(900 * suave(0, 0.6, p))); }, relogio };
 }
 
 /** Parada 3: o gráfico desenha e o preço cai até cruzar a meta (dados de exemplo da demonstração). */
