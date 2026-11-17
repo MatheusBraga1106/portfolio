@@ -11,5 +11,10 @@ export default defineConfig({
   webServer: { command: 'node scripts/servir.mjs . 5320', url: 'http://127.0.0.1:5320/', reuseExistingServer: true, timeout: 20_000 },
   projects: [
     { name: 'desktop', use: { viewport: { width: 1280, height: 800 } } },
+    {
+      name: 'sem-webgl',
+      testMatch: /abertura\.spec\.mjs/,
+      use: { viewport: { width: 1280, height: 800 }, launchOptions: { args: ['--disable-webgl', '--disable-3d-apis'] } },
+    },
   ],
 });

@@ -1,5 +1,6 @@
 // Entrada do site: rolagem suave, cursor e links internos. Cada seção liga a sua parte aqui.
 import { irPara } from './rolagem.js';
+import { iniciarAbertura, prepararTitulo } from './abertura3d.js';
 
 const reduzido = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const toque = matchMedia('(pointer: coarse)').matches;
@@ -35,6 +36,9 @@ document.querySelectorAll('a[href^="#"]:not([href="#"]):not([data-go]):not([data
     irPara(alvo.getBoundingClientRect().top + scrollY);
   });
 });
+
+prepararTitulo();
+iniciarAbertura();
 
 const site = { lenis, irPara, viagem: null, vitrine: null };
 if (new URLSearchParams(location.search).has('teste')) window.__site = site;

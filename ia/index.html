@@ -8,6 +8,7 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/fonts/fontes.css">
   <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/abertura.css">
   <script defer src="/assets/vendor/gsap.min.js"></script>
   <script defer src="/assets/vendor/ScrollTrigger.min.js"></script>
   <script defer src="/assets/vendor/lenis.min.js"></script>
@@ -18,7 +19,18 @@
   <header class="top g"><div class="w"><b>Matheus Braga</b><nav aria-label="Seções"><a href="#viagem">Trabalho</a><a href="#infra">Infra</a><a href="#contato">Contato</a></nav></div></header>
 
   <main>
-    <section id="hero" aria-label="Abertura"></section>
+    <section class="hero" id="hero" aria-label="Abertura">
+      <div class="poster" aria-hidden="true"><img src="/assets/img/racing-volante.webp" alt=""><img src="/assets/img/radar-demo.webp" alt=""><img src="/assets/img/findbus-busca.webp" alt=""><img src="/assets/img/racing-painel.webp" alt=""></div>
+      <canvas id="gl" aria-hidden="true"></canvas>
+      <div class="veil"></div>
+      <div class="hint g"><div class="w lbl"><span>telas reais dos projetos</span><span>mova o mouse · role para ver os projetos</span></div></div>
+      <div class="copy g"><div class="w">
+        <h1><span class="sr">Construo com IA e coloco no ar.</span><span aria-hidden="true" class="split">Construo com IA e coloco no ar.</span></h1>
+        <div class="side"><p>AI Builder · Engenharia de Computação na UFG. Agentes, automações e sistemas internos, do protótipo ao meu próprio servidor.</p><a class="cta" href="#viagem" data-hover>Ver os projetos ↓</a></div>
+      </div></div>
+    </section>
+
+    <div class="marq" aria-hidden="true"><div><span>n8n</span><i>✦</i><span>OpenAI</span><i>✦</i><span>Claude Code</span><i>✦</i><span>Python</span><i>✦</i><span>FastAPI</span><i>✦</i><span>Postgres</span><i>✦</i><span>Docker</span><i>✦</i><span>Dokploy</span><i>✦</i><span>Cloudflare</span><i>✦</i></div><div><span>n8n</span><i>✦</i><span>OpenAI</span><i>✦</i><span>Claude Code</span><i>✦</i><span>Python</span><i>✦</i><span>FastAPI</span><i>✦</i><span>Postgres</span><i>✦</i><span>Docker</span><i>✦</i><span>Dokploy</span><i>✦</i><span>Cloudflare</span><i>✦</i></div></div>
     <div id="viagem"></div>
     <section id="vitrine" aria-label="Vitrine e outros projetos"></section>
     <section id="caixa" aria-label="Caixa de ferramentas"></section>
