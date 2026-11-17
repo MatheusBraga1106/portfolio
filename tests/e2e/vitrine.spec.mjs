@@ -14,21 +14,19 @@ async function clicarEEsperar(page, locator) {
   await page.evaluate(() => dispatchEvent(new Event('scroll')));
 }
 
-test('sete janelas, a primeira é a landing', async ({ page }) => {
+test('duas janelas, a primeira é a landing', async ({ page }) => {
   await abrir(page); await pronto(page);
-  await expect(page.locator('.win')).toHaveCount(7);
+  await expect(page.locator('.win')).toHaveCount(2);
   await expect(page.locator('.win').first().locator('h3')).toHaveText('Do problema ao sistema no ar');
 });
 
-test('Catálogo, Ver projeto e voltar levam à janela certa', async ({ page }) => {
+test('Catálogo e Início levam à janela certa', async ({ page }) => {
   await abrir(page); await pronto(page);
   await page.evaluate(() => window.__site.vitrine.irParaJanela(0, true));
   await clicarEEsperar(page, page.locator('.win').first().locator('.win-menu a[data-win="1"]'));
   expect(Math.abs((await topos(page))[1] - 84)).toBeLessThanOrEqual(2);
-  await clicarEEsperar(page, page.locator('.ct-card[data-cat="hw"] a[data-win="3"]'));
-  expect(Math.abs((await topos(page))[3] - 112)).toBeLessThanOrEqual(2);
-  await clicarEEsperar(page, page.locator('.win').nth(3).locator('.win-volta'));
-  expect(Math.abs((await topos(page))[1] - 84)).toBeLessThanOrEqual(2);
+  await clicarEEsperar(page, page.locator('.win').nth(1).locator('.win-menu a[data-win="0"]'));
+  expect(Math.abs((await topos(page))[0] - 70)).toBeLessThanOrEqual(2);
 });
 
 // a landing agora cabe numa janela; o catálogo, numa tela baixa, ainda rola por dentro
@@ -72,5 +70,5 @@ test('depois de redimensionar, Catálogo ainda cai no lugar', async ({ page }) =
 
 test('ilustrações desenhadas', async ({ page }) => {
   await abrir(page); await pronto(page);
-  await expect(page.locator('[data-desenho] svg')).toHaveCount(11);
+  await expect(page.locator('[data-desenho] svg')).toHaveCount(6);
 });

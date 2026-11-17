@@ -44,7 +44,7 @@ for (const v of VERSOES) {
     await expect(page.locator('html')).toHaveClass(/flat/);
     for (const h of await page.locator('.scene h2').all()) await expect(h).toBeVisible();
     await expect(page.locator('.scene h2')).toHaveCount(4);
-    await expect(page.locator('.win h3')).toHaveCount(7);
+    await expect(page.locator('.win h3')).toHaveCount(2);
     for (const h of await page.locator('.win h3').all()) { await h.scrollIntoViewIfNeeded(); await expect(h).toBeVisible(); }
     // nenhum texto ou cartão com opacidade efetiva menor que 1
     const apagados = await page.evaluate(() => {
@@ -60,7 +60,7 @@ for (const v of VERSOES) {
     so(info, 'desktop');
     await abrir(page, v.caminho);
     await page.keyboard.press('Tab');
-    for (const alvo of [page.locator('.lj-caminho.prin'), page.locator('.ct-card a[data-win]').first(), page.locator('#mag')]) {
+    for (const alvo of [page.locator('.lj-caminho.prin'), page.locator('.ct-card a').first(), page.locator('#mag')]) {
       await alvo.focus();
       const contorno = await alvo.evaluate((el) => getComputedStyle(el).outlineStyle);
       expect(contorno).not.toBe('none');

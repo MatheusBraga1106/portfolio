@@ -16,15 +16,6 @@ for (const caminho of ['/ia/?teste', '/clientes/?teste']) {
     await expect(loja.locator('.win-menu a')).toHaveText(['Catálogo', 'Falar comigo']);
   });
 
-  test(`fichas sem faixa vermelha e sem categoria repetida, com o caminho de volta (${caminho})`, async ({ page }) => {
-    await abrir(page, caminho);
-    const fichas = page.locator('.win:not(.win-loja):not(.win-cat)');
-    await expect(fichas).toHaveCount(5);
-    await expect(fichas.locator('.win-faixa')).toHaveCount(0);
-    await expect(fichas.locator('.win-tag')).toHaveCount(0);
-    await expect(fichas.locator('.win-volta')).toHaveCount(5);
-  });
-
   test(`página mais curta: até 21 telas no desktop (eram 24,3) e abertura presa por no máximo 1,6 tela (${caminho})`, async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await abrir(page, caminho);
@@ -51,5 +42,19 @@ for (const [w, h] of [[1440, 900], [1280, 800]]) {
       return w.querySelector('.win-vp').getBoundingClientRect().bottom - w.querySelector('.lj-heroi').getBoundingClientRect().bottom;
     });
     expect(Math.abs(sobra)).toBeLessThanOrEqual(1);
+  });
+}
+
+for (const caminho of ['/ia/?teste', '/clientes/?teste']) {
+  test(`vitrine só com landing e catálogo; cartões levam ao código ou dizem por que não (${caminho})`, async ({ page }) => {
+    await abrir(page, caminho);
+    await expect(page.locator('.win')).toHaveCount(2);
+    await expect(page.locator('a[data-win]:not([data-win="0"]):not([data-win="1"])')).toHaveCount(0);
+    const codigo = page.locator('.ct-card a', { hasText: 'Ver código' });
+    await expect(codigo).toHaveCount(2);
+    await expect(codigo.nth(0)).toHaveAttribute('href', 'https://github.com/MatheusBraga1106/extrator-faturas-agua');
+    await expect(codigo.nth(1)).toHaveAttribute('href', 'https://github.com/MatheusBraga1106/robo-desviador');
+    for (let i = 0; i < 2; i++) await expect(codigo.nth(i)).toHaveAttribute('target', '_blank');
+    await expect(page.locator('.ct-card .ct-nota')).toHaveText(['Em uso no CA da UFG · código privado', 'Código privado', 'Uso pessoal']);
   });
 }
