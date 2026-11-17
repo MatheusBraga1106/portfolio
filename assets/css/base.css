@@ -30,7 +30,9 @@ img{max-width:100%;display:block}
 @media (pointer:coarse){.cur{display:none}}
 
 /* topo fixo */
-.top{position:fixed;inset:0 0 auto;z-index:50;padding-top:env(safe-area-inset-top,0px);mix-blend-mode:difference}
+.top{position:fixed;inset:0 0 auto;z-index:50;padding-top:env(safe-area-inset-top,0px);mix-blend-mode:difference;transition:transform .35s var(--ease)}
+/* rolando para baixo o topo sai da frente do conteúdo; os links continuam focáveis (o foco traz o topo de volta) */
+.top.oculto{transform:translateY(-110%)}
 .top .w{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-block:16px}
 .top b{font-family:var(--display);font-stretch:120%;font-weight:800;letter-spacing:.02em;text-transform:uppercase;font-size:14px}
 .top nav{display:flex;gap:18px;flex-wrap:wrap}

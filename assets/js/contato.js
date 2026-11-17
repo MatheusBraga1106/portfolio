@@ -24,8 +24,10 @@ export function iniciarContato() {
       if (Math.hypot(dx, dy) < 240) { mx(dx * 0.35); my(dy * 0.35); } else { mx(0); my(0); }
     });
   }
+  // duas linhas, mas com espaço entre elas para o leitor de tela
+  const rotulo = (a, b) => { botao.innerHTML = '<span>' + a + '</span> <span>' + b + '</span>'; };
   botao.addEventListener('click', () => {
-    const selecionar = () => { const r = document.createRange(); r.selectNodeContents(email); const s = getSelection(); s.removeAllRanges(); s.addRange(r); botao.innerHTML = 'Selecionado<br>Ctrl+C'; };
-    try { navigator.clipboard.writeText(email.textContent).then(() => { botao.innerHTML = 'E-mail<br>copiado'; }, selecionar); } catch { selecionar(); }
+    const selecionar = () => { const r = document.createRange(); r.selectNodeContents(email); const s = getSelection(); s.removeAllRanges(); s.addRange(r); rotulo('Selecionado', 'Ctrl+C'); };
+    try { navigator.clipboard.writeText(email.textContent).then(() => { rotulo('E-mail', 'copiado'); }, selecionar); } catch { selecionar(); }
   });
 }
